@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+  <!-- Use Anj.XNA.Joysticks.exe to show the axes of the currently connected joysticks to help setup a new profile. -->
+  <JoystickSetup Name="Microsoft SideWinder Precision 2">
+    <JoystickDevice Name="SideWinder Precision 2 Joystick"><!-- Important! This name must match the USB device name exactly! -->
+      <Axis Name="X" Inverted="false">Roll</Axis>
+      <Axis Name="Y" Inverted="false">Pitch</Axis>
+      <Axis Name="Z" Inverted="false"></Axis>
+      <Axis Name="Rx" Inverted="false"></Axis>
+      <Axis Name="Ry" Inverted="false"></Axis>
+      <Axis Name="Rz" Inverted="false">Yaw</Axis>
+      <Axis Name="U" Inverted="true">Throttle</Axis>
+      <Axis Name="V" Inverted="false"></Axis>
+    </JoystickDevice>
+  </JoystickSetup>
+  
+  <JoystickSetup Name="Logitech G940 Flight System">
+    <JoystickDevice Name="Logitech G940 Joystick">
+      <Axis Name="X" Inverted="false">Roll</Axis>
+      <Axis Name="Y" Inverted="false">Pitch</Axis>
+      <Axis Name="Z" Inverted="false"></Axis>
+      <Axis Name="Rx" Inverted="false"></Axis>
+      <Axis Name="Ry" Inverted="false"></Axis>
+      <Axis Name="Rz" Inverted="false"></Axis>
+      <Axis Name="U" Inverted="false"></Axis>
+      <Axis Name="V" Inverted="false"></Axis>
+    </JoystickDevice>
+    <JoystickDevice Name="Logitech G940 Throttle">
+      <!-- Y is also throttle, but X and Y are typically linked together except for controlling two engines separately -->
+      <Axis Name="X" Inverted="true">Throttle</Axis>
+      <Axis Name="Y" Inverted="false"></Axis>
+      <Axis Name="Z" Inverted="false"></Axis>
+      <Axis Name="Rx" Inverted="false"></Axis>
+      <Axis Name="Ry" Inverted="false"></Axis>
+      <Axis Name="Rz" Inverted="false"></Axis>
+      <Axis Name="U" Inverted="false"></Axis>
+      <Axis Name="V" Inverted="false"></Axis>
+    </JoystickDevice>
+    <JoystickDevice Name="Logitech G940 Pedals">
+      <Axis Name="X" Inverted="false"></Axis>
+      <Axis Name="Y" Inverted="false"></Axis>
+      <Axis Name="Z" Inverted="false"></Axis>
+      <Axis Name="Rx" Inverted="false"></Axis>
+      <Axis Name="Ry" Inverted="false"></Axis>
+      <Axis Name="Rz" Inverted="false">Yaw</Axis>
+      <Axis Name="U" Inverted="false"></Axis>
+      <Axis Name="V" Inverted="false"></Axis>
+    </JoystickDevice>
+  </JoystickSetup>
+</root>

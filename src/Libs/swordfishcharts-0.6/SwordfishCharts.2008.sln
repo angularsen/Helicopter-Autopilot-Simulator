@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swordfish.WPF.Charts", "Swordfish.WPF.Charts\Swordfish.WPF.Charts.2008.csproj", "{455B0C11-236A-4A4E-956F-1A3E41B7260B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApplication", "TestApplication\TestApplication.2008.csproj", "{EBABC335-F2E6-4F72-BCB0-992E8EDC9342}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestXBAP", "TestXBAP\TestXBAP.2008.csproj", "{CAB3529A-F6B2-417E-B40F-64D65BB778E9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{455B0C11-236A-4A4E-956F-1A3E41B7260B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{455B0C11-236A-4A4E-956F-1A3E41B7260B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{455B0C11-236A-4A4E-956F-1A3E41B7260B}.Debug|x86.ActiveCfg = Debug|x86
+		{455B0C11-236A-4A4E-956F-1A3E41B7260B}.Debug|x86.Build.0 = Debug|x86
+		{455B0C11-236A-4A4E-956F-1A3E41B7260B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{455B0C11-236A-4A4E-956F-1A3E41B7260B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{455B0C11-236A-4A4E-956F-1A3E41B7260B}.Release|x86.ActiveCfg = Release|x86
+		{455B0C11-236A-4A4E-956F-1A3E41B7260B}.Release|x86.Build.0 = Release|x86
+		{EBABC335-F2E6-4F72-BCB0-992E8EDC9342}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBABC335-F2E6-4F72-BCB0-992E8EDC9342}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBABC335-F2E6-4F72-BCB0-992E8EDC9342}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EBABC335-F2E6-4F72-BCB0-992E8EDC9342}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBABC335-F2E6-4F72-BCB0-992E8EDC9342}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBABC335-F2E6-4F72-BCB0-992E8EDC9342}.Release|x86.ActiveCfg = Release|Any CPU
+		{CAB3529A-F6B2-417E-B40F-64D65BB778E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAB3529A-F6B2-417E-B40F-64D65BB778E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAB3529A-F6B2-417E-B40F-64D65BB778E9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CAB3529A-F6B2-417E-B40F-64D65BB778E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAB3529A-F6B2-417E-B40F-64D65BB778E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAB3529A-F6B2-417E-B40F-64D65BB778E9}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual C# Express 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChaseCameraXbox", "ChaseCamera\ChaseCameraXbox.csproj", "{E6FFA5A4-E3E8-4567-9666-B887D5A4E5BE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Xbox 360 = Debug|Xbox 360
+		Release|Xbox 360 = Release|Xbox 360
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E6FFA5A4-E3E8-4567-9666-B887D5A4E5BE}.Debug|Xbox 360.ActiveCfg = Debug|Xbox 360
+		{E6FFA5A4-E3E8-4567-9666-B887D5A4E5BE}.Debug|Xbox 360.Build.0 = Debug|Xbox 360
+		{E6FFA5A4-E3E8-4567-9666-B887D5A4E5BE}.Debug|Xbox 360.Deploy.0 = Debug|Xbox 360
+		{E6FFA5A4-E3E8-4567-9666-B887D5A4E5BE}.Release|Xbox 360.ActiveCfg = Release|Xbox 360
+		{E6FFA5A4-E3E8-4567-9666-B887D5A4E5BE}.Release|Xbox 360.Build.0 = Release|Xbox 360
+		{E6FFA5A4-E3E8-4567-9666-B887D5A4E5BE}.Release|Xbox 360.Deploy.0 = Release|Xbox 360
+		{E9CEBA95-F4C6-41E1-8955-9D552C1001A9}.Debug|Xbox 360.ActiveCfg = Debug|Xbox 360
+		{E9CEBA95-F4C6-41E1-8955-9D552C1001A9}.Release|Xbox 360.ActiveCfg = Release|Xbox 360
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

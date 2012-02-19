@@ -1,0 +1,6217 @@
+#LyX 1.6.5 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass scrbook
+\begin_preamble
+\usepackage{subfigure}
+\usepackage{eso-pic}
+\end_preamble
+\use_default_options true
+\language english
+\inputencoding auto
+\font_roman ae
+\font_sans lmss
+\font_typewriter lmtt
+\font_default_family rmdefault
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\paperfontsize 11
+\spacing single
+\use_hyperref true
+\pdf_title "Approaches To Real-Time Simulation of Autopilot Software"
+\pdf_author "Andreas Larsen"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize a4paper
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 2
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset External
+	template PDFPages
+	filename Project_cover_pages.pdf
+	extra LaTeX "pages=1"
+
+\end_inset
+
+
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+mbox{}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+pagestyle{empty}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newpage newpage
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pagestyle{plain}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+pagenumbering{roman}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+setcounter{page}{1}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Abstract}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter*
+
+\series bold
+Abstract
+\end_layout
+
+\begin_layout Standard
+This paper identifies novel and best-practice methods for real-time simulation
+ of aircraft behavior in a virtual environment.
+ The work is preliminary to a master's thesis on autonomous aircrafts and
+ forms the theoretical background for implementing a flight simulator game
+ to develop and test autopilot software on.
+ Basic principles of aerodynamics are briefly introduced to help understand
+ how aircrafts fly and we investigate methods to simulate the flight behavior.
+ The outdoor environment is particularly difficult to visualize in real-time
+ so this study covers recent methods to render natural scenes by tricks
+ commonly used in games.
+ Finally the study covers two flight simulator games that are freely available
+ and discusses whether some of the work may be reused for this project.
+ 
+\end_layout
+
+\begin_layout Standard
+The conclusion of this report is a set of methods and approaches to best
+ realize the simulator software in light of performance, realism, visual
+ appeal and the scope of the project.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage clearpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Table of Contents}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{List of Figures}
+\end_layout
+
+\end_inset
+
+
+\begin_inset FloatList figure
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Nomenclature}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset nomencl_print
+LatexCommand printnomenclature
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pagenumbering{arabic}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+setcounter{page}{1}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Introduction
+\end_layout
+
+\begin_layout Section
+Purpose
+\end_layout
+
+\begin_layout Standard
+This report presents a survey of state-of-the-art methods suitable for real-time
+ flight simulation.
+ The findings here is the preliminary work of a master's thesis on autonomous
+ flight and form the theoretical foundation required to implement the simulator
+ part of the software.
+ This paper focuses solely on the methods related to flight simulation and
+ will only briefly mention the topic of autopilots here.
+\end_layout
+
+\begin_layout Section
+Motivation
+\end_layout
+
+\begin_layout Standard
+The field of robotics has gained significant interest over the last two
+ decades and its applications are ever increasing.
+ Factories use robots to automate and speed up processes and commercial
+ airliners have fully autonomous autopilots that almost render pilots obsolete.
+ 
+\end_layout
+
+\begin_layout Standard
+This project was inspired from the idea that swarms of cheap off-the-shelf
+ model aircrafts could solve tasks safely and efficiently.
+ The costs of issuing a search and rescue helicopter are tremendous and
+ it takes a lot of time to cover a large area.
+ With swarms one could ideally launch hundreds or even thousands of drones
+ capable of navigating by themselves and sending live pictures to a ground
+ station.
+ This way a large area could be covered more quickly and potentially a lot
+ cheaper.
+ For hazardous tasks, such as in irradiated areas or in extreme weather
+ conditions, the drones could be sent instead to avoid putting humans at
+ risk.
+\end_layout
+
+\begin_layout Standard
+In order to develop autopilots safely and with minimal risk of failure it
+ is necessary to have a realistic and flexible flight simulator software
+ to test the autopilots on.
+ The development of such a simulator is the motivation for this study.
+\end_layout
+
+\begin_layout Section
+Context
+\end_layout
+
+\begin_layout Standard
+Flight simulators often use game technology to achieve realistic and appealing
+ graphics at interactive frame rates.
+ Ever since the emergence of computer games there has been a synergy between
+ game development and academic work, which have led to the rise of 
+\emph on
+serious 
+\emph default
+flight simulators that are both recreational and educational.
+
+\emph on
+ 
+\emph default
+Serious games aim to help understand a problem or develop real-world skills
+ and flight simulators have become particularly important in areas such
+ as training pilots and evaluating new aircraft designs.
+
+\emph on
+ 
+\end_layout
+
+\begin_layout Standard
+A lot of prior work exist in the field of flight simulation and this study
+ discusses some of the methods that look promising.
+ The goal is to apply such methods in the future implementation of a physically
+ oriented game that simulates flight behavior in a realistic manner.
+ In particular the study focuses on how the simulator can be realized as
+ a serious game that is intuitive to test the autopilot's performance in
+ and that is fun to experiment with.
+ 
+\end_layout
+
+\begin_layout Standard
+It is the intention that this report will provide the reader with a primary
+ source of reference when reading the master's thesis and give the necessary
+ background to understand the methods and choices made in the future implementat
+ion.
+\end_layout
+
+\begin_layout Section
+Intended Audience
+\end_layout
+
+\begin_layout Standard
+This study is relevant for any reader interested in an entry level introduction
+ to aerodynamics and real-time simulation of flight.
+ The intention is not to give intricate details on methods and implementations
+ but rather give an overview of a few promising methods and how they may
+ be applied in this setting.
+ It is assumed that the reader has a good understanding of graduate level
+ calculus and physics to follow some of the equations listed, but beyond
+ that the text should be easy to follow for the uninitiated.
+\end_layout
+
+\begin_layout Section
+Overview
+\end_layout
+
+\begin_layout Standard
+The structure of the report is as follows.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cha:Theoretical-Background"
+
+\end_inset
+
+ Introduction to theory on aircraft simulation.
+ It introduces aerodynamics and describes methods for simulating and visualizing
+ flight behavior.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cha:Related-Work"
+
+\end_inset
+
+ Overview of related work for comparison and inspiration.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cha:Discussion-of-Best-Practice"
+
+\end_inset
+
+ Discussion of methods and how well they fit the implementation.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+Chapter
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cha:Conclusion"
+
+\end_inset
+
+ A summary that proposes a starting point for the real-time flight simulator
+ implementation.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Theoretical Background
+\begin_inset CommandInset label
+LatexCommand label
+name "cha:Theoretical-Background"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Basic Principles of Aerodynamics
+\end_layout
+
+\begin_layout Standard
+In order to simulate aircraft physics we must first have a basic understanding
+ of the dynamics of air.
+ This section touches briefly on the most important topics such as lift
+ and drag and explains how heavier-than-air flight is possible.
+ Most of the theory is explained for fixed-wing airplanes so a separate
+ section discusses how the same concepts apply for helicopters.
+\end_layout
+
+\begin_layout Standard
+Aerodynamics is a specialization of 
+\emph on
+fluid dynamics
+\emph default
+ as air and gases have the properties of fluids.
+ When designing an aircraft it is important to consider how it interacts
+ with air and there are two main types of forces in flight; namely 
+\emph on
+lift
+\emph default
+ and 
+\emph on
+drag
+\emph default
+.
+ Lift is the upwards force created by diverting an airflow over the wing
+ that counteract gravity and enables the aircraft to maneuver.
+ Drag is the air equivalent to ground friction when pulling a sled.
+ They both resist motion but drag also increases its resistance as the airspeed
+ increases whereas friction is nearly independent of velocity.
+ 
+\end_layout
+
+\begin_layout Standard
+Beyond lift and drag there are also more advanced properties of aerodynamics
+ such as turbulence, supersonic flight and different aircraft designs that
+ are briefly discussed in this chapter.
+\end_layout
+
+\begin_layout Subsection
+Lift
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Lift"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The principle of generating lift is a complex physical phenomenon and historical
+ly there have been several explanations and theories.
+ A currently popular explanation to lift is that a difference in pressure
+ causes the wing to pull up.
+ This idea originates from Bernoulli's Principle, which states that for
+ an inviscid flow the pressure decreases with increasing speed
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki_bernoulli_principle"
+
+\end_inset
+
+.
+ The 
+\emph on
+equal transit time
+\emph default
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "equal transit time"
+description "A condition that states that an airflow diverted around an airfoil must rejoin at the trailing edge in the same amount of time"
+
+\end_inset
+
+ condition proposes that diverted air must rejoin at the trailing edge of
+ the wing in the same amount of time.
+ The difference in pressure is then a result of air traveling faster on
+ the top side of the wing because the top side is more curved and the air
+ must travel farther.
+ The condition has later been proven wrong in wind tunnels, but the popular
+ understanding of lift still prevails because it 
+\begin_inset Quotes eld
+\end_inset
+
+makes sense
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Although the air actually do move faster along the top side and there is
+ a pressure difference, this alone does not explain how lift is created
+ and there are several sources that debunk the common understanding of lift
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "lift_correct,anderson00,lift_debunk1,lift_debunk2,lift_debunk3"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+A simplified but more accurate explanation to lift 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "pp. 62-65"
+key "watkinson04"
+
+\end_inset
+
+ is that masses of air are accelerated down in order to lift the body up
+ by Newton's second and third laws.
+ This explanation is also crude because it neglects the effects of viscosity
+ and the fact that air particles behave more like a continuum than tiny
+ bullets deflecting off the wing.
+ A thorough explanation to the lift of wings is found in 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "ch. 3"
+key "lift_explained_jsd"
+
+\end_inset
+
+ and is too comprehensive to cover here, so we will stick with the Newtonian
+ explanation in this section.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Figures/lift.png
+	width 13cm
+	BoundingBox 0bp 0bp 482bp 278bp
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Relative airflow passing over an airfoil and generating lift.
+ Source: 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "p. 62"
+key "watkinson04"
+
+\end_inset
+
+.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Relative-airflow-passing"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A structure placed in an airflow for the purpose of generating lift is called
+ an 
+\emph on
+airfoil
+\emph default
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "airfoil"
+description "A structure placed in an airflow for the purpose of generating lift"
+
+\end_inset
+
+ and for airplanes and helicopters the airfoil is the wings and rotor blades
+ respectively.
+ The magnitude of the lift depends on the 
+\emph on
+relative airflow
+\emph default
+ (RAF
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "RAF"
+description "Relative Airflow"
+
+\end_inset
+
+).
+ RAF has a direction and a velocity represented in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Relative-airflow-passing"
+
+\end_inset
+
+ by vector 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ When air passes around an airfoil the air is pushed down due to the 
+\emph on
+angle of attack
+\emph default
+ of the airfoil structure.
+ We assume only the direction of the RAF is changed and not the velocity,
+ so a new velocity vector 
+\begin_inset Formula $V'$
+\end_inset
+
+ is derived from 
+\begin_inset Formula $V$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+In order to accelerate the air in this manner the air is not accelerated
+ straight down but at an angle 
+\begin_inset Formula $V_{a}$
+\end_inset
+
+, as illustrated.
+ This produces a reaction force that comprises the wanted upwards lift force
+ and an unwanted induced drag force explained later.
+ Intuitively the lift increases as the relative airspeed or the angle of
+ attack increases and when the lifting force exceeds the weight of the body
+ it makes heavier-than-air flight possible.
+ For an airfoil where the lift coefficient for a specific angle of attack
+ is known the lifting force can be determined
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The lift equation only holds for specific flow conditions
+\end_layout
+
+\end_inset
+
+ by equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:lift"
+
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "p. 128"
+key "cummings09"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+F_{L}=\frac{1}{2}\rho u^{2}AC_{L}\label{eq:lift}\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula \begin{equation}
+F_{D}=\frac{1}{2}\rho u^{2}AC_{D}\label{eq:drag}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $\rho$
+\end_inset
+
+ mass density of the fluid
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+u relative airflow velocity 
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+A reference area (typically the square of the mean chord length for a wing)
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+C
+\begin_inset Formula $_{\text{D}}$
+\end_inset
+
+ drag coefficient
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+C
+\begin_inset Formula $_{L}$
+\end_inset
+
+ lift coefficient
+\end_layout
+
+\begin_layout Subsection
+Drag
+\end_layout
+
+\begin_layout Standard
+When an object moves in a fluid it is subjected to resistive drag forces.
+ In aircraft designs this is something we want to minimize, and to better
+ understand how we need to distinguish between different types of drag.
+ According to 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "pp. 236-256"
+key "cummings09"
+
+\end_inset
+
+ there are three major categories:
+\end_layout
+
+\begin_layout Description
+
+\emph on
+parasite
+\begin_inset space ~
+\end_inset
+
+drag
+\emph default
+ from the pressure when an airflow is split around a structure
+\end_layout
+
+\begin_layout Description
+
+\emph on
+induced
+\begin_inset space ~
+\end_inset
+
+drag
+\emph default
+ because the wing requires an angle of attack to generate lift
+\end_layout
+
+\begin_layout Description
+
+\emph on
+wave
+\begin_inset space ~
+\end_inset
+
+drag
+\emph default
+ due to the formation of shock waves around the aircraft
+\end_layout
+
+\begin_layout Subsubsection
+Parasite Drag
+\end_layout
+
+\begin_layout Standard
+Parasite drag covers all types of drag that are not related to the generation
+ of lift.
+ It occurs when a solid body is placed in an airflow forcing the flow to
+ separate.
+ 
+\end_layout
+
+\begin_layout Standard
+There are three main types of parasite drag and they all follow the drag
+ equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:drag"
+
+\end_inset
+
+ and rise by the square of the RAF velocity.
+ Dependent on the form the body induces drag by the bluntness of the body
+ and by air passing along its surface named 
+\emph on
+form drag
+\emph default
+ and 
+\emph on
+skin friction drag
+\emph default
+ respectively.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Form-drag-and"
+
+\end_inset
+
+ and table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Distribution-of-form"
+
+\end_inset
+
+ shows how the distribution generally varies for different forms.
+ Intuitively it can be seen that form drag is the major contributor and
+ that streamlined bodies with gradually changing cross-sections are preferred
+ for flying structures.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Figures/form_vs_skin_bw.png
+	lyxscale 50
+	width 15cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Form drag and skin friction for different types of forms.
+ Source: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "drag_wiki"
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Form-drag-and"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="5">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Form drag
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+90%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Skin friction
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+90%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10%
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0%
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Distribution of form and skin friction drag.
+ Source: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "drag_wiki"
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Distribution-of-form"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Finally there is 
+\emph on
+interference drag
+\emph default
+ induced by airflow vortices.
+ Vortices arise when two surfaces meet at a sharp angle and draw energy
+ from the aircraft in the form of drag.
+ To minimize interference drag the designers try to smooth out all sharp
+ angles by adding 
+\emph on
+fairings;
+\emph default
+ structures that gradually join each surface
+\emph on
+.
+ 
+\emph default
+Vortices also appear where separate bodies are close to each other such
+ as between the wing and the engines.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Induced Drag
+\end_layout
+
+\begin_layout Standard
+The effect of accelerating air downwards has the undesirable consequence
+ of inducing drag due to the wing's angle of attack.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Relative-airflow-passing"
+
+\end_inset
+
+ shows how changing the RAF vector gives a reaction vector that is at an
+ angle to the desired vertical lift direction.
+ This angle comprises a component that is backwards and will try to slow
+ the wing down proportional to the lift created.
+ Generally the lift-induced drag increases when the RAF velocity or the
+ angle of attack is increased.
+\end_layout
+
+\begin_layout Subsubsection
+Wave Drag
+\end_layout
+
+\begin_layout Standard
+Aircrafts that are able to travel faster than the speed of sound perform
+ what is widely known as 
+\emph on
+supersonic flight
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "supersonic flight"
+description "Travelling faster than the speed of sound"
+
+\end_inset
+
+
+\emph default
+ and breaking the sound barrier.
+ The 
+\emph on
+Mach number
+\emph default
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "pp. 149-167"
+key "anderson00"
+
+\end_inset
+
+
+\emph on
+ 
+\emph default
+is an aircraft's relative airspeed in units of the speed of sound and at
+ Mach 1 the aircraft is moving through air at the speed of sound.
+ As the aircraft diverts air around its body it emits waves of sound (fig
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "Flo:subsonic"
+
+\end_inset
+
+) that travels for several miles in the air just as a big boat creates waves
+ in the water.
+ These waves draw kinetic energy from the aircraft in the form of drag and
+ the faster the aircraft moves the more powerful the waves become.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subfigure[Subsonic flight emits ripples of sound waves]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Figures/subsonic.png
+	lyxscale 50
+	width 5cm
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "Flo:subsonic"
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subfigure[The wake of Mach 1 accumulates into shock waves]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Figures/mach1.png
+	lyxscale 50
+	width 5cm
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "Flo:mach1"
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Wakes of sound waves during flight
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:wakes-of-sound-waves"
+
+\end_inset
+
+.
+ Source: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "wiki_supersonic"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+When nearing Mach 1, known as 
+\emph on
+transonic flight
+\emph default
+, there is a rapid increase in wave drag as shown by figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Power-increases-dramatically"
+
+\end_inset
+
+.
+ Even if the aircraft is traveling below Mach 1 the air has to move around
+ thick structures and can accelerate into supersonic speeds to keep up with
+ the outer airflow.
+ This results in small shock waves near excrescences in subsonic flight
+ and is shown by the sudden increase in drag for Mach numbers between 0.85
+ and 1.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Figures/mach1power.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Required power increases dramatically as the airplane approaches Mach 1.
+ Source: 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "p. 161"
+key "anderson00"
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Power-increases-dramatically"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The waves in front of the aircraft travel by the speed of sound and if the
+ aircraft is moving at Mach 1 they cannot get out of the way.
+ The sound waves then merge into extremely powerful shock waves that sound
+ very much like an explosion on the ground.
+ These 
+\emph on
+sonic booms
+\emph default
+ are so powerful that supersonic flight is often banned over populated areas.
+\end_layout
+
+\begin_layout Subsection
+Turbulence
+\end_layout
+
+\begin_layout Standard
+One of the truly complex behaviors of fluid dynamics is turbulence, and
+ this stochastic chaos is an area where theory lags behind experiment.
+ Although turbulence is widely studied in many fields, such as in the natural
+ mixture of fluids and in the flow of water pipes, we will only discuss
+ here what is relevant for aircrafts.
+ 
+\end_layout
+
+\begin_layout Standard
+In flight this phenomenon is commonly known as 
+\emph on
+air pockets 
+\emph default
+and rough rides through windy conditions, but there is more to turbulence
+ than most people think.
+ For instance it plays a crucial role in creating lift that is not too intuitive.
+ According
+\emph on
+ 
+\emph default
+to 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "pp. 138-141"
+key "atkinson81"
+
+\end_inset
+
+ there are two types of fluid flows; laminar and turbulent, where the first
+ is relatively smooth and parallel and the other becomes sinuous and eddying.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subfigure[Eddies in the water]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Figures/water_eddies.png
+	lyxscale 30
+	height 5.5cm
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\backslash
+subfigure[Eddies in the air]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Figures/air_eddies.png
+	lyxscale 70
+	height 5.5cm
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Turbulent flow can result in eddies.
+ Sources: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "trcs09"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cr4_vortex09"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Consider moving the oar of a row boat slowly through the water.
+ The water is not disturbed and flows smoothly around it in what is called
+ a 
+\emph on
+laminar flow
+\emph default
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "laminar flow"
+description "When a fluid flows in parallel layers with little or no disruption between the layers"
+
+\end_inset
+
+.
+ Then force the oar quickly through the water.
+ The water separates so fast that nearby water particles are not able to
+ immediately fill the void resulting in a sinuous motion of water and eddies
+ in the trail known as 
+\emph on
+turbulent flow
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "turbulent flow"
+description "A flow of fluid characterized by chaotic, stochastic movement"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+When flying a commercial airliner the disturbance we may experience is due
+ to 
+\emph on
+atmospheric turbulence
+\emph default
+.
+ This generally arises from two conditions:
+\end_layout
+
+\begin_layout Enumerate
+Shear wind forces when the wind velocity varies at different positions
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+Thermal convection
+\emph default
+ when warm air rises and cooler air descends
+\end_layout
+
+\begin_layout Standard
+Both sources are generated in the lower 1-2 km of the atmosphere known as
+ the 
+\emph on
+boundary layer
+\emph default
+.
+ Shear forces occur when air closer to the ground is retarded by friction
+ from structures such as trees, buildings and mountains.
+ The latter is a natural consequence of the ground being heated by sun radiation
+ forming vertical structures of rising air
+\emph on
+ 
+\emph default
+known as 
+\emph on
+thermals
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "thermal"
+description "Parcels of warm air that rise upwards due to heating by sun radiation on the ground"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Reynolds Number
+\end_layout
+
+\begin_layout Standard
+An important parameter of fluid dynamics is the Reynolds Number.
+ It is simply the ratio of 
+\emph on
+inertial force
+\emph default
+s
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "inertial force"
+description "A pseudo-force equal but opposite in direction of the accelerating force"
+
+\end_inset
+
+ (resistance to change in motion) to the 
+\emph on
+viscous forces
+\emph default
+ (stickiness) of a fluid.
+ The number is dimensionless and indicates how much the 
+\emph on
+viscosity
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "viscosity"
+description "A fluid's resistance to flow due to internal friction"
+
+\end_inset
+
+ 
+\emph default
+affects the flow of the fluid at a given mean flow velocity V and a reference
+ dimension L.
+ 
+\end_layout
+
+\begin_layout Standard
+There is no theorem relating the Reynolds Number magnitude to turbulent
+ flow, but 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "benson09"
+
+\end_inset
+
+ describes how high numbers in the order of tens of millions for the wing
+ of an airplane indicate a nearly inviscid behavior and can result in a
+ turbulent flow of air around the wing.
+ For Reynolds numbers below a few thousands the viscous forces are more
+ significant and exhibit laminar flows, such as for the flow of blood particles
+ in the veins.
+ However, the significance of the viscid forces must be considered per applicati
+on as the flow will have varying degrees of turbulence depending on the
+ properties of the fluid and any obstructions in the flow.
+ The water flow in a straight pipe is very different than for the flow of
+ an angled pipe or for the currents of the Gulf Stream.
+\end_layout
+
+\begin_layout Standard
+In aircraft design analysis the Reynolds Number is used to calculate the
+ drag and lift coefficients, and when testing the design in a wind tunnel
+ it is common to use a model-scale prototype.
+ Air performs differently on smaller objects and so it is necessary to scale
+ the flow as well.
+ Accurate wind tunnel testing can be achieved by matching the Reynolds Number
+ for the flow at the full and model scale objects.
+ The Reynolds Number is given by equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Reynolds-number"
+
+\end_inset
+
+ and is a function of fluid density, viscosity, relative flow velocity and
+ a reference dimension.
+ For airplanes the wing chord is often chosen as the reference length L
+ so in order to match the two flow regimes the wind tunnel airspeed 
+\emph on
+or
+\emph default
+ the air density is increased for tests on the model-scale aircraft.
+ 
+\begin_inset Formula \begin{equation}
+Re=\frac{\rho VL}{\mu}\label{eq:Reynolds-number}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $\rho$
+\end_inset
+
+ fluid density
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+V mean relative flow velocity
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+L reference length (typically the chord length for wings)
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $\mu$
+\end_inset
+
+ dynamic viscosity
+\end_layout
+
+\begin_layout Subsection
+Rotary-Wing Aerodynamics
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Rotary-Wing-Aerodynamics"
+
+\end_inset
+
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Itemize
+Rotor aerodynamics 1.5p
+\end_layout
+
+\begin_layout Itemize
+Reynolds Number
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "Reynolds number"
+description "A measure of the relative importance of inertial forces to viscous forces for given fluid flow conditions, and is often used to distinguish between laminar and turbulent flows."
+
+\end_inset
+
+ and 
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "Mach number"
+description "The speed of an object divided by the speed of sound in the same substance."
+
+\end_inset
+
+ effects 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "p. 350"
+key "leishman06"
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Dynamic stall 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "p. 525"
+key "leishman06"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Blade tip vortexes 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "p.567"
+key "leishman06"
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Ground effect 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "figures at p. 261"
+key "leishman06"
+
+\end_inset
+
+ 0.5p
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Most of the aerodynamics so far have been focused on airplane analogies
+ where fixed-wing structures are subjected to lift and drag.
+ Airplanes are relatively simple in nature and make complex aerodynamic
+ behavior easier to understand.
+ Another important type of flight is by rotary-wing designs such as helicopters
+ and this section will briefly discuss the key properties.
+ A complete description of their workings is found in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "leishman06"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+While airplanes move at high speeds to generate sufficient airflow and lift
+ the rotor blades are instead spun at high speeds around an axis of the
+ helicopter.
+ The rotor blades are formed like small wings and typically one or two pairs
+ of blades are used to generate lift.
+ The dynamics of helicopters are far more complex than for airplanes so
+ we will break it down into basic maneuvers.
+\end_layout
+
+\begin_layout Subsubsection
+Hovering
+\end_layout
+
+\begin_layout Standard
+The main advantage of helicopters is the ability to move in all three axes.
+ This allows for vertical take-off and landing and hovering at a fixed position
+ in the air that allows the helicopter to perform many tasks that airplanes
+ are not able to.
+ The challenge in hovering is that wind, turbulent air and mechanical imperfecti
+ons will eventually tilt the helicopter and accelerate it away from the
+ position.
+ If the drift is not immediately countered by the pilot the helicopter will
+ continue to tilt, accelerate even more and speed up dramatically.
+ Hovering may be compared to balancing on a ball and a stable hover takes
+ a lot of flight experience and is difficult even in calm conditions.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+subfigure[The controls of a helicopter]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Figures/helicopter_maneuvers.gif
+	lyxscale 70
+	width 7cm
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "Flo:helicopter-controls"
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+subfigure[Tail rotor compensates for main rotor torque]{
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename Figures/torque-effect.jpg
+	lyxscale 50
+	width 7cm
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "Flo:helicopter-tail"
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Basic helicopter dynamics
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Basic-helicopter-dynamics"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Collective Pitch
+\end_layout
+
+\begin_layout Standard
+There are two ways to control the induced lift shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "Flo:helicopter-controls"
+
+\end_inset
+
+.
+ First the thrust can be increased to spin the rotor blades faster and second
+ the angle of attack of the blades can be increased.
+ 
+\end_layout
+
+\begin_layout Standard
+Thrust-controlled lift is considered simpler and cheaper, but suffers from
+ slow and disproportionate lift response because of varying resistive forces
+ such as drag and mechanical friction and because the inertia of the engine
+ resists change in motion.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Collective pitch
+\emph default
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "collective pitch"
+description "The base angle of attack for all blades of a helicopter"
+
+\end_inset
+
+ instead changes the angle of attack of the blades to control lift.
+ The rotor blade inertia helps improve the proportionality and the response
+ time of the control output and is one of the reasons why most modern helicopter
+s use collective pitch.
+ In addition it enables the pilot to perform emergency landings if the engine
+ should stop working.
+ 
+\emph on
+Autorotation
+\emph default
+ is a technique that exploits
+\emph on
+ 
+\emph default
+the inertia of the rotor blades and the potential energy at an altitude
+ to generate enough lift to land safely.
+\end_layout
+
+\begin_layout Subsubsection
+Cyclic Control
+\end_layout
+
+\begin_layout Standard
+One part of flying a helicopter is using lift to control the altitude and
+ the other is using lift to move around.
+ Since the main rotor is the only source of lift, moving from A to B is
+ simply a manner of tilting the helicopter in a direction so that part of
+ the lift is used to counter gravity and the other part is used to accelerate
+ towards B.
+ Tilting is achieved by 
+\emph on
+cyclic
+\emph default
+ 
+\emph on
+control
+\emph default
+ 
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "cyclic control"
+description "Tilting the helicopter by adjusting the angle of attack for each blade in the rotation cycle"
+
+\end_inset
+
+ and enables the helicopter to move horizontally as in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "Flo:helicopter-controls"
+
+\end_inset
+
+.
+ A complex mechanical structure allows the angle of attack to be controlled
+ separately for each rotor blade.
+ By producing a greater angle of attack on the left side looking in the
+ nose direction each blade will produce more lift on the left side and cause
+ the helicopter to tilt to the right.
+ Tilting
+\emph on
+ 
+\emph default
+to the left or right and tilting the nose up or down is called changing
+ the 
+\emph on
+roll
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "roll angle"
+description "The tilt angle around the nose axis"
+
+\end_inset
+
+
+\emph default
+ and 
+\emph on
+pitch
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "pitch angle"
+description "For a rotor blade it is the angle of attack and for an aircraft it  is the nose angle around the wing axis"
+
+\end_inset
+
+
+\emph default
+ angles respectively.
+ The helicopter may tilt in any combination of pitch and roll and enables
+ the helicopter to perform very advanced maneuvers.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Tail Rotor
+\end_layout
+
+\begin_layout Standard
+In flight the engine must constantly apply torque to the main rotor shaft
+ to overcome the resistive forces.
+ The consequence is that without a fixed point to hold on to the helicopter
+ will spin in the opposite direction 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "pp. 166-177"
+key "watkinson04"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+To counter this effect the conventional helicopter uses a smaller tail rotor
+ that produce thrust in the opposite rotational direction of the main rotor,
+ illustrated by figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "Flo:helicopter-tail"
+
+\end_inset
+
+.
+ The tail rotor is positioned at a distance 
+\series bold
+d
+\series default
+ from the main rotor axis so that its thrust 
+\series bold
+F 
+\series default
+can be relatively small to compensate for the main rotor torque, as given
+ by the torque equation 
+\begin_inset Formula $\mathbf{\tau}=\mathbf{F\times d}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+In addition to counter torque the tail rotor enables the pilot to control
+ the 
+\emph on
+yaw
+\emph default
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "yaw"
+description "The horizontal angle of the aircraft's nose axis"
+
+\end_inset
+
+ angle and point the nose in an arbitrary direction.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Methods of Flight Simulation
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Methods-of-Aircraft-simulation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Predicting and simulating aircraft behavior are two strongly related fields
+ of theory so this chapter covers methods for predicting the dynamics of
+ flight.
+ As already noted, the theory in this field is still young and often combined
+ with empirical approaches.
+ This chapter will not go into all the details but rather give an overview
+ over methods that are widely used when predicting the aerodynamic properties
+ of an aircraft structure.
+ 
+\end_layout
+
+\begin_layout Subsection
+Parametric Equations
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Parametric-Equations"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We can approximate drag and lift for most parts of the aircraft by transforming
+ their geometrical structures to similar structures that have empirically
+ derived tables.
+ In this section we discuss two methods to estimate the parasite drag for
+ wing-like and body-like parts of the aircraft.
+ Equivalent methods also exist for lift and a number of other drag components,
+ but since they are similar in concept we omit them here and refer to 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cummings09"
+
+\end_inset
+
+ for further details.
+ It should be noted that the estimations are crude and are typically corrected
+ by empirical data from previous wind tunnel test data of similar designs.
+\end_layout
+
+\begin_layout Standard
+One approach 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "pp. 229-256"
+key "cummings09"
+
+\end_inset
+
+ is to calculate the parasite drag coefficient separately for the parts
+ of an aircraft and sum the total drag coefficient.
+ The following equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:zero-lift-drag"
+
+\end_inset
+
+ divides the aircraft in N parts and each part has a form factor K, skin-frictio
+n coefficient 
+\begin_inset Formula $\overline{C}_{f}$
+\end_inset
+
+ and a wetted surface 
+\begin_inset Formula $S_{wet}$
+\end_inset
+
+ susceptible to airflow.
+ The reference area 
+\begin_inset Formula $S_{ref}$
+\end_inset
+
+ can be any surface but is typically chosen as the top surface of the wing.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+C_{D}\equiv\frac{\overset{N}{\underset{i=1}{\sum}}K_{i}\overline{C}_{f_{i}}S_{wet_{i}}}{S_{ref}}\label{eq:zero-lift-drag}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The parasite drag forces in subsonic speeds are mainly due to form and skin
+ friction, but since parts of the aircraft are very different we distinguish
+ between wing-like structures and body-like structures.
+ This section will cover two methods for determining 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+
+\begin_inset Formula $K_{i}$
+\end_inset
+
+, 
+\begin_inset Formula $\overline{C}_{f_{i}}$
+\end_inset
+
+ and 
+\begin_inset Formula $S_{wet_{i}}$
+\end_inset
+
+for the two types of structures so that a total parasite drag coefficient
+ can be estimated.
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\noun default
+\color inherit
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Wing method
+\end_layout
+
+\begin_layout Standard
+For thin wing-like structures skin friction is the major contributor to
+ drag.
+ Equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:flat-plate-friction"
+
+\end_inset
+
+ was derived from theory and experiment by Prandtl-Schlichting 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "pp. 196-200"
+key "cummings09"
+
+\end_inset
+
+ for the skin friction of turbulent flow over flat plates.
+ 
+\begin_inset Formula \begin{equation}
+\overline{C}_{f}\equiv\frac{0.455}{(log_{10}Re_{L})^{2.58}}\label{eq:flat-plate-friction}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To apply this equation we must first fit the surface of a wing to a flat
+ plate equivalent.
+ A wing is not flat and is typically trapezoidal with varying 
+\emph on
+chord
+\emph default
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "chord"
+description "Imaginary straight line from the leading to the trailing edge of an airfoil"
+
+\end_inset
+
+ lengths as shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:The-mean-aerodynamic"
+
+\end_inset
+
+.
+ One solution is to find the mean aerodynamic chord (MAC
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "MAC"
+description "Mean Aerodynamic Chord"
+
+\end_inset
+
+) length by geometry and define the wing as a rectangle of area 
+\begin_inset Formula $MAC\times wing\, span$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Figures/wing_mac.jpg
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+The mean aerodynamic chord (MAC) of a wing.
+ Source: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cummings09"
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:The-mean-aerodynamic"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The wing surface 
+\begin_inset Formula $S_{top}$
+\end_inset
+
+ has a curvature due to its thickness and is flattened by a thickness factor
+ 
+\begin_inset Formula $(1+0.2\frac{t}{c})$
+\end_inset
+
+.
+ Since the total wing surface comprises a top and bottom side the top surface
+ is doubled.
+ 
+\begin_inset Formula $S_{wet}$
+\end_inset
+
+ is then the total wetted surface of the wing transformed into a flat plate
+ equivalent.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+S_{wet}\approx2S_{top}(1+0.2\frac{t}{c})\label{eq:wet}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $S_{wet}$
+\end_inset
+
+ flate plate equivalent of surface exposed to airflow
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $S_{top}$
+\end_inset
+
+ orthogonal top surface area of wing
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $\frac{t}{c}$
+\end_inset
+
+ ratio of thickness to the chord length of the wing
+\end_layout
+
+\begin_layout Standard
+At last the form factor of the wing must be determined.
+ As previously mentioned the form factor affects the distribution of pressure
+ and skin friction.
+ The form factor K can be determined from tables of empirical data and is
+ a function of thickness to length ratio and the angle at which the wings
+ are swept back.
+ With all the parameters known the parasite drag of a wing-like component
+ can now be calculated by equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:wing-drag-coefficient"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+C_{D_{wing}}=K\overline{C}_{f}\frac{S_{wet}}{S_{ref}}\label{eq:wing-drag-coefficient}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $C_{D_{wing}}$
+\end_inset
+
+ parasite drag coefficient for a wing-like body
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $\overline{C}_{f}$
+\end_inset
+
+ skin friction for a flat plate equivalent
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+K form factor of wing
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $Re_{L}$
+\end_inset
+
+ mean Reynolds Number for a wing of MAC length L (by equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Reynolds-number"
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+\begin_inset Formula $S_{ref}$
+\end_inset
+
+ reference surface area (typically 
+\begin_inset Formula $S_{top}$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Subsubsection
+Fuselage method
+\end_layout
+
+\begin_layout Standard
+The fuselage of an aircraft has a constant chord length and is much simpler
+ to calculate than wings.
+ The drag coefficient is found by the same equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:wing-drag-coefficient"
+
+\end_inset
+
+ but the parameters are slightly different.
+ The wetted surface 
+\begin_inset Formula $S_{wet}$
+\end_inset
+
+ can now be approximated by cones, cylinders and other well known geometries
+ as shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subfig:fuselage-geometry"
+
+\end_inset
+
+.
+ The form factor K is determined by the 
+\emph on
+fineness ratio
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "fineness ratio"
+description "The length divided by the maximum diameter of a body"
+
+\end_inset
+
+
+\emph default
+ of the body, defined as the length divided by the maximum diameter (L/D).
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subfig:fuselage-formfactor"
+
+\end_inset
+
+ is derived from experiment and shows how the form factor decreases as the
+ fuselage becomes longer and more slender.
+ 
+\end_layout
+
+\begin_layout Standard
+Finally, the flat plate skin friction 
+\begin_inset Formula $\overline{C}_{f}$
+\end_inset
+
+ is found by equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:flat-plate-friction"
+
+\end_inset
+
+.
+ Here the Reynolds Number at the end of the fuselage is used, given by equation
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:Reynolds-number"
+
+\end_inset
+
+ and the fuselage length L from figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subfig:fuselage-geometry"
+
+\end_inset
+
+ as the reference length.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+subfigure[Approximating the surface by geometry]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Figures/fuselage_geometry.png
+	width 7cm
+	height 3cm
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "subfig:fuselage-geometry"
+
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\backslash
+subfigure[Form factor as a function of fuselage fineness]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Figures/fuselage_form_factor.png
+	lyxscale 50
+	width 7cm
+	height 4cm
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "subfig:fuselage-formfactor"
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Drag coefficient parameters using the fuselage method.
+ Source: 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "p. 251"
+key "cummings09"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Computational Fluid Dynamics 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Computational-Fluid-Dynamics"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The problem with parametric equations is that some behavior is hard to express
+ by parameters and the methods generally suffer from crude approximations
+ mapped to empirical data.
+ A different approach is to simulate the behavior of air and calculate the
+ forces that air exert on the aircraft.
+ The computation of fluid dynamics is a twofold process 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "ch. 1"
+key "versteeg07"
+
+\end_inset
+
+.
+ First a physical model must be chosen to approximate real air, defined
+ by governing flow equations.
+ The models have trade-offs in performance and correctness and the choice
+ should reflect the requirements of the application.
+ Second a numerical modeling method transforms the physical model to a discrete
+ domain that can be solved on a computer.
+ Numerical methods also have trade-offs and varies in ease of implementation,
+ performance and accuracy, but all methods suffer from numerical dissipation.
+\end_layout
+
+\begin_layout Standard
+As computational fluid dynamics (CFD
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "CFD"
+description "Computational Fluid Dynamics"
+
+\end_inset
+
+) gained interest in the 80s it has been touted as the Holy Grail for aerodynami
+cs analysts.
+ A dramatic increase in computational power and memory capacity made this
+ approach economically feasible and the accuracy is ever increasing.
+ However, 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "ch. 1"
+key "versteeg07"
+
+\end_inset
+
+ notes that the simulation is no substitute for experiment as the results
+ are yet impossible to validate without careful testing in equal conditions.
+ 
+\end_layout
+
+\begin_layout Standard
+The current purpose of CFD is to give insight into complex behavior and
+ is often used to speed up design processes by simulating the effects of
+ changes before a prototype is built and tested.
+ In the perspective of a modern flight simulator this technology can be
+ used to simulate very complex behavior such as winds, turbulence, interfering
+ airwakes and the effects of modifying an aircraft design.
+\end_layout
+
+\begin_layout Subsubsection
+Governing Flow Equations
+\end_layout
+
+\begin_layout Standard
+The governing equations of fluid flow are mathematical expressions of physical
+ conservation laws.
+ A conservation law states that a particular measurable property in an isolated
+ physical system does not change over time.
+ When modeling fluid motion there are three laws discussed in 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "ch. 2"
+key "versteeg07"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Enumerate
+The mass of a fluid is conserved
+\end_layout
+
+\begin_layout Enumerate
+The rate of change of momentum for a fluid particle equals the sum of its
+ forces by Newton's second law
+\end_layout
+
+\begin_layout Enumerate
+The rate of change of energy equals the sum of the rate of heat addition
+ to and the rate of work done on a fluid particle by Newton's law of thermodynam
+ics
+\end_layout
+
+\begin_layout Standard
+For practical reasons the fluid may be treated as a continuum with macroscopic
+ properties such as velocity, pressure, density and temperature.
+ The molecular structures and motions only complicate matters.
+ The Navier-Stokes equations are currently considered one of the most physical
+ correct descriptions of fluid dynamics but they have proven very hard to
+ solve for.
+ A hierarchy of governing equations has later been proposed that simplify
+ the model but still preserve important fluid behavior while being easier
+ to compute.
+ This section briefly covers three promising flow equations described in
+ detail in 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "ch. 14"
+key "leishman06"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Navier-Stokes Equations
+\end_layout
+
+\begin_layout Standard
+The most fundamental equations governing the fluid dynamics were found independe
+ntly by Navier and Stokes and originate from the conservation of mass and
+ the interchange of momentum and energy within a fluid.
+ In 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "ch. 14"
+key "leishman06"
+
+\end_inset
+
+ this is written in conservation form as equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:navier-stokes-conservation-form"
+
+\end_inset
+
+, where Q is the conserved variable vector and E, F and G are 
+\emph on
+flux vectors
+\emph default
+ that gives the rate at which mass, momentum and energy are being transported
+ at any point in the fluid.
+ The right hand terms 
+\begin_inset Formula $E_{v}$
+\end_inset
+
+, 
+\begin_inset Formula $F_{v}$
+\end_inset
+
+ and 
+\begin_inset Formula $G_{v}$
+\end_inset
+
+ express the fluxes resulting from the viscosity of the flow.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\frac{\partial\mathbf{Q}}{\partial t}+\frac{\partial\mathbf{E}}{\partial x}+\frac{\partial\mathbf{F}}{\partial y}+\frac{\partial\mathbf{G}}{\partial z}=\frac{\partial\mathbf{E_{v}}}{\partial x}+\frac{\partial\mathbf{F_{v}}}{\partial y}+\frac{\partial\mathbf{G_{v}}}{\partial z}\label{eq:navier-stokes-conservation-form}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The Navier-Stokes (N-S
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "N-S"
+description "Navier-Stokes, rerfers here to the equations governing mass, momentum and energy in a fluid"
+
+\end_inset
+
+) equations are strongly coupled, non-linear partial differential equations
+ and are extremely difficult and expensive to solve without major simplification
+s, such as assuming 
+\emph on
+thermal equilibrium
+\emph default
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "thermal equilibrium"
+description "Systems at constant temperature and volume"
+
+\end_inset
+
+, 
+\emph on
+ideal gasses
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "ideal gas"
+description "A theoretical gas of randomly-moving point particles that interact only through elastic collisions"
+
+\end_inset
+
+
+\emph default
+ and incompressible fluids.
+ 
+\end_layout
+
+\begin_layout Standard
+A key issue with any CFD calculation is the generation of grids on which
+ to solve the governing equations.
+ Turbulence and viscous shearing effects require an extremely fine grid
+ resolution and large amounts of memory and processing power to compute.
+ 
+\end_layout
+
+\begin_layout Standard
+Another problem is that theory lacks closure on the governing equations,
+ meaning there are too few equations and too many unknowns.
+ In particular the 
+\emph on
+turbulence closure problem
+\emph default
+ has proven difficult.
+ Empirical closure models were introduced to overcome this and had success
+ for simple cases like turbulent flow in a straight pipe, but history has
+ proven it difficult to find a general model that fits different and more
+ complicated cases.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Euler Equations
+\end_layout
+
+\begin_layout Standard
+If it can be assumed that viscous forces do not need to be resolved and
+ the fluid is treated as inviscid, then according to 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "ch. 14"
+key "leishman06"
+
+\end_inset
+
+ the N-S equations reduce to the Euler equations shown by dropping the viscous
+ terms of equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:navier-stokes-conservation-form"
+
+\end_inset
+
+ to yield equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:euler-equations-conservation-form"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\frac{\partial\mathbf{Q}}{\partial t}+\frac{\partial\mathbf{E}}{\partial x}+\frac{\partial\mathbf{F}}{\partial y}+\frac{\partial\mathbf{G}}{\partial z}=0\label{eq:euler-equations-conservation-form}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In theory the Euler equations should not be able to model turbulence since
+ fluids would never circulate were it not for viscous forces.
+ Although it should be noted that too much viscosity would also prevent
+ the formation of vortices since they would be damped by internal resistance
+ in the same way as syrup does not form eddies.
+ However, in practice the Euler equations yield a very good approximation
+ to the airflows around an aircraft since the flows are nearly inviscid.
+ Numerical methods suffer from numerical dissipation and this artificial
+ dissipation will to some extent make up for the missing viscid terms and
+ allow vortices to form.
+ Since the Euler equations are far simpler to solve for than N-S this is
+ a very desirable property.
+\end_layout
+
+\begin_layout Subsubsection
+Vorticity Transport Equations
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Vorticity-Transport-Equations"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+No matter what governing equations are used there is a separate issue when
+ modeling turbulence.
+ For practical use it is often necessary to consider how turbulent flows
+ indirectly affect the aircraft.
+ For instance a helicopter that hovers near the ground will disrupt the
+ air around it by the wake of turbulent flows from the rotor itself.
+\end_layout
+
+\begin_layout Standard
+In order to model how this turbulence is recycled back into the in-flow
+ it is necessary to preserve the detailed vortices over time and over a
+ large amount of space around the helicopter.
+ It would be infeasible to have sufficiently detailed grids for the entire
+ space and so there is need for a separate set of governing equations that
+ model the vortices directly.
+ One well known technique is the 
+\emph on
+Vorticity Transport Model
+\emph default
+ (VTM
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "VTM"
+description "Vorticity Transport Model"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Figures/vtm.jpg
+	lyxscale 50
+	width 15cm
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Vorticity in the rotor wake of a helicopter modeled by VTM.
+ Note how the grid resolution is detailed near the rotors and gradually
+ less detailed further away.
+ Source: 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "p. 779"
+key "leishman06"
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Vorticity-in-rotor-wake"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If the flow can be assumed to be incompressible, which is reasonable for
+ the case of a hovering helicopter where RAF velocities are relatively small,
+ then 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "ch. 14"
+key "leishman06"
+
+\end_inset
+
+ describes how VTM can be used to minimize the unwanted numerical diffusion
+ of vorticity over space and time.
+ This is done by solving the governing equations for the flow directly in
+ terms of vorticity 
+\begin_inset Formula $\omega$
+\end_inset
+
+ and velocity V as shown in equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:navier-stokes-incompressible-eulerian"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The advection term refers to the transport of vorticity due to the fluid
+ flow, strain is the deformation of the fluid's particle structure and diffusion
+ is how the vorticity is dampened by viscosity 
+\begin_inset Formula $v$
+\end_inset
+
+.
+ 
+\begin_inset Formula \begin{equation}
+\underset{temporal}{\underbrace{\frac{\partial w}{\partial t}}}+\underset{advection}{\underbrace{(\mathbf{V}\cdot\nabla)\omega}}=\underset{strain}{\underbrace{(\omega\cdot\nabla)\mathbf{V}}}+\underset{diffusion}{\underbrace{v\triangle\cdot\omega}}\label{eq:navier-stokes-incompressible-eulerian}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If the vorticity field is known or initially assumed then the velocity field
+ can be calculated by the Biot-Savart relationship 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:biot-savart"
+
+\end_inset
+
+ and applied to a traditional CFD grid approach.
+ For practical use the field may be easier to calculate in integral form
+ as shown in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:biot-savart-integral"
+
+\end_inset
+
+.
+\begin_inset Formula \begin{equation}
+\nabla^{2}\mathbf{V}=-\nabla\times\omega\label{eq:biot-savart}\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula \begin{equation}
+\mathbf{V}(x)=-\frac{1}{4\pi}\int\frac{(x-y)}{|x-y|^{3}}\times\omega(y)dy\label{eq:biot-savart-integral}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+VTM is an intermediate between traditional CFD techniques and pure vortex
+ methods and provides a very complete model for the evolution of the airflow
+ structure in the wake, illustrated by figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Vorticity-in-rotor-wake"
+
+\end_inset
+
+.
+ However, as with other CFD approaches it suffers from being computationally
+ expensive and is still impractical for routine use, but provides excellent
+ insight into the complex turbulent flows and how they affect aircraft flight.
+\end_layout
+
+\begin_layout Subsection
+Numerical Modeling
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Numerical-Modeling"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In practical use there is a need for numerical methods to calculate the
+ flow state using any of the governing equations above.
+ The equations only describe relations of physical properties in the flow,
+ but to compute a result we must discretize time, space and their derivatives.
+\end_layout
+
+\begin_layout Standard
+According to 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "ch. 4"
+key "versteeg07"
+
+\end_inset
+
+ there are three widely used methods that solve an approximation of the
+ problem; 
+\emph on
+finite element, finite difference 
+\emph default
+and 
+\emph on
+finite volume
+\emph default
+.
+ The three methods take different mathematical approaches to approximating
+ and discretizing flow variables, but rely on the same basic steps.
+ First a grid must be generated for the area of interest, then time, space
+ and their derivatives must be discretized and solved for the governing
+ equations by the values in the grid.
+ 
+\end_layout
+
+\begin_layout Standard
+Grid generation has already been mentioned and is an essential part of CFD
+ techniques.
+ Except for simple cases it is extremely difficult to analyze fluid flows
+ due to complex and interchanging partial differential equations.
+ To overcome this the flow domains are subdivided into smaller domains and
+ solved independently.
+ The grid should encompass all areas where we are interested in calculating
+ the flow and a straight-forward solution is to use 
+\emph on
+structured grids
+\emph default
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "structured grid"
+description "A grid of rows and columns"
+
+\end_inset
+
+.
+ Structured does not refer to the geometrical form but rather how grid informati
+on is accessed by the computer, as shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Structured-grid"
+
+\end_inset
+
+ by a mesh with rows and columns.
+ The neighbors are then easily found and simplify the CFD code.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Figures/structured_grid.png
+	lyxscale 70
+	scale 80
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Structured grid.
+ Source: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cfd_grid09"
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Structured-grid"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The problem with structured grids is that we can't refine the resolution
+ at certain areas in the grid without increasing the entire grid resolution,
+ and that is likely to become a bottleneck in applications with complex
+ geometries in the flow.
+ An alternative is to use 
+\emph on
+unstructured grids
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "unstructured grid"
+description "A mesh without a direct mapping to rows and columns"
+
+\end_inset
+
+
+\emph default
+ that may consist of tetrahedrons, hexahedrons or prism cell shapes as shown
+ in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:3D-cell-shapes"
+
+\end_inset
+
+.
+ These geometries allow local grid refinement but are also harder to implement
+ solvers for.
+ In theory any type of complex geometry can be properly wrapped inside a
+ flow grid but the process of creating the grid is so complicated that it
+ often requires human interaction to achieve a good balance between efficiency
+ and accuracy.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Figures/unstructured_cells.png
+	lyxscale 70
+	scale 70
+	rotateOrigin rightBaseline
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+3D cell shapes in unstructured grids.
+ Source: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cfd_grid09"
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:3D-cell-shapes"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Two techniques that are used to automatically improve the CFD grid are described
+ in 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "ch. 1"
+key "versteeg07"
+
+\end_inset
+
+ as 
+\emph on
+convergence
+\emph default
+ and
+\emph on
+ grid independence
+\emph default
+.
+ Convergence denotes how quickly a solution converges to within an accepted
+ error margin in a solution algorithm that is iterative in its nature.
+ The convergence can be adjusted using relaxation and acceleration methods
+ in much the same way the stiffness of a spring can be adjusted.
+ Soft springs produce inaccurate results while stiff springs may take excessive
+ computational time to avoid numerical instability.
+\end_layout
+
+\begin_layout Standard
+Unstructured grids are particularly difficult to balance between good results
+ and cost in areas with complex flow patterns.
+ Grid independence refers to when a grid has a resolution that produces
+ sufficiently accurate results and that enhancing the grid resolution further
+ will not improve the results significantly.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Subparagraph
+Finite Element
+\end_layout
+
+\begin_layout Subparagraph
+Finite Difference
+\end_layout
+
+\begin_layout Itemize
+Nodes at intersecting grid lines
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Quotes eld
+\end_inset
+
+Flow field
+\begin_inset Quotes erd
+\end_inset
+
+ of space derivatives at each node
+\end_layout
+
+\begin_layout Itemize
+Taylor series approximations
+\end_layout
+
+\begin_layout Itemize
+Only structured grids
+\end_layout
+
+\begin_layout Subparagraph
+Finite Volume
+\end_layout
+
+\begin_layout Plain Layout
+One of the more straight-forward methods is finite volume.
+ 
+\end_layout
+
+\begin_layout Itemize
+Cells
+\end_layout
+
+\begin_layout Itemize
+Mass, momentum and energy averaged by cell volume to conserve
+\end_layout
+
+\begin_layout Itemize
+Average flux by integral of boundary surfaces
+\end_layout
+
+\begin_layout Itemize
+Also unstructured grids
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Real-Time and Simulation-Time 2p
+\end_layout
+
+\begin_layout Itemize
+How does real-time constraints differ from simulation-time?
+\end_layout
+
+\begin_layout Itemize
+Parallel computing
+\end_layout
+
+\begin_layout Plain Layout
+Simulation Depth 1p
+\end_layout
+
+\begin_layout Itemize
+Dimensional (1D, 2D, 3D)
+\end_layout
+
+\begin_layout Itemize
+Quantities (particle systems, grids)
+\end_layout
+
+\begin_layout Itemize
+Complexity (mesh details, physics model relations and constraints)
+\end_layout
+
+\begin_layout Plain Layout
+Stiffness and Time Steps 1p
+\end_layout
+
+\begin_layout Itemize
+Particle dynamics
+\end_layout
+
+\begin_layout Itemize
+Numerical stiffness vs.
+ time steps required
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Springs, positions and velocities
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Implicit methods
+\end_layout
+
+\begin_layout Itemize
+Constrained dynamics
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Evolutionary algorithms can be useful to refine the grids more quickly.
+ Convergence and grid independence can be used as heuristics to help grid
+ generators produce both efficient and accurate grids given user-defined
+ constraints.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Methods of Visualization
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Methods-of-Visualization"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+An important part of the flight simulator is to give a realistic and appealing
+ representation of the virtual world.
+ Outdoor environments have proven particularly difficult to render quickly
+ and game development has been a key driver here.
+ Games are renowned for their endless struggle to squeeze a few extra frames
+ per second out of the hardware, and this has led to many creative solutions
+ using approximations and a sleeve full of dirty tricks.
+ This section discusses some essential issues of rendering natural scenes
+ and describes fast methods that cleverly approximates their appearance.
+ 
+\end_layout
+
+\begin_layout Subsection
+Terrain
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Terrain"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The virtual world of a flight simulator consists in large part of ground
+ that often stretches over long distances.
+ It would be desirable to give the user an impression of being able to fly
+ as far as the eye can see and still retain a high level of detail.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Horizon Culling
+\end_layout
+
+\begin_layout Standard
+One big concern with rendering terrain in real-time is how to maintain highly
+ detailed variations over large areas, since the graphics card memory is
+ limited.
+ Even if the terrain data is small enough to be rendered directly the large
+ amount of polygons often become a rendering bottleneck and limits the frame
+ rate.
+ To overcome this problem it makes sense to only render the parts of the
+ terrain that is actually visible and to reduce the level of detail without
+ degrading the image quality.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subfigure[Occluders and occludees]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Figures/horizon_culling1.png
+	width 7cm
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "Flo:occluders"
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subfigure[Approximation of gridlet by a quad]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Figures/horizon_culling2.png
+	width 7.5cm
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "Flo:occlusion-profile"
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+The horizon edge is used to cull patches of terrain.
+ Source: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "horizonocclusion02"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Horizon culling 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "horizonocclusion02"
+
+\end_inset
+
+
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "culling"
+description "Omit geometry to speed up the rendering process"
+
+\end_inset
+
+ is a method that quickly determines if geometry is visible from a point
+ of view by keeping track of the highest terrain points in the screen space
+ projection.
+ The method relies on a rendering algorithm that renders the patches of
+ terrain, or 
+\emph on
+gridlets
+\emph default
+, in a front-to-back manner.
+ This way the horizon can be updated for each rendered gridlet and all subsequen
+t renders need only test against the current horizon.
+ 
+\end_layout
+
+\begin_layout Standard
+Obviously the tests against the horizon are performed frequently and so
+ the paper proposes an optimization by 
+\emph on
+occluders 
+\emph default
+and 
+\emph on
+occludees 
+\emph default
+as figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "Flo:occluders"
+
+\end_inset
+
+
+\emph on
+ 
+\emph default
+shows
+\emph on
+.
+ 
+\emph default
+When a gridlet is tested against the current horizon, it is conservatively
+ approximated by a quad polygon that guarantees to be lower or equal to
+ the terrain points along the edges of the gridlet, shown by figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "Flo:occlusion-profile"
+
+\end_inset
+
+.
+ Then this quad is tested for visibility against the screen space horizon
+ edge and if any part of it exceeds the horizon then the gridlet is rendered
+ and the horizon edge updated.
+\end_layout
+
+\begin_layout Standard
+The paper also proposes that this method be used in combination with frustum
+ culling, where gridlets that are fully outside the view space can be omitted.
+ The horizon culling is then simply applied to further refine the culling
+ of terrain patches that are guaranteed to be fully occluded.
+ 
+\end_layout
+
+\begin_layout Standard
+In a particular scenario where the camera flew across a terrain with a variety
+ of views the paper claimed to increase the frame rate by 2-4 times compared
+ to only using frustum culling.
+ This makes it an interesting method for rendering large terrains in a real-time
+ flight simulator.
+\end_layout
+
+\begin_layout Subsubsection
+Big Textures and Geometric Level of Detail
+\end_layout
+
+\begin_layout Standard
+Another concern is that the level of detail (LOD
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "LOD"
+description "Level of Detail"
+
+\end_inset
+
+) in terrains can be extremely high and the textures just as large.
+ Fortunately, the final image quality only require a certain LOD at a distance
+ and a method is proposed in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "large_textured_terrains05"
+
+\end_inset
+
+ that handles both geometric mipmapping and very large textures.
+ 
+\end_layout
+
+\begin_layout Standard
+Modern graphics cards are designed for games and are currently limited to
+ textures of about 
+\begin_inset Formula $4096\times4096$
+\end_inset
+
+.
+ For a terrain of 100km² a texture of that size would only hold a texel
+ per 2-3 meters and would be insufficient by far for details up close.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subfigure[Level of detail is achieved by omitting the white points]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Figures/geometric_lod.png
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "Flo:LOD"
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subfigure[The edges between patches of different LOD are matched]{
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename Figures/geometric_lod_edge.png
+	BoundingBox -30bp 0bp 283bp 139bp
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "Flo:LOD-edge"
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Geometric level of detail for patches of terrain.
+ Source: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "large_textured_terrains05"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The method divides the terrain into a 2D array of patches called GeoMipMaps
+ (GMM), which holds information about terrain height points and level of
+ detail for that patch.
+ The large texture is then simply split up in tiles small enough to render
+ and the tiles mapped onto their respective GMMs.
+\end_layout
+
+\begin_layout Standard
+The advantage of this structure is that each GMM can easily change its LOD
+ by omitting 
+\emph on
+n 
+\emph default
+height points in both directions and conforming the shared edges of GMMs
+ with different LOD, as shown by figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "Flo:LOD"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "Flo:LOD-edge"
+
+\end_inset
+
+.
+ A maximum geometrical error can then be pre-calculated for each LOD level,
+ so that at run-time the minimum LOD for a GMM is trivially queried from
+ the current view parameters and a user-defined threshold.
+ 
+\end_layout
+
+\begin_layout Standard
+The concerns of geometric LOD and mapping tiles of large textures have much
+ in common and this approach handles both.
+ Its implementation is manageable and the author claims good performance,
+ but the paper does not specify how well the method of geometric LOD performs
+ for differently sized terrains compared to rendering with full LOD.
+\end_layout
+
+\begin_layout Subsection
+Vegetation
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Trees-and-Vegetation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Grass and trees exist in abundance on Earth and is an important element
+ in natural 3D scenes, but the complex geometries pose a huge challenge.
+ It has proven difficult to get realistic looking vegetation at interactive
+ frame rates so many tricks and approximations are often used.
+ This section discusses a few recent methods that aim to produce believable
+ pictures of vegetation at very high speeds on modern graphics cards.
+\end_layout
+
+\begin_layout Subsubsection
+Dynamically Lit Grass
+\end_layout
+
+\begin_layout Standard
+One paper 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "grass06"
+
+\end_inset
+
+ proposes a method that allows dynamic lighting and a prominent parallax
+ effect of grass in real-time.
+ It uses a combination of geometric, volumetric and surface rendering to
+ obtain highly detailed grass near the camera and a smooth transition to
+ distances where grass blades can no longer be distinguished, shown by figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Grass"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The method makes use of Bidirectional Texture Functions (BTF
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "BTF"
+description "Bidirectional Texture Function"
+
+\end_inset
+
+s) to pre-calculate per-pixel lighting of grass at a distance for different
+ view and lighting angles and enables fast, dynamic lighting of non-geometric
+ grass.
+ It also supports density texture maps that enables artistic possibilities
+ in 3D scenes as well as improves the transition between geometric and non-geome
+tric grass.
+ Lastly, the method supports shadowing and the grass blades can cast shadows
+ onto the ground and each other.
+ For non-geometric grass the shadows are baked into the BTFs and allow for
+ truly realistic lighting and natural looking grass at all distances.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Figures/grass_distances.png
+	width 15cm
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+A football field rendered with dynamically lit grass at various distances,
+ using a combination of geometric, volumetric and surface rendering.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Grass"
+
+\end_inset
+
+ Source: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "grass06"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Hardware Rendered Foliage
+\end_layout
+
+\begin_layout Standard
+The method presented in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "hwfoilage03"
+
+\end_inset
+
+ takes a novel approach to rendering trees and foliage quickly, using an
+ extension of the well-known billboarding technique.
+ 
+\end_layout
+
+\begin_layout Standard
+The conventional billboard tree is a transparent 2D texture that always
+ faces the camera or a combination of multiple textures for different angles
+ of the tree, as in figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "Flo:billboard-facing"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "Flo:billboard-cutout"
+
+\end_inset
+
+ respectively.
+ The main limitation with static billboards is a loss of motion parallax
+ effect within the tree itself, so that the trees look very much like sheets
+ of paper instead of geometric trees with depth.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+subfigure[Always facing the camera]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Figures/billboard_simple.png
+	width 5cm
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "Flo:billboard-facing"
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+subfigure[Two-faced cutout]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Figures/billboard_cross.png
+	width 5cm
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "Flo:billboard-cutout"
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+subfigure[2.5 dimensional impostors]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Figures/billboard_25.png
+	width 5cm
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "Flo:billboard-25-impostors"
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Comparison of billboarding techniques.
+ Source: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "hwfoilage03"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subfigure[Tree canopy]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Figures/tree_canopy.png
+	width 6cm
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subfigure[Forest of tree canopies]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Figures/forest.png
+	width 9cm
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Final results using 2.5 dimensional impostors.
+ Source: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "hwfoilage03"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This algorithm introduces the concept of 
+\emph on
+dynamic 2.5 dimensional impostors
+\emph default
+ to visualize trees in a convincing quality while being fast and cheap on
+ resources.
+ Each frame a set of impostors are rendered at various sides of the tree.
+ An impostor is simply a billboard texture rendered from a set of randomly
+ placed geometric leaves, and because they are rendered each frame the impostors
+ become view-dependent giving both depth and a natural parallax effect.
+ The impostors are then duplicated as sprites for each their respective
+ sides and make it look like the tree is rendered with thousands of geometric
+ leaves instead of billboards of leaves.
+\end_layout
+
+\begin_layout Standard
+The final touch of the method is to use the alpha channel of the impostor
+ textures for depth information of each leaf within the rendered impostor
+ volume, giving a semi-3D rendering of the leaves by standard depth-testing.
+ This means branches and other geometries are successfully surrounded by
+ leaves and the leaves themselves occlude each other properly.
+\end_layout
+
+\begin_layout Subsection
+Weather
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Weather"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Virtual worlds that require a realistic outdoor environment need to visualize
+ the weather in one way or another.
+ For sunny or cloudy days it is common in real-time applications to simply
+ use a textured skydome with appropriate lighting, but if harsh weather
+ conditions are simulated or visibility is reduced by fog it may be necessary
+ to use additional methods.
+\end_layout
+
+\begin_layout Standard
+One method presented in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "rain04"
+
+\end_inset
+
+ describes how to efficiently render falling rain or snow when the camera
+ is moving.
+ The cost of animating and rendering such a vast number of particles is
+ not practical in real-time, so an approximation to the same visual effect
+ is proposed.
+ By mapping textures of rain or snow streaks onto an invisible double cone,
+ as shown in figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "Flo:double-cone"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "Flo:rain-texture"
+
+\end_inset
+
+, simple texture transformations can animate the streaks along the cone
+ and around the camera.
+ The end result is that particles of rain or snow seem to fall continuously
+ and by tilting the cone it will look like the camera is moving through
+ the falling particles as they fall towards the camera.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subfigure[Cone placed around camera]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Figures/rain_cone.png
+	height 5cm
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "Flo:double-cone"
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subfigure[Rain texture]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Figures/rain_texture.png
+	height 5cm
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "Flo:rain-texture"
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+subfigure[Snow seems to be falling]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Figures/snow_falling.png
+	height 5cm
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+An illusion of falling snow or rain by moving textures.
+ Source: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "rain04"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Perception of Depth
+\end_layout
+
+\begin_layout Standard
+One of the challenges in computer graphics is to overcome the lack of depth
+ on computer monitors and it can be hard to precisely determine the position
+ of objects in a virtual world.
+ 
+\end_layout
+
+\begin_layout Standard
+A perception of depth is particularly important when flying near the ground.
+ The pilot needs visual references such as trees, stones, buildings and
+ other types of objects whose relative position and general size can be
+ ascertained.
+ Good references help the pilot estimate his position and velocity and without
+ a good perception of depth this task is complicated.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Stereoscopy
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Stereoscopy"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Stereoscopy
+\emph default
+ is an effective technique that exploits our natural stereo vision.
+ There are many variations in stereoscopy, ranging from simple stereo cards
+ of two photographs to high-tech head mounted displays and immersive stereo-proj
+ected caves shown in figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Head-mounted-display"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Stereo-cave"
+
+\end_inset
+
+.
+ However, the principle remains the same.
+ Stereoscopic pictures let each eye see only one of two pictures, and when
+ the pictures are taken at angles that correspond to each eye's position
+ the brain interprets a perception of depth as we do in the real world.
+\end_layout
+
+\begin_layout Standard
+The advantage of stereoscopy is that it provides a true perception of depth
+ so the position and scale of objects can be more accurately perceived.
+ For aircraft simulation this would greatly increase the pilot's feel of
+ the aircraft and is particularly helpful when navigating near the ground
+ or near obstacles to determine distances and the scale of things.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Figures/vr_hmd.png
+	lyxscale 30
+	width 13cm
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Head mounted display with tracking.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Head-mounted-display"
+
+\end_inset
+
+ Source: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "virtualreality"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Figures/vr_cave.png
+	lyxscale 50
+	width 13cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Stereo projected cave system.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Stereo-cave"
+
+\end_inset
+
+ Source: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "virtualreality"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Related Work
+\begin_inset CommandInset label
+LatexCommand label
+name "cha:Related-Work"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Flight simulators have been around in many flavors since the emergence of
+ games on the computer.
+ The advantage of using a finished product as a starting point is evident
+ and would save a lot of time, but could also restrict the solution in terms
+ of flexibility, modifiability and performance.
+ This section briefly covers two popular software projects that have much
+ in common with the aircraft simulator of this project and investigates
+ whether the products or parts of them could be reused in this setting.
+ 
+\end_layout
+
+\begin_layout Section
+Freeware: Flying-Model-Simulator (FMS)
+\end_layout
+
+\begin_layout Standard
+FMS 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fms"
+
+\end_inset
+
+ is a freeware model flight simulator originally intended for practicing
+ on the control of small remote controlled airplanes and helicopters.
+ The software is not open sourced and has been voluntarily maintained by
+ two persons since year 2000, and naturally lags behind commercial or open
+ source simulators.
+ However, because it is free it has gained tremendous popularity in the
+ RC (remote-control) community and is often bundled with RC products as
+ an introduction to flying.
+\end_layout
+
+\begin_layout Standard
+As a flight simulator FMS could fit the bill, but since its source is closed
+ one cannot run autopilot software on it or extend the simulator to challenge
+ the autopilot with windy conditions.
+ However, if the source code could be granted by the authors, it does run
+ a semi-realistic flight simulation that probably could be extended for
+ autopiloting.
+ The disadvantage is that the source code has gotten outdated by now and
+ users report trouble getting the system to run on modern computers.
+ Also the project is no longer actively maintained and the latest release
+ dates back to 2005.
+ This poses a risk if bugs should arise that is hard to trace without in-depth
+ knowledge to the simulator engine.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Figures/FMS_screenshot.png
+	lyxscale 40
+	height 3.5cm
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename Figures/FMS_screenshot2.png
+	lyxscale 40
+	height 3.5cm
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename Figures/FMS_screenshot3.png
+	lyxscale 40
+	height 3.5cm
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Screenshots from FMS 2.0 Beta 7.
+ Source: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fms"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Open Source: FlightGear
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Open-Source:-FlightGear"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A quick search on the Internet (pages 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "top10_opensource,top5_free_linuxgames"
+
+\end_inset
+
+ among others) indicates that FlightGear
+\begin_inset CommandInset citation
+LatexCommand cite
+key "flightgear"
+
+\end_inset
+
+ is the biggest, most popular and most active open source project on flight
+ simulation today.
+ It is daily updated by a large number of contributors and it features both
+ modern graphics and a very sophisticated flight simulation.
+ The code is free to download and modify by the terms of the GPL license,
+ and it also supports high-level extensions that does not require one to
+ modify the FlightGear engine code.
+ The software runs on several platforms including Windows, Linux and Mac
+ OSX.
+\end_layout
+
+\begin_layout Standard
+One can choose between three different flight dynamics models (FDM) that
+ each use different methods to determine the behavior of a specific aircraft.
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+JSBSim a general open source FDM component 
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+YASim simulates the effects of airflow on different parts of the aircraft
+ based on its mass and geometry
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+UIUC an extension of an FDM originally written by NASA
+\end_layout
+
+\begin_layout Standard
+The simulator features an extremely detailed world with real lakes, rivers,
+ roads, cities and over 20,000 airports.
+ The time of day modeling accurately represents the sun, moon and stars
+ for any specific date and time and all four seasons are modeled as they
+ naturally occur for different parts of the world.
+\end_layout
+
+\begin_layout Standard
+The extreme level of simulation in FlightGear is nothing but impressive
+ and it competes with the best of commercial simulators.
+ Its extensibility in being open source and the plug-in support makes this
+ software a great starting point for autopilot simulation.
+ The only drawback is that it is designed for full-scale aircraft simulation,
+ but it should be possible to model the dynamics of small-scale aircrafts
+ as well.
+ Also the level of simulation goes far beyond the needs of a small-scale
+ drone simulator where the focus is on precise short-range flights near
+ the ground.
+ However, a lot of inspiration can be taken from the pluggable FDM solution
+ it has implemented, since flight dynamics is the interesting part for testing
+ autopilots on different aircrafts.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Figures/flightgear_1.png
+	lyxscale 30
+	height 2.6cm
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename Figures/flightgear_2.png
+	lyxscale 40
+	height 2.6cm
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename Figures/flightgear_3.png
+	lyxscale 40
+	height 2.6cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Screenshots from FlightGear v1.9.
+ Source: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "flightgear"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Discussion of Methods
+\begin_inset CommandInset label
+LatexCommand label
+name "cha:Discussion-of-Best-Practice"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The intention of this study is to identify novel or best-practice methods
+ for implementing a real-time flight simulator to test autopilot software
+ on.
+ So far this report has covered basic principles of aerodynamics to better
+ understand the forces at work during flight and how to control these for
+ maneuvering.
+ Secondly it has covered methods to calculate the effects of these forces
+ in terms of drag and lift to simulate the flight behavior of the aircraft.
+ Thirdly a few methods have been selected to help create a convincing visualizat
+ion of outdoor flight, because the natural environment poses extra challenges
+ in real-time applications.
+ 
+\end_layout
+
+\begin_layout Standard
+This section will now discuss how these methods may be applied and their
+ fit will be assessed by weighing their levels of realism and appeal to
+ their costs in implementation and performance.
+\end_layout
+
+\begin_layout Section
+Flight Dynamics Model
+\end_layout
+
+\begin_layout Standard
+The choice of physics simulation is a delicate compromise between performance
+ and level of realism.
+ In section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Parametric-Equations"
+
+\end_inset
+
+ we covered parametric equations, and in particular the wing and fuselage
+ methods were described in how to determine the parasite drag coefficient
+ of an aircraft.
+ Other methods also exist that derive the lift and drag coefficients from
+ the geometrical and material structure, but generally all these methods
+ suffer from inaccuracies and need to be corrected by empirical test results.
+\end_layout
+
+\begin_layout Standard
+Computational fluid dynamics is an alternative approach covered in sections
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Computational-Fluid-Dynamics"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Numerical-Modeling"
+
+\end_inset
+
+.
+ In this context CFD aims to simulate the air particles and determine the
+ interacting forces between the air and the aircraft.
+ It is believed by many analysts that this method could simulate the entire
+ complex behavior of air by the Navier-Stokes equations, but in practice
+ there are no numerical methods or computing power available today that
+ can solve this in real-time without dire approximations.
+\end_layout
+
+\begin_layout Standard
+From these two categories of methods we can define four types of flight
+ dynamics models (FDM
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "FDM"
+description "Flight Dynamics Model"
+
+\end_inset
+
+) to use in a real-time flight simulator, as shown in table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:flight-dynamics-models"
+
+\end_inset
+
+.
+ Model 1 needs no prior knowledge about the aircraft structure and aims
+ to simulate the effects of air around the body during flight.
+ Models 2-4 rely on knowing the lift and drag coefficients for different
+ angles of airflow at all significant parts of the aircraft and simply feed
+ those to the lift and drag equations 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:lift"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:drag"
+
+\end_inset
+
+ respectively.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="3">
+<features islongtable="true">
+<column alignment="center" valignment="top" width="1cm">
+<column alignment="center" valignment="top" width="3cm">
+<column alignment="center" valignment="top" width="9cm">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+#
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Method(s)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Model Description
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CFD
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Simulate the interacting forces of air and the aircraft structure by some
+ governing equation for air
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CFD + Parametric
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Determine the lift and drag coefficients by simulating the air in a virtual
+ wind tunnel
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Parametric
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Use published wind tunnel test data for specific aircraft models
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Parametric
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Pick lift and drag coefficients that give reasonable max velocities and
+ control responses
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Different combinations of computational fluid dynamics and parametric equations
+ to model the flight dynamics
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:flight-dynamics-models"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Published Wind Tunnel Data
+\end_layout
+
+\begin_layout Standard
+Models 2-4 differ only in how they obtain these coefficients, and if possible
+ the best is to use published numbers from wind tunnels as proposed in model
+ 3.
+ Microsoft Flight Simulator X 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "msflightsim"
+
+\end_inset
+
+ is one commercial flight simulator that relies on numbers from aircraft
+ manufacturers and achieves a high level of realism simulating real-world
+ aircrafts.
+ However, it seems difficult to find publications for small model airplanes
+ and helicopters so that may rule out model 3.
+\end_layout
+
+\begin_layout Subsection
+Empirically Chosen Data
+\end_layout
+
+\begin_layout Standard
+If we have no test data available a straight-forward approach is to manually
+ pick coefficients as proposed in model 4.
+ If one is trying to match a specific real-world model airplane or helicopter
+ then experiments could be performed to measure the linear and angular motion
+ as a function of control outputs over time.
+ This could be realized by two cameras monitoring a remote controlled aircraft
+ and the control sticks during flight.
+ From this it would be possible to derive coefficients by trial and error
+ that approximately match the original dynamics in a flight simulator.
+ If live experiments cannot be performed it is still possible to construct
+ a semi-realistic and believable flight dynamics model by picking coefficients
+ that comply to reasonable constraints in max velocity and acceleration
+ in linear and angular motion.
+\end_layout
+
+\begin_layout Subsection
+Virtual Wind Tunnel
+\end_layout
+
+\begin_layout Standard
+Model 2 uses CFD to simulate air particles in a virtual wind tunnel and
+ determines the lift and drag dynamics as one would in a real tunnel.
+ Ideally this method is able to analyze an arbitrarily designed aircraft,
+ and even a piano could be tested for its ability to fly (but it would be
+ rather poor!).
+ However, in practice this method is as good as its implementation and suffers
+ from high computational costs and numerical dissipation, just as any CFD
+ implementation.
+ The advantage is that this analysis could be done just once and so a lot
+ of time could be spent to analyze the dynamics accurately and then apply
+ the results to parametric methods for simulating the dynamics in real-time.
+ 
+\end_layout
+
+\begin_layout Standard
+X-Plane 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "xplane"
+
+\end_inset
+
+ is a commercial flight simulator that allows you to design your own aircraft.
+ The flight behavior is determined by breaking the aircraft down into many
+ small elements and calculating the forces on each of them.
+ The coefficients are obtained in run-time from the dynamic airflow and
+ the pre-calculated structural analysis and used to calculate the forces
+ of lift and drag.
+\end_layout
+
+\begin_layout Subsection
+Real-Time Aerodynamics Simulation
+\end_layout
+
+\begin_layout Standard
+Model 1 is the most complex and computationally expensive solution of the
+ four.
+ It is so demanding that it is generally considered infeasible for flight
+ simulation and most of the prior work is academic.
+ However, the main limitations are computational power and fast, accurate
+ numerical implementations.
+ Many aerodynamics analysts believe 
+\begin_inset CommandInset citation
+LatexCommand cite
+after "ch. 14"
+key "leishman06"
+
+\end_inset
+
+ that once this limitation is overcome then CFD may just be the answer to
+ aircraft design analysis and simulation.
+ It is currently considered to have the best potential of truly modeling
+ the complex behavior of air of the methods known today.
+ 
+\end_layout
+
+\begin_layout Standard
+One study 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "cfd_flightsim"
+
+\end_inset
+
+ from 2006 did try to use a CFD implementation in a real-time helicopter
+ flight simulation to account for the complex interference of airwakes when
+ landing on a boat.
+ The report concluded that it should be possible to run such simulations
+ at interactive frame rates using 500 to 1000 processor cores in parallel,
+ so real-time flight simulation by CFD is probably some way into the future
+ yet.
+\end_layout
+
+\begin_layout Subsection
+Best Fit for a Real-Time Flight Simulator
+\end_layout
+
+\begin_layout Standard
+There is no obvious single best fit from the four flight dynamics models
+ listed.
+ Each has its pros and cons in terms of accuracy, performance, flexibility
+ and implementation cost.
+ Generally the models in table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:flight-dynamics-models"
+
+\end_inset
+
+ are listed by decreasing complexity in a top-down manner, but it should
+ be noted that the level of realism is not necessarily in the same order.
+ The behavior of real-world aircrafts has been successfully approximated
+ by parametric equations in simulators such as the Microsoft Flight Simulator
+ series and used as a professional training aid for many years already.
+ 
+\end_layout
+
+\begin_layout Standard
+However, the lift and drag coefficients by themselves are not sufficient.
+ Moving parts such as flaps and gears complicate matters and atmospheric
+ dynamics, local airflows and airwakes all affect the velocity field around
+ the aircraft.
+ To resolve local flows one could turn to fluid dynamics or similar variants
+ such as the vorticity transport equations covered in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Vorticity-Transport-Equations"
+
+\end_inset
+
+, but the backside is that without sufficiently accurate simulation even
+ the simplest types of lift and drag would be poorly modeled.
+ It is likely that the flight behavior would behave unnaturally if it would
+ even fly at all.
+\end_layout
+
+\begin_layout Standard
+For a master's thesis on the autopilot of model aircrafts the main concern
+ is not so much the realism of flight dynamics as it is the autopilot's
+ ability to adapt to different aircraft dynamics and winds.
+ The physics need to be seemingly realistic, but a perfect model of air
+ dynamics and local airflows is not a priority.
+ By this assumption we can safely conclude that a complete CFD simulation
+ is neither necessary nor feasible for the scope of such a project.
+\end_layout
+
+\begin_layout Standard
+A hybrid as described in model 2 is more interesting.
+ To develop a virtual wind tunnel from scratch and determine the coefficients
+ is a huge task and essentially a thesis on its own, but if open source
+ components are available such as YASim in FlightGear then that could be
+ one way to achieve a high level of realism for different types of model
+ aircrafts.
+\end_layout
+
+\begin_layout Standard
+If wind tunnel test data is available for such small-scale aircrafts then
+ model 3 could be the best solution, but the flexibility in testing different
+ aircrafts would be limited to the data available and manually tweaking
+ existing data.
+ If data is lacking then model 4 is a reasonable alternative.
+ It should be possible to manually define flight dynamics that are sufficiently
+ realistic for flying and testing the autopilot on.
+ The approach is entirely empirical and a matter of subjective choices,
+ but it is very quick to implement and for a project focused on developing
+ the autopilot software that could be a good starting point in any case.
+ The flight dynamics component should be designed to be pluggable and that
+ should make it easier to improve or replace later.
+ 
+\end_layout
+
+\begin_layout Section
+Visualization 
+\end_layout
+
+\begin_layout Standard
+The goal of the visualization is not to accurately present the results of
+ the physics simulation per se, but rather give the user a graphical presentatio
+n that is intuitive, appealing and fun to use.
+ The simulator will function both as a flight simulator game and as a tool
+ for testing autopilot control logic.
+ The rendered environment is therefore only an approximation to the real
+ world and the key focus is to give the user a good sense of scale, position
+ and motion in the virtual world.
+ 
+\end_layout
+
+\begin_layout Standard
+In section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Methods-of-Visualization"
+
+\end_inset
+
+ we cover some methods to visualize a natural scene with terrain, trees,
+ grass and weather.
+ Natural scenes are particularly difficult to render in real-time and game
+ development has been one of the main drivers behind such methods.
+ Solutions exist in abundance in game development communities and in published
+ works, so for this study we had to select a few promising methods that
+ aim to solve some key issues of rendering outdoor scenes in real-time.
+ The fit for this project was subjectively assessed for each method by how
+ much time it would require to implement it, expected performance hit and
+ its potential to create convincing and appealing graphics.
+\end_layout
+
+\begin_layout Standard
+Evaluation of visualization methods differs slightly than for the methods
+ of flight dynamics.
+ We are still restricted to real-time performance, but in graphics the choice
+ of methods do not necessarily decide the level of realism and appeal in
+ the graphics.
+ The final result often depends just as much on the artistic work as on
+ the method used.
+ A simple billboard tree with high quality textures can look convincingly
+ real in certain applications in the same way as truly geometric grass can
+ look artificial without proper lighting, geometry and textures.
+\end_layout
+
+\begin_layout Standard
+This section discusses the fit of each method and whether the method or
+ a variation of it could be used in the implementation.
+\end_layout
+
+\begin_layout Subsection
+Terrain
+\end_layout
+
+\begin_layout Standard
+Rendering realistic terrain requires detailed meshes that often become a
+ bottleneck.
+ In section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Terrain"
+
+\end_inset
+
+ we propose methods to cull parts of the terrain that do not need to be
+ rendered and to reduce the level of detail for distant geometry with little
+ impact on image quality.
+ 
+\end_layout
+
+\begin_layout Standard
+Horizon culling is a clever culling technique that claims 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "horizonocclusion02"
+
+\end_inset
+
+ to increase the frame rate by 2-4 times to ordinary frustum culling in
+ detailed terrain with height variations that hide large parts of the terrain
+ from the camera.
+ The method seems fairly easy to implement and should provide a much needed
+ performance boost for large detailed terrains.
+ In particular it should prove effective for low altitude flights such as
+ in simulated search missions.
+\end_layout
+
+\begin_layout Standard
+To further improve the performance one method 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "large_textured_terrains05"
+
+\end_inset
+
+ suggests how the geometrical level of detail may be adjusted.
+ The details of the paper indicate that the method is slightly intricate
+ and could take some time to implement.
+ In particular there are issues in the approach such as joining gridlets
+ of different LOD and preserving normals across the edges of curved gridlets
+ that complicate the implementation.
+ It may not be desirable to implement this method unless there is an absolute
+ need to improve the performance beyond frustum and horizontal culling.
+ Also the simplicity of the technique is expected to produce 
+\begin_inset Quotes eld
+\end_inset
+
+popping
+\begin_inset Quotes erd
+\end_inset
+
+ behavior when a gridlet changes its LOD.
+ However, the method does describe an implementation structure for dividing
+ a large texture into tiles and mapping them to gridlets that will prove
+ valuable in creating large, detailed non-repeating textures.
+ For instance, it could be interesting to use large high-resolution aerial
+ photographs of real-world terrain as a texture to create more realistic
+ graphics.
+\end_layout
+
+\begin_layout Subsection
+Vegetation
+\end_layout
+
+\begin_layout Standard
+Trees, bushes and grass are obvious elements in a natural 3D scene, but
+ they are also important in providing a sense of scale.
+ A small model helicopter flying in a terrain without vegetation may very
+ well look full-scale if the terrain size cannot easily be determined.
+ Humans excel at comparing the relative sizes of objects, but without good
+ reference objects it can be hard to figure out the distance to or the size
+ of an object in a 3D scene.
+ This is particularly true if the visualization medium lacks depth, such
+ as in computer screens.
+ 
+\end_layout
+
+\begin_layout Standard
+In section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Trees-and-Vegetation"
+
+\end_inset
+
+ we suggest two methods for rendering different types of vegetation in real-time.
+ The first method describes how to render realistic looking grass.
+ Grass is an interesting element because its parallax effect is expected
+ to greatly improve the sense of movement and visual appeal near the ground,
+ and should prove particularly useful for precision navigation.
+ The paper claims to achieve highly detailed grass up close that still looks
+ natural and retains the parallax effect at a distance.
+ Unfortunately the implementation seems too time consuming in that three
+ different techniques are combined and each one would probably take some
+ time to get right.
+ It could be interesting to implement only the geometric technique as described
+ in the paper, but the performance hit would likely limit the area and density
+ of the grass.
+ The transition to textured surfaces would also look very unnatural, and
+ even though the density map technique helps transition between the two
+ that is yet another implementation cost.
+ 
+\end_layout
+
+\begin_layout Standard
+The method is generally complex and there are no obvious fallbacks if the
+ implementation only gets halfway.
+ Also the method only supports flat terrain and is not very well suited
+ for the terrain of a flight simulator, although the paper notes that the
+ technique could be extended to handle curved terrain as well.
+ The gain of rendering grass is evident, but it seems the costs in performance
+ and implementation may not be justified for the scope of this project.
+ There are many other alternatives to grass that are far simpler and more
+ efficient such as grass textures and billboards, that are commonly used
+ in games today.
+ It seems reasonable to start out simple and later add more advanced grass
+ if time allows it.
+\end_layout
+
+\begin_layout Standard
+The other method describes how to render the foliage of trees and bushes
+ quickly and is particularly effective in rendering forests or large groups
+ of bushes.
+ The approach uses a novel improvement over billboards and introduces dynamicall
+y rendered impostors with per-leaf depth testing.
+ This enables us to render very rich trees with thousands of seemingly geometric
+ leaves, but there are a couple of drawbacks.
+ 
+\end_layout
+
+\begin_layout Standard
+First it performs significantly slower than static billboarding techniques.
+ Each visible tree must render a set of impostors with geometric leaves
+ every frame and duplicate the impostors many times by sprite rendering.
+ However, the paper claimed to render a forest canopy of approximately 200
+ trees with no culling at 50 frames per second on a modern PC per 2003,
+ and should perform well in the real-time implementation slated for early
+ 2010.
+ 
+\end_layout
+
+\begin_layout Standard
+Second it is likely that the canopy looks natural only at a distance, and
+ for flight near the ground with small-scale aircrafts it is expected that
+ the impostors lose some of their illusion when flying near trees and bushes.
+ This is not a major issue for a game-oriented visualization, but it should
+ be clear that this method is far from a truly geometric representation
+ of trees.
+ It could be possible to use a level of detail technique to blend between
+ impostor trees and fully geometric trees as a function of distance, but
+ it might be difficult to achieve this without very noticable 
+\begin_inset Quotes eld
+\end_inset
+
+popping
+\begin_inset Quotes erd
+\end_inset
+
+ between the two representations.
+\end_layout
+
+\begin_layout Standard
+If performance becomes a limiting factor the method easily allows one to
+ adjust the number of leaves and impostors and if the implementation takes
+ longer than expected it is relatively easy to degrade to a static billboarding
+ technique.
+ These factors make this method a good starting point for populating the
+ terrain with vegetation.
+ 
+\end_layout
+
+\begin_layout Standard
+An alternative would be to use off-the-shelf solutions for rendering trees
+ at different levels of detail.
+ SpeedTree 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "speedtree"
+
+\end_inset
+
+ is one commercial software library that generates realistic, geometric
+ foliage in many different flavors and is extensively licensed in recent
+ games like Fallout 3, Batman: Arkham Asylum and Age of Conan - Hyborian.
+\end_layout
+
+\begin_layout Subsection
+Weather
+\end_layout
+
+\begin_layout Standard
+In section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Weather"
+
+\end_inset
+
+ we described how the sky can easily be presented by a textured skydome.
+ This technique is used in most 3D games today because it is very fast and
+ yet looks convincing with proper artistic work.
+ Clouds are typically superimposed as textures on the skydome and animated
+ by transformations, and the weather and time of day can easily be changed
+ by blending between different textures of clouds and skies.
+ Skydomes fit this simulator well because the typical scenario is flight
+ near the ground and flying through volumetric clouds is not an issue.
+ However, to present flying in poor weather we may need additional methods.
+ 
+\end_layout
+
+\begin_layout Standard
+One method describes how to efficiently render falling rain and snow in
+ a flight simulator as if the camera is moving through the falling particles.
+ This is a typical example where game technology applies simple methods
+ in a clever way to give the impression that more advanced visualization
+ is going on.
+ This illusion of rain and snow is computationally cheap and would be a
+ good fit for visualizing flight in such weather conditions.
+ For its application the main drawback is realism, since flat 2D textures
+ are used to give an illusion of moving among millions of particles.
+ However, the paper notes how a parallax effect can be achieved by layering
+ several textures and scrolling them at different speeds, and with some
+ tuning the end result can become quite believable.
+\end_layout
+
+\begin_layout Standard
+An extension of this method could also to some extent visualize windy conditions.
+ Gusts of wind could be shown by adjusting the direction that rain or snow
+ is falling as a function of the wind vector.
+ However, this is a crude approximation since all particles would be affected
+ simultaneously and uniformly, ignoring the fact that it takes time for
+ wind to propagate and that wind swirls as it goes.
+ But even if it is not realistic it does help visualize gusts of wind and
+ how the autopilot reacts when they occur.
+ 
+\end_layout
+
+\begin_layout Standard
+The method is generally versatile and should run a lot faster and be simpler
+ to implement than a particle system.
+ Although the illusion is not very realistic the method complements the
+ skydome in visualizing different kinds of weather and is a good starting
+ point that fits the scope of this project well.
+\end_layout
+
+\begin_layout Subsection
+Perception of Depth
+\end_layout
+
+\begin_layout Standard
+3D goggles for PCs have gained popularity in the recent years, much due
+ to light-weight goggles that fit the home user budget.
+ Polarized glasses have been replaced by LCD shutter glasses that enable
+ vivid colors and smooth frame rates.
+ 
+\end_layout
+
+\begin_layout Standard
+In 3D scenes this helps the user to accurately determine the position and
+ the scale of things and can give the user a heightened sense of presence
+ in the virtual world.
+ The advantage of stereoscopy on computers is that the implementation is
+ relatively simple and only requires the scene to be rendered from two slightly
+ different camera positions.
+ This does not necessarily mean we get half the frame rate, but there is
+ a significant drop in performance for stereoscopic rendering that must
+ be taken into account.
+\end_layout
+
+\begin_layout Standard
+Generally one must explicitly render the stereoscopic effect, but NVIDIA
+ 3D Vision 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "3dvision"
+
+\end_inset
+
+ is a recent solution that turns any 3D application into a stereoscopic
+ experience.
+ The advantage is that older applications that originally did not support
+ sterescopy can now be viewed with 3D googles.
+ Unfortunately there is a problem that elements rendered without depth informati
+on, such as the heads up display, overlaid texts and crosshairs, suffer
+ from ghosting artifacts and floating uncomfortably in front of where one
+ is focusing.
+ Generally one must explicitly render such elements at a proper depth, however
+ 3D Vision has managed to substitute the crosshair with a 3D version in
+ their graphics card driver and fixes the crosshair in older first-person
+ shooter games.
+ It is possible that the remaining elements can be fixed in the future too,
+ and if so it might no longer even be necessary to write stereoscopy code.
+\end_layout
+
+\begin_layout Standard
+Tracking systems have also become increasingly popular because they are
+ getting cheaper and more accurate.
+ High-end HMDs often incorporate tracking of the head movement so that the
+ pictures reflect the movement of the person wearing it.
+ This opens up many interesting possibilities, such as sitting in a virtual
+ cockpit of the aircraft and being able to move and look around as a pilot
+ would in a real aircraft.
+ With systems that can track the head movement over several meters it is
+ to some extent possible to let the user walk and look around as if he is
+ present in the virtual world.
+ For movement over larger areas this type of tracking can complement regular
+ game controllers in an interesting combination.
+ 
+\end_layout
+
+\begin_layout Standard
+The ability to walk around makes the simulator more interactive and fun
+ to use, but it also has practical uses.
+ In particular it would be very helpful in evaluating the autopilot performance
+ in precision navigation.
+ The degree of freedom in walking around and observing the flight pattern
+ in real-time is unmatched and would closely resemble a real flight experiment,
+ and with no risk to life and limb!
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Conclusion
+\begin_inset CommandInset label
+LatexCommand label
+name "cha:Conclusion"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A complete flight simulator is a huge undertaking and the intention of this
+ study is merely to identify key theory and methods to better understand
+ how a flight simulator can be realized.
+ This report has given some insight into aerodynamics and discussed methods
+ that simulate flight dynamics and visualize the outdoor environment in
+ a realistic manner.
+ We have covered existing flight simulators that each solve the task differently
+, from the relatively simple hobbyist project FMS to the huge open source
+ project FlightGear that accurately simulates the inner workings of an aircraft
+ down to the malfunction of gauges and mechanics.
+\end_layout
+
+\begin_layout Standard
+We have learned that flight simulators generally model the flight dynamics
+ by lift and drag coefficients for major parts of the aircraft or for the
+ aircraft as a whole.
+ These coefficients simply describe the tendency of an object to produce
+ lift and drag when placed in an airflow at a specific angle.
+ Wind tunnels measure these coefficients for different types of aircrafts
+ and enable flight simulators to accurately model the dynamics of real-world
+ aircrafts.
+ We have also explored the possibility of simulating complex airflows and
+ arbitrary aircraft designs by turning to computational fluid dynamics.
+ Although real-time flight simulation by fluid dynamics is some way into
+ the future yet, a lot of interesting work has been done in this field.
+ We discovered that hybrid solutions exist such as YASim for FlightGear
+ that do not necessarily model the airflow, but rather determine the flight
+ dynamics by structural analysis.
+\end_layout
+
+\begin_layout Standard
+The study of visualization techniques revealed some novel methods inspired
+ by game technology for fast and convincing results.
+ Outdoor 3D scenes are generally considered difficult because of the tremendous
+ amount of detail in nature.
+ This forces the methods to balance between performance and realism, and
+ try to land on a compromise that is 
+\begin_inset Quotes eld
+\end_inset
+
+good enough
+\begin_inset Quotes erd
+\end_inset
+
+.
+ We have learned how terrain rendering can be sped up by horizon and frustum
+ culling and by adjusting the geometric level of detail, and how super-sized
+ textures can be split up in tiles and properly mapped for highly detailed
+ terrain.
+ We have investigated recent methods for rendering huge amounts of living
+ elements such as trees, bushes and grass in real-time to populate the terrain
+ and increase the sense of scale and motion.
+ We have discussed how to visualize clouds, rain, snow and winds to present
+ different kinds of weather, and finally we have explored the possibilities
+ of stereoscopy and tracking systems and how the immersive experience can
+ be both useful and fun in a flight simulator game.
+ 
+\end_layout
+
+\begin_layout Standard
+The theory and methods in this study give a brief glimpse of the challenges
+ in creating a realistic flight simulator.
+ We have discussed each of the methods in terms of realism and appeal compared
+ to the costs in implementation and performance, and some of the methods
+ stick out as more promising.
+ The methods of horizon culling, large texture mapping and 2.5 dimensional
+ foliage are particularly interesting since they seem relatively easy to
+ implement and should perform well by the claims in the papers.
+ Together they enable large, detailed and textured terrains filled with
+ hundreds of trees and bushes in real-time, and that would be a good starting
+ point for the virtual world of a flight simulator.
+ 
+\end_layout
+
+\begin_layout Standard
+In flight dynamics there is one method that looks promising.
+ CFD simulation was discarded due to its complexity and computational cost,
+ so that leaves simulation by parametric equations.
+ There are generally two problems related to simulation by this method.
+ First we need to determine the lift and drag coefficients for a particular
+ aircraft design.
+ We have already discussed methods to get these numbers, and options include
+ open source components that perform structural analysis, published wind
+ tunnel test data and choosing coefficients empirically.
+ Second we must maintain a velocity vector field to model winds, atmospheric
+ turbulence, local airflows and similar variations.
+ To calculate the motion of an aircraft is then a matter of resolving force
+ vectors of drag and lift by the vector field and adding in the thrust force
+ vector.
+ We also noted that an open source FDM such as JSBSim, YASim or UIUC could
+ be used to handle this part of the simulator and reduce the scope of the
+ implementation.
+\end_layout
+
+\begin_layout Standard
+Realistic flight simulators have been around for some time now and best-practice
+s are well established.
+ Ever since the beginning parameters have been used to define the behavior
+ of different types of aircrafts, and the level of realism was mainly constraine
+d by the match of parameters and the level at which winds, weather processes
+ and local airflows were modelled.
+ However, in recent work 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "xplane,cfd_flightsim"
+
+\end_inset
+
+ we also see the emergence of structural analysis and simulation of fluid
+ dynamics to further up the flexibility and realism.
+ 
+\end_layout
+
+\begin_layout Standard
+This study set out to identify novel and best-practice methods for implementing
+ a realistic real-time flight simulator game.
+ The result is a thorough survey of methods discussed in light of solid
+ theoretical background and related to prior work, which should provide
+ a solid foundation to understand and realize such an implementation.
+\end_layout
+
+\begin_layout Standard
+\align left
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "andreas"
+options "bibtotoc,elsarticle-num"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset External
+	template PDFPages
+	filename Project_cover_pages.pdf
+	extra LaTeX "pages=2"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

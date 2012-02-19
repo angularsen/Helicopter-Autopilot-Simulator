@@ -1,0 +1,112 @@
+# $Id: README,v 2.0 2002/09/22 02:10:16 tramm Exp $
+
+This directory contains the software for the onboard computer and
+microcontroller.  Right now the onboard computer has not been
+designed, so the groundstation code (in the efis repository) talks
+directly to the real-time microcontroller.
+
+All microcontroller code is in the ./avr directory.
+
+GNU software is available from these sites:
+
+	http://www.gnu.org/server/list-mirrors.html
+
+----------------------------------------------------------------------
+
+Required software:
+
+binutils-2.11.2
+	ftp://ftp.twtelecom.net/pub/GNU/binutils/binutils-2.11.2.tar.gz
+
+	Build with:
+
+		./configure			\
+			--target=avr		\
+			--prefix=/usr/local
+		make
+		make install
+
+gcc-core-3.0.1
+	ftp://ftp.twtelecom.net/pub/GNU/gcc/gcc-3.0.3/gcc-core-3.0.3.tar.gz
+
+	Build with:
+
+		./configure			\
+			--target=avr		\
+			--prefix=/usr/local	\
+			--enable-language=c
+		make
+		make install
+
+avr-libc for the AVR:
+	http://www.amelek.gda.pl/avr/libc/
+	We're using release 20011007, but have also tested with 20011208.
+	Build with:
+
+		make
+		make install
+
+
+UISP (In System programmer) for the AVR:
+	http://www.amelek.gda.pl/avr/uisp/
+	We're using release 20011006
+
+	It's a pain to build with less than 2.4 kernels.
+	And it's in C++, which makes it unportable.  There is a binary
+	in the source tree, but it doesn't work very well for most
+	anyone else.
+
+----------------------------------------------------------------------
+
+Todo for Rev 1.1 of the Board:
+
+
+Size issues:
+- Thinner headers.  These require grinding to fit
+- Larger holes for accelerometer (done).
+- Spacing between AVR and MAX231 is tight if socket is used for MAX231.
+- Spacing with DB9F is very tight.  Requires grinding the DB9F. (Done)
+- Thinner (0.25) traces are ok for digital lines.  0.30 is just huge.
+- "Cut throughs" between pins only on top-side.  None on solder side (done).
+- Reduce the number of "expansion holes" and spread out the components.
+
+Style:
+- Bi-color LED for power / programming
+- Status LED for accelerometer/gyros
+- Opto-isolate digital inputs
+- Voltage regulator
+- Remove jumper for Pitch/Roll accelerometer
+- Make two-axis version usable with one gyro + one accelerometer
+- Expose all extra lines from gyros and accelerometers
+- Solder points for IO lines (done).
+- Voltage regulator
+- Divide-by-n chips for tachs
+- Label servo connectors
+
+Oops:
+- MAX231 pinout is totally hosed (Fixed).
+- Z / Roll accelerometer pins are backwards and must to be used for
+  Pitch/Roll instead.  No room for safety pilot PAL that way. (Fixed)
+- Va, Vr and Vcc links are difficult to reach (but should go away)
+- If Pitch/Roll accelerometer is used as designed it blocks the
+  voltage regulator spot.
+
+Maybe:
+- Explore MSP1005-ND from MSI (three axis accelerometer)
+- Explore Tokin/Murata ceramic gyros
+- Use two-uart AVR and connect GPS to IMU
+- Screw-down wire headers for analog/digital inputs
+
+----------------------------------------------------------------------
+
+Servo assignments:
+
+These are for both prototypes, the LMH and the 60.  The color refers
+to the zip tie on the servo connector; your milage may vary.
+
+	60		LMH		Color
+0:	LR Cyclic			Red
+1:	FA Cyclic			Green
+2:	Throttle or Collective		Yellow
+3:	Tail rotor			None
+4:	Throttle			Clear

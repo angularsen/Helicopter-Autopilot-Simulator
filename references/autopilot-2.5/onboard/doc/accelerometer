@@ -1,0 +1,139 @@
+# $Id: accelerometer,v 2.0 2002/09/22 02:10:16 tramm Exp $
+
+The ADXL202 and ADXL210 output pulse width modulated ("duty cycle")
+data that represents the acceleration along that axis.  These are
+two axis units, so they can be used for tilt sensors.
+
+Similar to the hobby gyros, the measurement of the pulse widths
+must be rock-solid to ensure that the signal does not jitter.
+The easiest way to do this is to concentrate all the time on it,
+but we want the board to do other things, too.
+
+A sample pulse train for one axis:
+
+  v------------------- T2 ----------------v
+   ____________                            _____________
+__|            |__________________________|             |___________
+
+  ^---- T1 ----^
+
+The acceleration along this axis is A(g) = (T1/T2 - 0.5) / k
+For the ADXL202 units, k = 0.125 g
+For the ADXl210 units, k = 0.500 g
+
+That means that if the sensor is subject to no force (0g), the T1
+pulse width will be 50% of the T2 width.  Subject to gravity,
+A = 1g -> T1 / T2 = 0.625.
+
+Unfortunately, the midpoints of the two axis pulses coincide
+rather than the start or end times.
+             ___________                ___________
+X   ________|           |______________|           |____
+            ^ Ta        ^ Tb
+               _______                    _______
+Y   __________|       |__________________|       |______
+                                         ^ Tc    ^ Td
+
+This makes measuring the two widths simulatenously difficult.
+Analog provides a tech note on the subject, with sample code:
+
+	http://www.analog.com/techsupt/application_notes/202Duty.pdf
+
+We reproduce details of that note here and in the code.
+
+Ta = Rising edge of X
+Tb = Falling edge of X
+Tc = Rising edge of Y
+Td = Falling edge of Y
+
+T1x = Tb - Ta
+T1y = Td - Tc
+T2x = T2y = Tc + (Td - Tc)/2 - (Ta + (Tb - Ta) / 2)
+2 T2 = 2 Tc + Td - Tc - 2 Ta - Tb + Ta
+     = Tc + Td - Ta - Tb
+
+To avoid overflow on the 16-bit words, we compute it thusly:
+
+T3 = 2 T2 = (Td - Tb) + (Tc - Ta)
+
+We keep track of 2 T2 rather than T2 and deduce new constants:
+
+Ax = (T1x / T2 - 0.5) / k
+   = T1x / (k T2) - 0.5 / k
+   = T1x / (k1 T3) - k2
+
+where k1 = k / 2 and k2 = 0.5 / k
+
+Since we have selected a resistor that gives us roughly 10ms for T2,
+we can compute that we have between 2.5 ms and 7.5 ms after marking
+Ta and Tc.  And a like amount between Tb and Tc.  We can squeeze
+some computation or IO in that period.
+
+Our sampling cycle is roughly 50 Hz.  We want to update the servos that
+frequently, so this should work well.  We're currently sampling it in
+the code and things are working great.
+
+For the actual IMU we will require a second ADXL202 or 210.  This
+means that the IMU will measure one axes with two accelerometers.
+But we don't have to listen to the extra accelerometer and probably
+don't want to.  If we have two ADXL202's, the four sets of pulses
+are not going to be syncronized.  This means that we'll end up
+sampling the two waveforms separately and halving the bandwidth
+available.
+
+Can we make do with only two axis measured by the accelerometers?
+Perhaps, since in hovering flight we should be able to use them as
+tilt sensors.  The problem comes in a banking turn, where the forces
+look like this:
+
+         ______
+	|      |
+        |      |
+        |______|
+       /        \
+      /     |    \
+     /      |     \
+   mg       |     mv^2 / r
+            |
+            v
+           F=ma
+
+You have to imagine the box is tilted on its side at an angle A off
+the vertical axis.  I can't do it in ASCII very well.
+
+We have the force downward of mg.  We have the acceleration
+outward of mv^2/r = mf.  The resultant force is
+
+	|F| = m sqrt( g^2 + v^4 / r^2 )
+	 a  =   sqrt( g^2 + f^2 )
+
+at an angle
+
+	/_ = atan( f / g )
+
+In a coordinated turn, /_ = 90 - A which means that the force is
+straight down through the floor of the aircraft.  We can
+plug in some values for different bank angles, but the one that is
+easy is A = 60 degrees.
+
+	/_ = 30 = atan( g / f )
+	tan(30) = sqrt(3) = g / f
+	f = sqrt(3) g
+
+Where f is the outward force.  Thus, the resultant acceleration magnitude is
+
+	a = sqrt( g^2 + f^2 )
+	  = sqrt( g^2 + (sqrt(3) g)^2 )
+	  = sqrt( g^2 + 3 g^2 )
+	  = sqrt( 4 g^2 )
+	  = 2 g
+
+The tilt and roll accelerometers will read zero acceleration and might
+lead us to conclude that the aircraft is level.  However, the vertical
+accelerometer will tell us that it is experiencing a 2 g force.
+Either we are rapidly climbing in a level attitude, or we are in
+a constant banked coordinated turn.  Without the third accelerometer
+we could not tell that we were off level at all.
+
+Would the rate gyros help us?  Maybe.  I haven't started correlating
+the inputs yet.

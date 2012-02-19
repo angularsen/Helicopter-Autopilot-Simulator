@@ -1,0 +1,68 @@
+#!/usr/bin/make
+# $Id: Makefile.common,v 2.2 2003/03/08 05:09:17 tramm Exp $
+
+ARCH		=							\
+	-march=armv4							\
+	-mtune=strongarm1100						\
+	-DNO_FPU							\
+
+#CC		= /skiff/local/bin/arm-linux-gcc $(ARCH)
+#CXX		= /skiff/local/bin/arm-linux-g++ $(ARCH)
+CC		= gcc
+CXX		= g++
+LD		= $(CXX)
+MAKEDEPEND	= $(CXX) -M
+RANLIB		= ranlib
+
+ROOTDIR		= ../..
+BINDIR		= $(ROOTDIR)/bin
+OBJDIR		= $(ROOTDIR)/obj
+LIBDIR		= $(ROOTDIR)/lib
+
+NO=\
+	-pg								\
+
+CFLAGS		=							\
+	-g								\
+	-O3								\
+	-W								\
+	-Wall								\
+	-pedantic							\
+	-I.								\
+	-I..								\
+	-I../include							\
+	-I../sim							\
+	-I../state							\
+	-I../controller							\
+	-I../joystick							\
+
+
+CXXFLAGS	=							\
+	$(CFLAGS)							\
+
+
+LDFLAGS		=							\
+
+LDLIBS		=							\
+	-lm								\
+
+GLFLAGS		=							\
+	-L/usr/X11R6/lib						\
+	-lGL								\
+	-lGLU								\
+	-lglut								\
+	-lXi								\
+	-lXmu								\
+
+# Bring in our generic rules and targets
+include $(ROOTDIR)/Makefile.rules
+
+# Libraries just descend into the top level directory
+# and do the update there
+FORCE:
+
+$(LIBDIR)/lib%.a: FORCE
+	$(MAKE) -C $(ROOTDIR)/src/$(*:lib=) lib
+
+
+

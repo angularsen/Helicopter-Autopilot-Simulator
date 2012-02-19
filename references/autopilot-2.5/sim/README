@@ -1,0 +1,147 @@
+# $Id: README,v 2.0 2002/09/22 02:07:28 tramm Exp $
+
+The files at the top level are historic and are likely to be removed
+soon.  Everything of interest is in the ./src directory.  After building,
+run the "sim" script to start up a hovering helicopter.
+
+To get started, do a build:
+
+	gmake depend
+	gmake
+
+At the minimum, this should compile ./bin/heli-sim and ./bin/hover.
+If you have OpenGL support, it will also build ./bin/heli-3d and
+./bin/heli-panel.  Then try running the ./bin/test-hover program to see 
+if the simulator and OpenGL pieces work well together.
+
+If this is too slow, you might try running just the simulator,
+the flight controller and one display window:
+
+	./bin/heli-sim &
+	./bin/heli-3d -geometry 200x200 &
+	./bin/hover &
+
+Hit 'q' in the window to close it and kill the simulator.
+
+Before manually flying the simulator, you need to calibrate your
+joystick with the ./bin/calibrate program.  It will prompt you for
+control inputs and extreme values, then write out a block of code
+that should be cut-n-pasted into ./src/joystick/heli-stick.c.
+Recompile and run:
+
+	./bin/sim
+
+If you would like a "heading hold gyro", add the flight controller
+with all other axes turned off (no automatic roll, pitch or collective):
+
+	./bin/sim './bin/hover -rpc'
+
+If you have SWIG installed, cd to src/controller and do a 'make perl5'
+to build Perl bindings for the controller and state libraries.  You
+can test these with the ./bin/perl-hover and ./bin/perl-rpv programs.
+The last requires Perl Tk, which may require additional software
+installation.
+
+
+Major components:
+
+heli-sim:
+---------
+
+This is the core math model.  It spawns some number of clients
+specified on the command line and outputs the sensor data to these
+programs.  Currently it does not accept any options, but it should
+take:
+
+	--steps=steps		Number of steps to simulate
+	--wind=knots		Maximum wind
+	--vwind=knots		Maximum downdrafts
+
+	--rpm=r			Set the main rotor RPM
+	--model-dt=seconds	Time step for the model
+	--display-dt=seconds	Time step between display updates
+
+	--no-flybar		Disable the flybar
+	--no-torque		Disable engine torque
+	--no-servos		Disable servo transit and slop
+
+	--flatearth		Use the Flat earth coords
+	--wgs			Use the WGS sphere model
+
+	--hold=[uvwxyzprq]	Disable these values
+	--init=x,y,z		Initial position for the helicopter
+	--heading=x		Initial heading position
+
+	--params=file		File for helicopter parameters
+
+	--training		Enable the training gear undercarriage
+	--retract		Remove the undercarriage
+
+
+heli-3d:
+--------
+
+This program draws the simulated world with the model helicopter.
+It reads state information from the heli-sim program and renders
+it on screen.  Currently it accepts:
+
+	-geometry xywh		X geometry string
+
+It will eventually accept:
+
+	--no-trace		Do not draw the flight path on the ground
+	--no-windsock		Do not draw the wind sock at the origin
+	--viewpoint=[1-6]	Set the "pilot" position
+
+	--training		Enable the training gear undercarriage
+	--retract		Remove the undercarriage
+
+While running, you can press the keys 1-6 for the following viewpoints:
+
+	1: Stationary viewpoint
+	2: Walking behind the helicopter at a 6" height
+	3: Hovering behind the helicopter
+	4: Flying behind the helicopter
+	5: Bird's eye view, north up
+	6: Bird's eye view, front up
+
+Other commands are:
+
+	Space: reset to the origin
+	q: Quit
+
+
+heli-panel:
+-----------
+
+This draws the ground station's instrument panel.  It is a combined
+attitude, direction, altimeter, air speed and warning indicator.
+
+	-geometry xywh		X geometry string
+
+
+hover:
+------
+
+This program reads the helicopter sensor information, feeds it through
+a Kalman filter to produce the estimated state and then send control
+commands to the heli-sim program.  The program accepts the following
+arguments
+
+	-c			Ignore the main rotor collective
+	-y			Ignore the anti-torque rotor
+	-r			Ignore the left/right cyclic (roll)
+	-p			Ignore the fore/aft cyclic (pitch)
+
+	filename		List of waypoints to traverse
+
+
+Environment variables:
+----------------------
+
+The heli-sim program exports a variable "HELI_DT" that contains the
+time step between updates that the client programs should use.
+This does not allow the model to vary the time step during the
+simulation, which would require a change in the state transmission
+protocol.
+

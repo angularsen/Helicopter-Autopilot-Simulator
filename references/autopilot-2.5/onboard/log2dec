@@ -1,0 +1,46 @@
+#!/usr/bin/perl -w
+# $Id: log2dec,v 2.0 2002/09/22 02:10:16 tramm Exp $
+#
+# Program to convert output of control board into decimal values
+# for plotting with gnuplot, etc.
+#
+
+use strict;
+$| = 1;
+
+while(<>)
+{
+	s/[\r\n]//g;
+
+	my ($auto,$mode,$tach,$adc,$ppm) = /
+		^
+		([AM])
+		([0-9A-F])
+		\s
+		([0-9A-F]+)
+		\s
+		([0-9A-F]+)
+		\s
+		([0-9A-F!]+)
+	/x
+		or warn "Unable to parse: $_\n"
+		and next;
+
+	$mode = hex $mode;
+
+	my @adc = $adc =~ /([0-9A-F][0-9A-F][0-9A-F][0-9A-F])/g;
+	if( @adc != 8 )
+	{
+		print STDERR "Invalid ADC input: $_\n";
+		next;
+	}
+
+	$_ = hex $_ for @adc;
+
+	if( $ppm ne '!' )
+	{
+		my @ppm = map { hex $_ } $ppm =~ /([0-9A-F][0-9A-F][0-9A-F][0-9A-F])/g;
+	}
+
+	print "$adc[0] $adc[1] $adc[2] $adc[4] $adc[5]\n";
+}

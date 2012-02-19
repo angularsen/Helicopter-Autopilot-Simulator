@@ -1,0 +1,53 @@
+LCD:
+http://www.allelectronics.com/cgi-bin/category.cgi?category=search&item=LCD-64&type=store
+
+Tokin CG-16D gyros from Bravo Electronics
+
+DigiKey:
+
+1	ATMEGA163-8PC-ND	IC AVR MCU 16K A/D 8MHZ 40DIP
+1	ED3740			IC SOCKET 40 PIN MS TIN/TIN .600	
+2	A9414			14 PIN DIP SOCKET GOLD
+2	OPA4342PA		IC QUAD UPWR R-R OPAMP 14-DIP
+1	CTX082-ND		CRYSTAL 8.000MHZ HC-49, 20PF
+1	MAX231CPD		IC 2DVR/2RCVR RS232 5V 14-DIP
+2	296-2037-5		DECADE COUNTER/DIVIDER 16-DIP
+1	A2100			D-SUB RECP 9 PIN RT ANGLE .318
+4	P5330			CAP 1.0UF 250V ALUM LYTIC RADIAL
+1	LM7805			5V 1.0AMP V REGULATOR TO-220
+10	A19356			CONN HDR 8POS FRIC STR MTA 100
+5	1.0KH			1.0K OHM 1/2W 5% CARBON FILM RES
+3	4.7KH			4.7K OHM 1/2W 5% CARBON FILM RES
+2	33KH			33K OHM 1/2W 5% CARBON FILM RES
+2	6.8KH			6.8K OHM 1/2W 5% CARBON FILM RES
+5	399-2081		CAP .1UF 50V 10% CER RADIAL
+2	22KH			22K OHM 1/2W 5% CARBON FILM RES
+1	A3AAG-1018M		IDC CABLE - ASC10G/R000/ASC10G	
+
+
+ERRATA:
+
+LM7805 spacing is bad; you have to bend the pins as shown in the
+picture to get it to fit.
+
+No transistor is supplied.  5808 or equivilant is required.
+
+Servo power supply is bad.  Cut trace on top and on bottom.
+Connect to hole underneath AVR with jumper wire.
+
+1/2 W resistors are large.  You might want to substitute 1/4W ones
+from RadioShack.
+
+Roll and Pitch accelerometer inputs into ADC on silkscreen are
+transposed.  A4 is Pitch, A5 is Roll.
+
++7V power connector has limited space due to gyro.  It is also
+non-polarized so a reverse connection is possible.  The silk
+screen label is correct.
+
+No LEDs are supplied.  Use 3mm ones from Radio Shack.
+
+No potentiometer is supplied.  Use an appropriate one based on your
+installation of the LCD.
+
+

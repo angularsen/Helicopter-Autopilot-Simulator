@@ -1,0 +1,67 @@
+# $Id: pid,v 2.0 2002/09/22 02:10:16 tramm Exp $
+
+Details copied and expanded from:
+
+	http://www.jashaw.com/pid/
+
+------------------
+
+PID Control loop details:
+
+P: Proportional response to current offset from desired state
+
+P = E * G + k
+
+E is the difference between where we want to be and where we are.
+E = Measurement - Setpoint
+
+G is the gain
+
+Requires manual reset to maintain zero offset from desired position.
+
+--------------
+
+I: Integral response (or automatic reset)
+
+I = g * Kr * Integral of error
+
+g is the gain, Kr is the reset setting in repeats per minute?
+Set error to zero and measurement to setpoint.  Make a change
+in the input and note the immediate change in the output.
+
+--------------
+
+D: Derivative response
+
+Used to overcome lag in measurements.  Ideal with helicopters.
+Also called Pre-Act or Rate.
+
+D = g * Kd * de/dt
+
+g is the gain, Kd is the derivative setting in minutes.
+
+--------------
+
+Input  The process input, in percent
+InputD Process input after derivative calculation
+InputLast Process input on the previous pass
+InputDF Input after derivative calculation and filter
+Feedback internal feedback for reset after filter
+Derivative Derivative time in minutes
+Gain Gain, negative if controller is reverse acting
+ResetRate Reset Rate in repeats per minute
+DFilter Derivative filter time constants, in minutes
+OutputTemp Result of the PID calculation
+Output The final output
+
+The PID emulation code:
+
+InputD=Input+(Input-InputLast)*Derivative *60           Derivative calculation
+InputLast=Input
+InputDF=InputDF+(InputD-InputDF)*DFilter/60              Derivative filter
+OutputTemp=(InputDF-SetPoint)*Gain+Feedback              Basic gain calculation
+IF OutputTemp >100 THEN OutputTemp= 100                        Output Limits
+IF OutputTemp <0 THEN OutputTemp= 0                                         Values other than 0 and 100 may be used
+Output=OutputTemp                                                                               The final output
+Feedback=Feedback+(Feedback-Output)*ResetRate/60 Filter for reset feedback
+

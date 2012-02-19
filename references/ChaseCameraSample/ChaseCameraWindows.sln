@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChaseCameraWindows", "ChaseCamera\ChaseCameraWindows.csproj", "{C4063110-2C35-452B-8B5F-5641B88F99F4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C4063110-2C35-452B-8B5F-5641B88F99F4}.Debug|x86.ActiveCfg = Debug|x86
+		{C4063110-2C35-452B-8B5F-5641B88F99F4}.Debug|x86.Build.0 = Debug|x86
+		{C4063110-2C35-452B-8B5F-5641B88F99F4}.Release|x86.ActiveCfg = Release|x86
+		{C4063110-2C35-452B-8B5F-5641B88F99F4}.Release|x86.Build.0 = Release|x86
+		{6E5A33B1-0169-42FA-8C23-DF235228054B}.Debug|x86.ActiveCfg = Debug|x86
+		{6E5A33B1-0169-42FA-8C23-DF235228054B}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

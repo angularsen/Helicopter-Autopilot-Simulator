@@ -1,0 +1,25 @@
+﻿<Window x:Class="Anj.XNA.Joysticks.Wizard.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:Wizard="clr-namespace:Anj.XNA.Joysticks.Wizard" Title="Configure the joystick"
+         SizeToContent="WidthAndHeight">
+    <Window.Resources>
+        <DataTemplate x:Key="JoystickTemplate">
+            <Wizard:JoystickAxes Wizard:JoystickAxes.JoystickName="{Binding Path=JoystickName}" />
+        </DataTemplate>
+    </Window.Resources>
+    <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Horizontal">
+            <Button Click="Button_Click">Back</Button>
+            <Label x:Name="WizardInfo" FontSize="14" FontWeight="Bold" Content="Move joystick to pitch nose up..."/>
+        </StackPanel>
+        <ItemsControl ItemsSource="{Binding Path=Devices}"
+                      ItemTemplate="{StaticResource JoystickTemplate}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+    </StackPanel>
+</Window>

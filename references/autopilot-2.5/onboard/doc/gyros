@@ -1,0 +1,83 @@
+# $Id: gyros,v 2.0 2002/09/22 02:10:16 tramm Exp $
+
+The Piezo and mechanical gyros used for RC helicopter's yaw control
+are cheap, plentiful and easily obtained.  The Piezo ones have
+fairly low power requirements (38 mA @ 4.8V), can be found in under
+20g packages and consume a 20 mm x 20 mm x 5 mm package.
+
+Unfortunately, they are also very prone to drift, have low
+maximum acceleration thresholds and a great deal of temperature
+sensitivity.  The mechanical ones are less temperature sensitve,
+but consume more power, space and payload.
+
+They are also designed to drive servos rather than output useful
+attitude information, so interfacing with them is difficult.  The
+pwmeter.c program does this by measuring the pulse widths and
+computing a rotional acceleration value from the width.  It then
+performs rate integration to produce the "attitude", but this
+value drifts quite rapidly.
+
+Lastly, the gyros typically require a PWM sync signal on their
+inputs to clock their internal operations.  This means that each
+gyro consumes a PWM output from the control board (or shares it
+with the others if a special harness is wired).  Some folks have
+reported that tieing the gyro input to ground will cause it to
+self clock, although we have not observed that.
+
+
+Instead of using the expensive, drift-prone and hard to sample
+"hobby" gyros, we've purchased a two-axis sensor from Gyration.com.
+They build it into a wireless mouse that is really pretty cool.
+The sensor units are $150 in single unit quantities, or $99 for
+the mouse with one sensor built in.  A little desoldering and
+its usable.
+
+The gyro outputs four values as analog voltages -- acceleration
+along two axes, a reference voltage and the temperature of the unit.
+If extreme temperature changes are detected the outputs should be
+ignored until they stabilize.  We ignore this for now...  The
+reference voltage indicates the "at rest" voltage for the gyros,
+so we sample it and use this value to compare the incoming
+voltages.
+
+The AVR ADC chip will sample the incoming signal for a specified
+number of clock ticks.  The more ticks allowed, the better the
+precision of the sample.  Since we do not want to spend all of our
+time handling interrupts and we want fairly accurate samples, we
+do Clk / 128.  That gives us a 31.25 KHz sampling rate per sample,
+or 4 KHz sampling rate per input.
+
+The rate integration code is very primitive right now.  Since the
+voltages are proportional to the acceleration, we should perform:
+
+	    / /
+	x = | | a dt
+	    / /
+
+We are simplifying the code by doing:
+
+	x' = x + a dt
+
+While the actual code should be:
+
+	v' = v + a dt
+	x' = x + v dt
+
+A constant speed rotation will not be detected by our rate integration
+code.  This approximation will work for simple, easy movement, but fail
+in the "coordinated turn" case.
+
+
+
+Additionally, accelerometers can be used to determine the error in the
+gyros.  While they will fail to detect a bank during a coordinated
+turn, the gyros should produce usable data during that region.  Once
+the bank is rolled out, the accelerometer will again be "level" and
+the gyros should indicate a near-level condition.  The math for
+this escapes me, but many sources have recommended "Kalman filters".
+
+The accelerometer selected is the Analog Devices ADXL202-EB, an
+evaluation board for their product.  It has the SMD sensor on a
+board with a header for easy integration.  The output is similar
+to a PWM gyro; we're using the older code to sample the gyros
+and are seeing several glitches.  This needs to be reworked again.

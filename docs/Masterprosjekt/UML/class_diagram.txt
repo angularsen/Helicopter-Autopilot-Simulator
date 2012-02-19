@@ -1,0 +1,109 @@
+﻿
+@startuml "class_diagram.png"
+skinparam classAttributeIconSize 1
+title Class Diagram of Key Components
+
+package State
+PhysicalHeliState : Position
+PhysicalHeliState : Velocity
+PhysicalHeliState : Acceleration
+PhysicalHeliState : Orientation
+PhysicalHeliState : AngularVelocity
+
+interface IStateProvider 
+IStateProvider : Update()
+IStateProvider : GetState()
+
+IStateProvider ..> PhysicalHeliState
+IStateProvider <|-- SensorEstimatedState
+IStateProvider <|-- PerfectState
+
+SensorEstimatedState "1" *-- "1" GPS_INSFilter
+SensorEstimatedState  "1" *-- "1" SensorModel
+end package
+
+
+
+package "Control"
+Autopilot : GetOutput() 
+OutputController : MoveTowardsGoal()
+Task : CurrentWaypoint
+Task : Next()
+PID : P
+PID : I
+PID : D
+PID : Update()
+PID : Compute()
+PID : ComputeExplicit()
+
+GPS_INSFilter : Filter()
+GPS_INSFilter : SetInitialState()
+GPS_INSFilter ..> SensorModel
+
+Waypoint : Position
+Waypoint : Radius
+Waypoint : Type
+
+Autopilot "1" *-- "1" Task
+Autopilot "1" *-- "1" OutputController
+Autopilot "1" ..> "1" IStateProvider
+OutputController "0..*" *-- "1..*" PID
+Task "0..*" *-- "1..*" Waypoint
+OutputController ..> Waypoint
+end package
+
+
+
+package Sensors
+ISensor : void Update()
+SensorModel : void Update()
+
+SensorModel "1" *-- "0..*" ISensor
+
+ISensor <|-- GPS
+ISensor <|-- Magnetometer3Axis
+ISensor <|-- IMU
+ISensor <|-- SonicRangeFinder
+ISensor <|-- StaticPressureGauge
+
+Accelerometer3Axis : Update()
+Gyroscope3Axis : Update()
+GPS : Position
+GPS : Velocity
+Accelerometer3Axis : LinearAcceleration
+Gyroscope3Axis : AngularVelocity
+Magnetometer3Axis : MagneticFieldVector
+SonicRangeFinder : Distance
+StaticPressureGauge : RelativeAltitude
+StaticPressureGauge : SetReferencePressure()
+StaticPressureGauge : SetReferenceAltitude()
+
+IMU "1" *-- Accelerometer3Axis
+IMU "1" *-- Gyroscope3Axis
+
+end package
+
+
+
+
+package Physics
+interface IHeliPhysics
+IHeliPhysics : PerformTimestep()
+IHeliPhysics ..> PhysicalHeliState
+IHeliPhysics <|-- HeliPhysics
+
+end package
+
+
+
+package Simulator
+HelicopterBase : TrueState
+HelicopterBase : EstimatedState
+HelicopterBase : Update()
+HelicopterBase "1" *-- "1" Autopilot
+HelicopterBase "1" *-- "2..*" IStateProvider
+HelicopterBase "1" *-- "1" IHeliPhysics
+end package
+
+
+@enduml

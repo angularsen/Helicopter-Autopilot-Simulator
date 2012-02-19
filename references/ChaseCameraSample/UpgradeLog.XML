@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="ChaseCameraWindows">
+</Property><Property Name="Solution File" Value="C:\Users\Andreas\Desktop\Repositories\NTNU SVN\HelicopterSim\ChaseCameraSample\ChaseCameraWindows.sln">
+</Property><Property Name="Date" Value="2. juni 2009">
+</Property><Property Name="Time" Value="19:14">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="ChaseCameraWindows.sln" Description="File successfully backed up as C:\Users\Andreas\Desktop\Repositories\NTNU SVN\HelicopterSim\ChaseCameraSample\Backup\ChaseCameraWindows.sln">
+</Event><Event ErrorLevel="0" Project="ChaseCameraWindows" Source="ChaseCamera\ChaseCameraWindows.csproj" Description="Upgraded XNA Game Studio nested content projects.">
+</Event><Event ErrorLevel="0" Project="ChaseCameraWindows" Source="ChaseCamera\ChaseCameraWindows.csproj" Description="Upgraded XNA Game Studio project.">
+</Event><Event ErrorLevel="0" Project="ChaseCameraWindows" Source="ChaseCamera\ChaseCameraWindows.csproj" Description="Project file successfully backed up as C:\Users\Andreas\Desktop\Repositories\NTNU SVN\HelicopterSim\ChaseCameraSample\Backup\ChaseCamera\ChaseCameraWindows.csproj">
+</Event><Event ErrorLevel="0" Project="ChaseCameraWindows" Source="ChaseCamera\ChaseCamera.cs" Description="File successfully backed up as C:\Users\Andreas\Desktop\Repositories\NTNU SVN\HelicopterSim\ChaseCameraSample\Backup\ChaseCamera\ChaseCamera.cs">
+</Event><Event ErrorLevel="0" Project="ChaseCameraWindows" Source="ChaseCamera\Game.cs" Description="File successfully backed up as C:\Users\Andreas\Desktop\Repositories\NTNU SVN\HelicopterSim\ChaseCameraSample\Backup\ChaseCamera\Game.cs">
+</Event><Event ErrorLevel="0" Project="ChaseCameraWindows" Source="ChaseCamera\Properties\AssemblyInfo.cs" Description="File successfully backed up as C:\Users\Andreas\Desktop\Repositories\NTNU SVN\HelicopterSim\ChaseCameraSample\Backup\ChaseCamera\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="ChaseCameraWindows" Source="ChaseCamera\Ship.cs" Description="File successfully backed up as C:\Users\Andreas\Desktop\Repositories\NTNU SVN\HelicopterSim\ChaseCameraSample\Backup\ChaseCamera\Ship.cs">
+</Event><Event ErrorLevel="0" Project="ChaseCameraWindows" Source="ChaseCamera\Game.ico" Description="File successfully backed up as C:\Users\Andreas\Desktop\Repositories\NTNU SVN\HelicopterSim\ChaseCameraSample\Backup\ChaseCamera\Game.ico">
+</Event><Event ErrorLevel="0" Project="ChaseCameraWindows" Source="ChaseCamera\ChaseCameraSample.png" Description="File successfully backed up as C:\Users\Andreas\Desktop\Repositories\NTNU SVN\HelicopterSim\ChaseCameraSample\Backup\ChaseCamera\ChaseCameraSample.png">
+</Event><Event ErrorLevel="0" Project="ChaseCameraWindows" Source="ChaseCamera\ChaseCameraWindows.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="ChaseCameraWindows" Source="ChaseCamera\ChaseCameraWindows.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="ChaseCameraWindows.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="ChaseCameraWindows.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="ChaseCameraWindows" Source="ChaseCamera\ChaseCameraWindows.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="ChaseCameraWindows" Source="ChaseCamera\ChaseCameraWindows.csproj" Description="Upgraded XNA Framework References.">
+</Event><Event ErrorLevel="0" Project="Content" Source="Arial.spritefont" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content" Source="Checker.bmp" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content" Source="Content.contentproj" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content" Source="Ground.x" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content" Source="Ship.fbx" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event><Event ErrorLevel="0" Project="Content" Source="ShipDiffuse.tga" Description="Copied XNA Game Studio Content Project content to backup location.">
+</Event></UpgradeLog>

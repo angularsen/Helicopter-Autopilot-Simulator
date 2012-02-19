@@ -1,0 +1,8 @@
+﻿<Application x:Class="Review.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    StartupUri="FlightLogReviewWindow.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>

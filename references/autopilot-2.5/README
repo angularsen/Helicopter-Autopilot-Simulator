@@ -1,0 +1,16 @@
+You'll have to build individually in sim, imuviewer, downlink/ground/src
+and onboard/rev2 for now.  Eventually we'll merge all of them.
+For Win32 builds, you will have to copy the Makefile.W32 over top
+of Makefile in most every directory.
+
+Please sign up for the autopilot-devel mailing list if you have
+any problems building things:
+
+	http://autopilot.sourceforge.net/lists.html
+
+The onboard software supports the new Rev 2.4 boards from Rotomotion:
+
+	http://www.rotomotion.com/prd_REV2.4.6DOFK.html
+
+Trammell <hudson@rotomotion.com>
+24 March 2003

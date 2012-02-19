@@ -1,0 +1,40 @@
+# $Id: electric,v 2.0 2002/09/22 02:10:16 tramm Exp $
+
+Thoughts on converting the LMH-110 to electric power.
+
+Article on conversion:
+
+	http://www.ezonemag.com/articles/2000/feb/lmh110/lmh110.shtml
+
+
+Motor that failed:
+
+	Astroflight Brushless 020 6-turn
+	9-tooth 32-pitch pinion
+
+Recommended motors:
+
+http://www2.towerhobbies.com/cgi-bin/wti0001p.pgm?Q=1&I=LX3542&P=7
+Astroflight 050 Brushless
+$130
+7 turns
+14,500 RPM
+8x4 thrust 33 oz @ 35 A
+
+
+Aveox 1005/4.
+
+AP29BB
+
+Possibilities:
+
+http://www2.towerhobbies.com/cgi-bin/wti0001p.pgm?Q=1&I=LXW935&P=7
+Kyosho K-Speed Heli motor
+Runs the .30 sized Concept EP, so it should be plenty
+large enough for the LMH.
+Requires an ESC:
+
+http://www2.towerhobbies.com/cgi-bin/wti0001p.pgm?Q=1&I=LXH326&P=7
+Futaba MC114H
+Recommended for the Concept EP.
+

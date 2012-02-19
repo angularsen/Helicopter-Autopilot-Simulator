@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C# Express 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sim", "Sim.csproj", "{9BACDDB2-347F-4F73-AF5B-3C44DD644740}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9BACDDB2-347F-4F73-AF5B-3C44DD644740}.Debug|x86.ActiveCfg = Debug|x86
+		{9BACDDB2-347F-4F73-AF5B-3C44DD644740}.Debug|x86.Build.0 = Debug|x86
+		{9BACDDB2-347F-4F73-AF5B-3C44DD644740}.Release|x86.ActiveCfg = Release|x86
+		{9BACDDB2-347F-4F73-AF5B-3C44DD644740}.Release|x86.Build.0 = Release|x86
+		{0190F8E7-909B-4352-91B7-5EE29BA3A3F5}.Debug|x86.ActiveCfg = Debug|x86
+		{0190F8E7-909B-4352-91B7-5EE29BA3A3F5}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

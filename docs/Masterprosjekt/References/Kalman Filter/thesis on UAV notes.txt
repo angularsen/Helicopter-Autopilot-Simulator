@@ -1,0 +1,6 @@
+Points of interest
+
+3.1.1 Sensor Thermal Compensation
+3.1.2 Newtonian Sensor Nonlinearity
+3.5 Navigation equations (IMU centripetal force)
+4.4 Complement filter

@@ -1,0 +1,2 @@
+$(BINDIR)/benchmark: $(call deps,benchmark)
+$(LIBDIR)/libmat.a: $(call src2obj,libmat)

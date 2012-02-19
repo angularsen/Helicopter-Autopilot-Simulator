@@ -1,0 +1,441 @@
+% This file was created with JabRef 2.5.
+% Encoding: Cp1252
+
+@BOOK{anderson00,
+  title = {Understanding Flight (2nd Edition)},
+  publisher = {McGraw-Hill Professional},
+  year = {2009},
+  author = {David Anderson and Scott Eberhardt},
+  isbn = {0071626964}
+}
+
+@BOOK{atkinson81,
+  title = {Dynamical Meteorology: An Introductory Selection (1st Edition)},
+  publisher = {Routledge},
+  year = {1981},
+  author = {B.W. Atkinson},
+  url = {http://books.google.no/books?id=gikOAAAAQAAJ&lpg=PP1&pg=PP1#v=onepage&q=&f=false}
+}
+
+@MASTERSTHESIS{beinset:msc,
+  author = {G. Beinset and J.S. Blomhoff},
+  title = {Controller design for an unmanned surface vessel},
+  school = {NTNU},
+  year = {2007}
+}
+
+@MISC{benson09,
+  author = {T. Benson},
+  title = {Reynolds Number},
+  howpublished = {\url{http://www.grc.nasa.gov/WWW/BGH/reynolds.html}, visited 28.10.2009},
+  publisher = {Routledge}
+}
+
+@BOOK{cummings09,
+  title = {Aerodynamics for Engineers (5th Edition)},
+  publisher = {Prentice Hall},
+  year = {2008},
+  author = {John J. Bertin and Russell M. Cummings},
+  isbn = {0132272687}
+}
+
+@BOOK{bramwell01,
+  title = {Bramwell's Helicopter Dynamics},
+  publisher = {Butterworth-Heinemann},
+  year = {2001},
+  author = {A. R. S. Bramwell and George Taylor Sutton Done and David Balmford},
+  isbn = {0750650753},
+  url = {http://www.amazon.com/Bramwells-Helicopter-Dynamics-R-Bramwell/dp/0750650753%3FSubscriptionId%3D0JYN1NVW651KCA56C102%26tag%3Dtechkie-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D0750650753}
+}
+
+@ARTICLE{large_textured_terrains05,
+  author = {Brodersen, Anders},
+  title = {Real-time visualization of large textured terrains},
+  year = {2005},
+  pages = {439--442},
+  address = {New York, NY, USA},
+  booktitle = {GRAPHITE '05: Proceedings of the 3rd international conference on
+	Computer graphics and interactive techniques in Australasia and South
+	East Asia},
+  doi = {10.1145/1101389.1101477},
+  isbn = {1-59593-201-1},
+  location = {Dunedin, New Zealand},
+  publisher = {ACM}
+}
+
+@TECHREPORT{grass06,
+  author = {{B}ouatouch, {K}adi and {B}oulanger, {K}{\'e}vin and {P}attanaik,
+	{S}umanta},
+  title = { {R}endering {G}rass in {R}eal {T}ime with {D}ynamic {L}ight {S}ources},
+  institution = {INRIA},
+  year = {2006},
+  type = {Research Report},
+  number = {{RR}-5960},
+  abstract = {{S}ince grass is very abundant on the {E}arth's surface, it is an
+	important element of natural 3{D} scenes. {R}eal-time realistic rendering
+	of grass has always been difficult due to the huge number of grass
+	blades. {O}vercoming this geometric complexity usually requires many
+	coarse approximations to provide interactive frame rates. {H}owever,
+	the performance comes at the cost of poor lighting quality and lack
+	of detail of the grass. {I}n this report, we describe a grass rendering
+	technique that allows better lighting and parallax effect while maintaining
+	real-time performance. {W}e use a novel combination of geometry and
+	lit volume slices, composed of {B}idirectional {T}exture {F}unctions
+	({{BTF}}s). {{BTF}}s, generated using a fast pre-computation step,
+	provide an accurate, per pixel lighting of the grass. {O}ur implementation
+	allows the rendering of a football field, covered by approximately
+	$627$ million virtual grass blades, with dynamic lighting, shadows
+	and anti-aliasing in real-time. {T}he creation of arbitrary shaped
+	patches of grass is made possible using our density management.},
+  affiliation = {{SIAMES} - {INRIA} - {IRISA} - {CNRS} : {UMR}6074 - {INRIA} - {I}nstitut
+	{N}ational des {S}ciences {A}ppliqu{\'e}es de {R}ennes - {U}niversit{\'e}
+	de {R}ennes 1 - {G}raphics {L}ab - {GRAPHICS} {LAB} - {U}niversity
+	of {C}entral {F}lorida },
+  keywords = {grass rendering, real-time, lighting, shadows, levels of detail, density,
+	volume rendering, {{BTF}}, anti-aliasing},
+  language = {{A}nglais},
+  pages = {36 },
+  url = {http://hal.inria.fr/inria-00087776/en/}
+}
+
+@ARTICLE{gpsimu_fusion06,
+  author = {Caron, Francois and Duflos, Emmanuel and Pomorski, Denis and Vanheeghe,
+	Philippe},
+  title = {GPS/IMU data fusion using multisensor Kalman filtering: introduction
+	of contextual aspects},
+  journal = {Inf. Fusion},
+  year = {2006},
+  volume = {7},
+  pages = {221--230},
+  number = {2},
+  address = {Amsterdam, The Netherlands, The Netherlands},
+  doi = {http://dx.doi.org/10.1016/j.inffus.2004.07.002},
+  issn = {1566-2535},
+  publisher = {Elsevier Science Publishers B. V.}
+}
+
+@MISC{ddc09,
+  author = {Iowa Energy Center},
+  title = {Introduction to Direct Digital Controls},
+  howpublished = {\url{http://www.ddc-online.org/intro/intro_chapt01.aspx}, visited
+	23.09.2009}
+}
+
+@MISC{copeland08,
+  author = {B.R. Copeland},
+  title = {The Design of PID Controllers using Ziegler Nichols Tuning},
+  howpublished = {\url{http://www.eng.uwi.tt/depts/elec/staff/copeland/ee27B/Ziegler_Nichols.pdf}},
+  month = {March},
+  year = {2008},
+  url = {http://www.eng.uwi.tt/depts/elec/staff/copeland/ee27B/Ziegler_Nichols.pdf}
+}
+
+@ARTICLE{imuuwb_fusion06,
+  author = {Corrales, J. A. and Candelas, F. A. and Torres, F.},
+  title = {Hybrid tracking of human operators using IMU/UWB data fusion by a
+	Kalman filter},
+  year = {2008},
+  pages = {193--200},
+  address = {New York, NY, USA},
+  booktitle = {HRI '08: Proceedings of the 3rd ACM/IEEE international conference
+	on Human robot interaction},
+  doi = {http://doi.acm.org/10.1145/1349822.1349848},
+  isbn = {978-1-60558-017-3},
+  location = {Amsterdam, The Netherlands},
+  publisher = {ACM}
+}
+
+@MISC{lift_debunk2,
+  author = {G. M. Craig},
+  title = {Physical Principles of Winged Flight},
+  howpublished = {\url{http://www.regenpress.com/aerodynamics.pdf}, visited 07.12.2009},
+  year = {2003}
+}
+
+@MISC{lift_correct,
+  author = {D. Anderson, S. Eberhardt},
+  title = {How Airplanes Fly: A Physical Description of Lift},
+  howpublished = {\url{http://www.aviation-history.com/theory/lift.htm}, visited 20.11.2009},
+  month = {02},
+  year = {1999}
+}
+
+@MISC{lift_debunk_debunk,
+  author = {John S. Denker},
+  title = {Critique of "How Airplanes Fly"},
+  howpublished = {\url{http://www.av8n.com/fly/lift.htm}, visited 07.12.2009},
+  year = {1999}
+}
+
+@MISC{lift_explained_jsd,
+  author = {John S. Denker},
+  title = {See How It Flies: Perceptions, Procedures and Principles of Flight},
+  year = {1996},
+  isbn = {0070164053},
+  publisher = {TAB Books Inc}
+}
+
+@MISC{lift_debunk3,
+  author = {P. Eastwell},
+  title = {Bernoulli? Perhaps, But What About Viscosity?},
+  howpublished = {\url{http://www.scienceeducationreview.com/open_access/eastwell-bernoulli.pdf},
+	visited 07.12.2009},
+  year = {2007}
+}
+
+@MISC{cr4_vortex09,
+  author = {CR4 GlobalSpec Forum},
+  title = {What's the Most Aerodynamic Shape?},
+  howpublished = {\url{http://cr4.globalspec.com/PostImages/200806/737px_Airplane_vortex_edit_8F32D8CA-9576-EF75-3EAA339AEEAB9FFB.jpg},
+	visited 09.09.2009}
+}
+
+@MISC{3dvision,
+  author = {H. Butler, J. Martin},
+  title = {Nvidia GeForce 3DVision \& How 3D Works},
+  howpublished = {\url{http://www.bit-tech.net/hardware/graphics/2009/01/09/nvidia-geforce-3dvision-review/4},
+	visited 18.11.2009},
+  month = {01},
+  year = {2009}
+}
+
+@ARTICLE{clouds05,
+  author = {Harris, Mark J.},
+  title = {Real-time cloud simulation and rendering},
+  year = {2005},
+  pages = {222},
+  address = {New York, NY, USA},
+  booktitle = {SIGGRAPH '05: ACM SIGGRAPH 2005 Courses},
+  doi = {http://doi.acm.org/10.1145/1198555.1198792},
+  location = {Los Angeles, California},
+  publisher = {ACM}
+}
+
+@MISC{cfd_grid09,
+  author = {Innovative-CFD.com},
+  title = {Quick Overview of CFD Grid Terminology},
+  howpublished = {\url{http://www.innovative-cfd.com/cfd-grid.html}, visited 03.10.2009}
+}
+
+@BOOK{jazwinski70,
+  title = {Stochastic Processes and Filtering Theory},
+  publisher = {Dover Publications},
+  year = {2007},
+  author = {Andrew H. Jazwinski},
+  isbn = {0486462749},
+  url = {http://www.amazon.com/Stochastic-Processes-Filtering-Theory-Jazwinski/dp/0486462749%3FSubscriptionId%3D0JYN1NVW651KCA56C102%26tag%3Dtechkie-20%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3D0486462749}
+}
+
+@MISC{virtualreality,
+  author = {S. Kuntz},
+  title = {A VR Geek Blog},
+  howpublished = {\url{http://cb.nowan.net/blog/tag/reference/}, visited 11.11.2009}
+}
+
+@BOOK{leishman06,
+  title = {Principles of Helicopter Aerodynamics (Cambridge Aerospace Series)},
+  publisher = {Cambridge University Press},
+  year = {2006},
+  author = {J. G. Leishman},
+  isbn = {0521858607}
+}
+
+@INPROCEEDINGS{horizonocclusion02,
+  author = {Lloyd, Brandon and Egbert, Parris},
+  title = {Horizon occlusion culling for real-time rendering of hierarchical
+	terrains},
+  booktitle = {VIS '02: Proceedings of the conference on Visualization '02},
+  year = {2002},
+  pages = {403--410},
+  address = {Washington, DC, USA},
+  publisher = {IEEE Computer Society},
+  isbn = {0-7803-7498-3},
+  location = {Boston, Massachusetts}
+}
+
+@MISC{volume_shadows,
+  author = {McGuire, Hughes, Egan, Kilgard, Everitt},
+  title = {Fast, Practical and Robust Shadows},
+  howpublished = {\url{http://developer.nvidia.com/object/fast_shadow_volumes.html},
+	visited 11.10.2009}
+}
+
+@MISC{top10_opensource,
+  author = {J. Montgomery},
+  title = {Top 10 Best Open Source games},
+  howpublished = {\url{http://tech.blorge.com/Structure:%20/2009/02/15/top-10-best-open-source-games/},
+	visited 07.12.2009},
+  month = {02},
+  year = {2009}
+}
+
+@MISC{fms,
+  author = {Roman and Michael Möller},
+  title = {Flight-Model-Simulator},
+  howpublished = {\url{http://n.ethz.ch/student/mmoeller/fms/index_e.html}, visited
+	13.11.2009}
+}
+
+@MISC{schmid05,
+  author = {C. Schmid},
+  title = {Course on Dynamics of multidisplicinary and controlled Systems},
+  howpublished = {\url{http://www.atp.ruhr-uni-bochum.de/rt1/syscontrol/node1.html},
+	visited 12.10.2009}
+}
+
+@ARTICLE{hwfoilage03,
+  author = {Szij\'{a}rt\'{o}, G\'{a}bor and Kolosz\'{a}r, J\'{o}zsef},
+  title = {Hardware accelerated rendering of foliage for real-time applications},
+  year = {2003},
+  pages = {141--148},
+  address = {New York, NY, USA},
+  booktitle = {SCCG '03: Proceedings of the 19th spring conference on Computer graphics},
+  doi = {10.1145/984952.984976},
+  isbn = {1-58113-861-X},
+  location = {Budmerice, Slovakia},
+  publisher = {ACM}
+}
+
+@MISC{cosy08,
+  author = {Helsinki University of Technology},
+  title = {TKK / LCE Models and Methods: 2D CWPA-model},
+  howpublished = {\url{http://www.lce.hut.fi/research/mm/ekfukf/cwpa_demo.shtml}, visited
+	11.10.2009}
+}
+
+@MISC{trcs09,
+  author = {{The Renaissance Charter School's Public Wiki}},
+  title = {Eddies},
+  howpublished = {\url{http://www.andybaird.com/travels/life05/photos/three-eddies.jpg},
+	visited 16.09.2009}
+}
+
+@BOOK{versteeg07,
+  title = {An Introduction to Computational Fluid Dynamics: The Finite Volume
+	Method (2nd Edition)},
+  publisher = {Prentice Hall},
+  year = {2007},
+  author = {H. Versteeg and W. Malalasekra},
+  isbn = {0131274988}
+}
+
+@ARTICLE{rain04,
+  author = {Wang, Niniane and Wade, Bretton},
+  title = {Rendering falling rain and snow},
+  year = {2004},
+  pages = {14},
+  address = {New York, NY, USA},
+  booktitle = {SIGGRAPH '04: ACM SIGGRAPH 2004 Sketches},
+  doi = {10.1145/1186223.1186241},
+  isbn = {1-59593-896-2},
+  location = {Los Angeles, California},
+  publisher = {ACM}
+}
+
+@BOOK{watkinson04,
+  title = {Art of the Helicopter},
+  publisher = {Butterworth-Heinemann},
+  year = {2004},
+  author = {John Watkinson},
+  isbn = {0750657154}
+}
+
+@MISC{welch06,
+  author = {G. Welch and G. Bishop},
+  title = {An Introduction to the Kalman Filter},
+  howpublished = {\url{http://www.cs.unc.edu/~welch/media/pdf/kalman_intro.pdf}, visited
+	20.10.2009}
+}
+
+@MISC{drag_wiki,
+  author = {Wiki},
+  title = {Drag (physics)},
+  howpublished = {\url{http://en.wikipedia.org/wiki/Drag_(physics)}, visited 29.10.2009}
+}
+
+@MISC{feedback_wiki,
+  author = {Wiki},
+  title = {Control Theory},
+  howpublished = {\url{http://en.wikipedia.org/wiki/Control_theory}, visited 29.10.2009}
+}
+
+@MISC{pid_wiki,
+  author = {Wiki},
+  title = {PID controller},
+  howpublished = {\url{http://en.wikipedia.org/wiki/PID_controller}, visited 29.10.2009}
+}
+
+@MISC{wiki_bernoulli_principle,
+  author = {Wiki},
+  title = {Bernoulli's Principle},
+  howpublished = {\url{http://en.wikipedia.org/wiki/Bernoulli's_principle}, visited
+	07.12.2009}
+}
+
+@MISC{wiki_supersonic,
+  author = {Wiki},
+  title = {Supersonic},
+  howpublished = {\url{http://en.wikipedia.org/wiki/Supersonic}, visited 20.11.2009}
+}
+
+@ARTICLE{animatedplants04,
+  author = {Jason C. Wong and Amitava Datta},
+  title = {Animating real-time realistic movements in small plants},
+  year = {2004},
+  pages = {182--189},
+  address = {New York, NY, USA},
+  booktitle = {GRAPHITE '04: Proceedings of the 2nd international conference on
+	Computer graphics and interactive techniques in Australasia and South
+	East Asia},
+  doi = {http://doi.acm.org/10.1145/988834.988866},
+  isbn = {1-58113-883-0},
+  location = {Singapore},
+  publisher = {ACM}
+}
+
+@MISC{autopilot09,
+  title = {autopilot: Do it yourself UAV},
+  howpublished = {\url{http://autopilot.sourceforge.net}, 20.10.2009}
+}
+
+@MISC{cfd_flightsim,
+  title = {Real-time CFD for helicopter flight simulation},
+  howpublished = {\url{http://cmg.devel.mauveinternet.co.uk/research/projects/real-time-cfd-for-helicopter-flight-simulation/},
+	visited 17.11.2009}
+}
+
+@MISC{flightgear,
+  title = {FlightGear},
+  howpublished = {\url{http://www.flightgear.org}, visited 13.11.2009}
+}
+
+@MISC{lift_debunk1,
+  title = {FIXED WING AIRCRAFT FACTS AND HOW AIRCRAFT FLY},
+  howpublished = {\url{http://www.aviationexplorer.com/fixed_wing_aircraft.htm}, visited
+	07.12.2009}
+}
+
+@MISC{msflightsim,
+  title = {Microsoft Flight Simulator X},
+  howpublished = {\url{http://www.microsoft.com/games/flightsimulatorX}, visited 17.11.2009}
+}
+
+@MISC{shaders_nvidia,
+  title = {FX Composer Shader Gallery},
+  howpublished = {\url{http://developer.nvidia.com/object/fx_composer_shaders.html},
+	27.10.2009}
+}
+
+@MISC{xplane,
+  title = {X-Plane},
+  howpublished = {\url{http://www.x-plane.com}, visited 17.11.2009}
+}
+
+@MISC{top5_free_linuxgames,
+  title = {Top 5 Free Linux Games},
+  howpublished = {\url{http://www.ixibo.com/2008/09/top-5-free-linux-games-download-now},
+	visited 07.12.2009},
+  month = {09},
+  year = {2008}
+}
+

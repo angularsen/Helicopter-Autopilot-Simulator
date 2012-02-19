@@ -1,0 +1,5 @@
+Use the flight log review tool in the bin/ folder.
+
+To review a single flight log, simply drag the .xml file to the review tool window.
+
+To compare several flight logs (scenario comparison folders) drag the four ex1.xml, ex2.xml, ex3.xml and ex4.xml files together to the review tool window.

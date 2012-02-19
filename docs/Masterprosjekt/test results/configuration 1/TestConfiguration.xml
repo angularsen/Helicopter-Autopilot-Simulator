@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+  <TestConfiguration>
+    <SensorSpecifications>
+      <Accelerometer>
+        <Frequency>0</Frequency>
+        <NoiseStdDev>
+                    <Forward>0</Forward>
+                    <Right>0</Right>
+                    <Up>0</Up>
+        </NoiseStdDev>
+      </Accelerometer>
+
+            <GPSPositionAxisStdDev>0</GPSPositionAxisStdDev>
+            <GPSVelocityAxisStdDev>0</GPSVelocityAxisStdDev>
+      <OrientationAngleNoiseStdDev>0</OrientationAngleNoiseStdDev>
+    </SensorSpecifications>
+
+    <MaxHVelocity>10</MaxHVelocity>
+    <MaxHVelocity>5</MaxHVelocity>
+    <MaxHVelocity>2</MaxHVelocity>
+    <MaxHVelocity>1</MaxHVelocity>
+
+    <ScenarioName>A-B Short Flat</ScenarioName>
+    <ScenarioName>Circle Large Hilly</ScenarioName>
+    <ScenarioName>Circle Medium Sloped</ScenarioName>
+    <ScenarioName>Circle Precision Short Flat</ScenarioName>
+  </TestConfiguration>
+</root>

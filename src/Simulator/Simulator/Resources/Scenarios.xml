@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+  <RenderMode>Stereo</RenderMode>
+  <SwapStereo>true</SwapStereo>
+
+    <PreSelectedScenario>Up-Down Throttle Test</PreSelectedScenario>
+<!--    <PreSelectedScenario>Autopilot Demo</PreSelectedScenario>-->
+<!--  <PreSelectedScenario>Terrain Flight Demo</PreSelectedScenario>-->
+<!--  <PreSelectedScenario>Circle Medium Sloped</PreSelectedScenario>-->
+  <!--  <PreSelectedScenario>Screenshot Scenario</PreSelectedScenario>-->
+
+  <!-- MANUAL FLIGHT SCENARIOS -->
+
+  <Scenario Name="Terrain Flight Demo">
+    <CameraType>Cockpit</CameraType>
+    <!--    <BackgroundMusic>Airwolf</BackgroundMusic>-->
+    <BackgroundMusic>No music</BackgroundMusic>
+    <Scene>
+      <Terrain Width="256" MinHeight="0" MaxHeight="70"/>
+      <Skydome />
+    </Scene>
+    <Helicopter>
+      <EngineSound>true</EngineSound>
+      <PlayerControlled>true</PlayerControlled>
+      <StartPosition X="128" Y="70" Z="128" />
+      <Task>
+        <Loop>true</Loop>
+        <Waypoint>
+          <Type>Land</Type>
+          <Position X="0" Y="0" Z="0" />
+        </Waypoint>
+      </Task>
+    </Helicopter>
+  </Scenario>
+
+
+  <!-- DEMO AUTOPILOT SCENARIOS -->
+
+  <Scenario Name="Autopilot Demo">
+    <TimeoutSeconds>0</TimeoutSeconds>
+    <Scene>
+      <Terrain Width="256" MinHeight="0" MaxHeight="50" />
+      <Skydome />
+      <CurrentWaypoint />
+    </Scene>
+    <Helicopter>
+      <StartPosition X="150" Y="-1" Z="160" />
+      <AssistedAutopilot>true</AssistedAutopilot>
+      <PlayerControlled>false</PlayerControlled>
+      <Task>
+        <Loop>true</Loop>
+        <HoldHeightAboveGround>5</HoldHeightAboveGround>
+        <DefaultWaypointRadius>2</DefaultWaypointRadius>
+        <Waypoint>
+          <Type>Intermediate</Type>
+          <Position X="160" Y="-1" Z="140" />
+        </Waypoint>
+        <Waypoint>
+          <Type>Intermediate</Type>
+          <Position X="150" Y="-1" Z="120" />
+        </Waypoint>
+
+        <Waypoint>
+          <Type>Intermediate</Type>
+          <Position X="148" Y="-1" Z="120" />
+          <Radius>0.5</Radius>
+        </Waypoint>
+        <Waypoint>
+          <Type>Intermediate</Type>
+          <Position X="150" Y="-1" Z="118" />
+          <Radius>0.5</Radius>
+        </Waypoint>
+        <Waypoint>
+          <Type>Intermediate</Type>
+          <Position X="152" Y="-1" Z="120" />
+          <Radius>0.5</Radius>
+        </Waypoint>
+        <Waypoint>
+          <Type>Intermediate</Type>
+          <Position X="135" Y="-1" Z="135" />
+        </Waypoint>
+
+        <Waypoint>
+          <Type>Intermediate</Type>
+          <Position X="120" Y="-1" Z="140" />
+        </Waypoint>
+        <Waypoint>
+          <Type>TestDestination</Type>
+          <Position X="150" Y="-1" Z="180" />
+        </Waypoint>
+      </Task>
+    </Helicopter>
+  </Scenario>
+
+
+
+  <Scenario Name="Screenshot Scenario">
+    <TimeoutSeconds>0</TimeoutSeconds>
+    <CameraType>Free</CameraType>
+    <Scene>
+      <Terrain Width="256" MinHeight="0" MaxHeight="50" />
+      <Skydome />
+      <!--      <Forest />-->
+      <!--      <Ground />-->
+      <!--      <Barrels />-->
+    </Scene>
+    <Helicopter>
+      <StartPosition X="0" Y="2" Z="2" />
+      <!--      <StartPosition X="150" Y="-1" Z="180" />-->
+      <Task>
+        <Loop>true</Loop>
+        <HoldHeightAboveGround>5</HoldHeightAboveGround>
+        <DefaultWaypointRadius>5</DefaultWaypointRadius>
+        <Waypoint>
+          <Type>Intermediate</Type>
+          <Position X="180" Y="-1" Z="150" />
+        </Waypoint>
+        <Waypoint>
+          <Type>Intermediate</Type>
+          <Position X="150" Y="-1" Z="120" />
+        </Waypoint>
+        <Waypoint>
+          <Type>Intermediate</Type>
+          <Position X="120" Y="-1" Z="150" />
+        </Waypoint>
+        <Waypoint>
+          <Type>Intermediate</Type>
+          <Position X="150" Y="-1" Z="180" />
+        </Waypoint>
+      </Task>
+    </Helicopter>
+  </Scenario>
+
+
+
+  <!-- AUTOPILOT TEST SCENARIOS -->
+
+  <Scenario Name="A-B Short Flat">
+    <TimeoutSeconds>100</TimeoutSeconds>
+    <Scene>
+      <Terrain Width="256" MinHeight="0" MaxHeight="0" />
+      <Skydome />
+      <CurrentWaypoint />
+    </Scene>
+    <Helicopter>
+      <StartPosition X="128" Y="-1" Z="128" />
+      <Task>
+        <HoldHeightAboveGround>5</HoldHeightAboveGround>
+        <DefaultWaypointRadius>5</DefaultWaypointRadius>
+        <Waypoint>
+          <Type>TestDestination</Type>
+          <Position X="150" Y="-1" Z="128" />
+        </Waypoint>
+      </Task>
+    </Helicopter>
+  </Scenario>
+
+  <Scenario Name="Circle Medium Sloped">
+    <TimeoutSeconds>100</TimeoutSeconds>
+    <Scene>
+      <Terrain Width="256" MinHeight="0" MaxHeight="30" />
+      <Skydome />
+      <CurrentWaypoint />
+    </Scene>
+    <Helicopter>
+      <StartPosition X="150" Y="-1" Z="180" />
+      <Task>
+        <HoldHeightAboveGround>5</HoldHeightAboveGround>
+        <DefaultWaypointRadius>5</DefaultWaypointRadius>
+        <Waypoint>
+          <Type>Intermediate</Type>
+          <Position X="180" Y="-1" Z="150" />
+        </Waypoint>
+        <Waypoint>
+          <Type>Intermediate</Type>
+          <Position X="150" Y="-1" Z="120" />
+        </Waypoint>
+
+        <Waypoint>
+          <Type>Intermediate</Type>
+          <Position X="150" Y="-1" Z="119" />
+        </Waypoint>
+        <Waypoint>
+          <Type>Intermediate</Type>
+          <Position X="149" Y="-1" Z="120" />
+        </Waypoint>
+        <Waypoint>
+          <Type>Intermediate</Type>
+          <Position X="150" Y="-1" Z="121" />
+        </Waypoint>
+        <Waypoint>
+          <Type>Intermediate</Type>
+          <Position X="150" Y="-1" Z="120" />
+        </Waypoint>
+
+
+        <Waypoint>
+          <Type>Intermediate</Type>
+          <Position X="120" Y="-1" Z="150" />
+        </Waypoint>
+        <Waypoint>
+          <Type>TestDestination</Type>
+          <Position X="150" Y="-1" Z="180" />
+        </Waypoint>
+      </Task>
+    </Helicopter>
+  </Scenario>
+
+
+  <Scenario Name="Circle Large Hilly">
+    <TimeoutSeconds>100</TimeoutSeconds>
+    <Scene>
+      <Terrain Width="256" MinHeight="0" MaxHeight="80" />
+      <Skydome />
+      <CurrentWaypoint />
+    </Scene>
+    <Helicopter>
+      <StartPosition X="150" Y="-1" Z="200" />
+      <Task>
+        <HoldHeightAboveGround>5</HoldHeightAboveGround>
+        <DefaultWaypointRadius>5</DefaultWaypointRadius>
+        <Waypoint>
+          <Type>Intermediate</Type>
+          <Position X="200" Y="-1" Z="150" />
+        </Waypoint>
+        <Waypoint>
+          <Type>Intermediate</Type>
+          <Position X="150" Y="-1" Z="100" />
+        </Waypoint>
+        <Waypoint>
+          <Type>Intermediate</Type>
+          <Position X="100" Y="-1" Z="150" />
+        </Waypoint>
+        <Waypoint>
+          <Type>TestDestination</Type>
+          <Position X="150" Y="-1" Z="200" />
+        </Waypoint>
+      </Task>
+    </Helicopter>
+  </Scenario>
+
+
+  <Scenario Name="Circle Precision Short Flat">
+    <TimeoutSeconds>100</TimeoutSeconds>
+    <Scene>
+      <Terrain Width="256" MinHeight="0" MaxHeight="0" />
+      <CurrentWaypoint />
+      <Skydome />
+    </Scene>
+    <Helicopter>
+      <StartPosition X="100" Y="-1" Z="102" />
+      <Task>
+        <HoldHeightAboveGround>1</HoldHeightAboveGround>
+        <DefaultWaypointRadius>0.5</DefaultWaypointRadius>
+        <Waypoint>
+          <Type>Intermediate</Type>
+          <Position X="102" Y="-1" Z="100" />
+        </Waypoint>
+        <Waypoint>
+          <Type>Intermediate</Type>
+          <Position X="100" Y="-1" Z="98" />
+        </Waypoint>
+        <Waypoint>
+          <Type>Intermediate</Type>
+          <Position X="98" Y="-1" Z="100" />
+        </Waypoint>
+        <Waypoint>
+          <Type>TestDestination</Type>
+          <Position X="100" Y="-1" Z="102" />
+        </Waypoint>
+      </Task>
+    </Helicopter>
+  </Scenario>
+
+
+
+  <Scenario Name="Up-Down Throttle Test">
+    <CameraType>Chase</CameraType>
+    <Scene>
+<!--      <Terrain Width="256" MinHeight="0" MaxHeight="0" />-->
+      <Ground />
+      <CurrentWaypoint />
+      <Skydome />
+    </Scene>
+    <Helicopter>
+      <StartPosition X="0" Y="1" Z="0" />
+      <PlayerControlled>true</PlayerControlled>
+      <Task>
+        <Loop>true</Loop>
+        <DefaultWaypointRadius>0.1</DefaultWaypointRadius>
+        <Waypoint>
+          <Type>Intermediate</Type>
+          <Position X="0" Y="2" Z="0" />
+        </Waypoint>
+        <Waypoint>
+          <Type>Intermediate</Type>
+          <Position X="0" Y="1" Z="0" />
+        </Waypoint>
+      </Task>
+    </Helicopter>
+  </Scenario>
+
+
+  <!-- Emergency scenarios such as losing GPS reception. Use a descending hover as emergency landing etc.. -->
+</root>

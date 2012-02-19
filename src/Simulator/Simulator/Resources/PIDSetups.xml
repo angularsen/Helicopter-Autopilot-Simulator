@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+  <PIDSetup Name="Stable_v1">
+    <PID Name="PitchAngle" P="30" I="0" D="0" />
+    <PID Name="RollAngle" P="30" I="0" D="0" />
+    <PID Name="YawAngle" P="30" I="0" D="0" />
+    <PID Name="Throttle" P="-0.5" I="-0.5" D="-1" />
+    <PID Name="Velocity" P="0" I="0" D="-1" />
+  </PIDSetup>
+</root>

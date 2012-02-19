@@ -1,0 +1,16 @@
+﻿<Window x:Class="Review.FlightLogReviewWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:ControlGraphs="clr-namespace:Tests.ControlGraphs;assembly=Tests.ControlGraphs" 
+    Title="FlightLogWindow (drag and drop flight log XML files)" WindowState="Maximized" MinHeight="600" MinWidth="600"
+    AllowDrop="True"
+    Drop="Window_Drop">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel x:Name="GraphsPanel" Orientation="Vertical">
+            <ControlGraphs:GraphComponent x:Name="PositionTopView" x:FieldModifier="public" VerticalAlignment="Stretch" Width="1000" Height="1000"/>
+            <ControlGraphs:GraphComponent x:Name="HeightView" x:FieldModifier="public" VerticalAlignment="Stretch" Height="500"/>
+            <ControlGraphs:GraphComponent x:Name="AccelerometerView" x:FieldModifier="public" VerticalAlignment="Stretch" Height="200"/>
+        </StackPanel>
+    </ScrollViewer>
+</Window>

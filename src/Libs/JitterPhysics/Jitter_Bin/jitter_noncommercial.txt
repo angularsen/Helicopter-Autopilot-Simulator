@@ -1,0 +1,23 @@
+Jitter Physics Engine
+Copyright (c) 2010 Thorben Linneweber (admin@jitter-physics.com)
+
+Definitions:
+
+-"Product" refers to Jitter Physics Engine.
+
+-"Licensor" is Thorben Linneweber.
+
+-"Licensee" is defined as the person evaluating the Software.
+
+Terms of Agreement:
+
+- Licensee is not allowed to reverse engineer the Product.
+
+- Licensee is not allowed to use the Product for commercial use.
+
+- Licensee is allowed to use the Product for non-commercial use.
+
+- Licensor retain all right to the Product and all copies of it.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
+

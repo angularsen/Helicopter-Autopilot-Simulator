@@ -1,0 +1,2 @@
+$(BINDIR)/heli-3d: $(call deps,heli-3d)
+$(BINDIR)/splitppm: $(call deps,splitppm)

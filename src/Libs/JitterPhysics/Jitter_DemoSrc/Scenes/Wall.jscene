@@ -1,0 +1,17 @@
+private const int WallSize = 12;
+
+public void Create(World world)
+{
+    Shape shape = new CylinderShape(0.5f, 0.5f);
+
+    for (int i = 0; i < WallSize; i++)
+    {
+        for (int e = 0; e < WallSize; e++)
+        {
+            RigidBody body = new RigidBody(shape);
+            body.Position = new JVector((i % 2 == 0) ? e : e + 0.5f, i + 0.5f, 0);
+            world.AddBody(body);
+        }
+    }
+
+}

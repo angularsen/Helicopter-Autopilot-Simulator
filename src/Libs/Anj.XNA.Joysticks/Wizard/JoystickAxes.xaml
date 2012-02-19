@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="Anj.XNA.Joysticks.Wizard.JoystickAxes"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:Joysticks="clr-namespace:Anj.XNA.Joysticks" xmlns:Wizard="clr-namespace:Anj.XNA.Joysticks.Wizard" x:Name="ja">
+    <UserControl.Resources>
+        <DataTemplate x:Key="AxisTemplate">
+            <Wizard:JoystickAxisValue Margin="1,0,1,0" AxisName="{Binding Path=AxisName}"/>
+        </DataTemplate>
+    </UserControl.Resources>
+    
+    <StackPanel Orientation="Vertical">
+        <Label FontSize="14" FontWeight="Bold" Content="{Binding ElementName=ja, Path=JoystickName}"/>
+        
+        <ItemsControl ItemsSource="{Binding Path=Axes}"
+                      ItemTemplate="{StaticResource AxisTemplate}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+    </StackPanel>
+</UserControl>

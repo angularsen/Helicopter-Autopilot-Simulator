@@ -1,0 +1,320 @@
+#!/usr/bin/make
+# $Id: Makefile.rules,v 2.1 2003/03/08 05:08:53 tramm Exp $
+#
+# Makefile.rules-HOWTO
+#
+# This is an generic Makefile that will build libraries, programs, tests
+# and scripts.  It is designed to remove the need for the "end user" to
+# write rules or special case things.
+#
+# The easiest way to use it is to create a subdirectory under src
+# that has the name of the library that you will be building.  If
+# there is no library, then you can name it something that describes
+# the programs that are built.
+#
+# For this example, we'll use the flight controller library,
+# 'libcontroller'.  First, make the directory:
+#
+#	mkdir src/controller
+#
+# Secondly, write the Makefile in src/controller:
+#
+#	vi src/controller/Makefile
+#
+# In here we need two variables defined, BINS and LIBS:
+#
+#	BINS		=						\
+#		hover							\
+#		rpv							\
+#
+# where 'hover' and 'rpv' are two programs that will be built.  The
+# "one thing per line" style allows for easier insertion and deletion,
+# as well as very clean CVS diffs.  Note that all lines, even the last one,
+# have the continuation character.  This allows an item to be added without
+# disturbing any other lines.  It does require a blank line following
+# the definition, but that white space can help with readability.
+#
+# LIBS is defined similarly:
+#
+#	LIBS		=						\
+#		libcontroller						\
+#
+# It is possible to have multiple libraries per subdirectory.  For now
+# all of ours have at most one library.
+#
+# You can also define 'TESTS' and 'SCRIPTS' for test programs that
+# will be built for 'make tests' and scripts that will be installed in
+# $(BINDIR).
+#
+# Then we need to define the sources that are used to build our library:
+#
+#	libcontroller.srcs	=					\
+#		controller.cpp						\
+#		PID.cpp							\
+#
+# That's it for the library!  Really -- the Makefile.rules knows how to
+# transform the list of sources into objects that are then linked into
+# the library.  When you run 'gmake depend', the rules to actually
+# build the library will be written into the Makefile.deps
+#
+# Binaries are defined in a similar fashion:
+#
+#	rpv.srcs		=					\
+#		rpv.cpp							\
+#
+#	rpv.cpp.cflags		=					\
+#		-DMODEL=3						\
+#
+#	rpv.libs		=					\
+#		libcontroller.a						\
+#		libstate.a						\
+#		libjoystick.a						\
+#		libmat.a						\
+#
+#	rpv.ldflags		=					\
+#		$(GLFLAGS)						\
+#
+# This demonstrates several advanced features.  As above, 'rpv.srcs'
+# lists the source file(s) used.  The 'rpv.cpp.cflags' defines a per-file
+# compilation flag.  The 'rpv.libs' variable defines which libraries have
+# to be built and linked into rpv.  Make will descend into the correct
+# directories and build them for you.  And lastly, 'rpv.ldflags' lists
+# per-program link flags, in this case to bring in the OpenGL libraries.
+#
+# 'hover' is defined in a similar fashion:
+#
+#	hover.srcs		=					\
+#		hover.cpp						\
+#
+#	hover.libs		=					\
+#		libcontroller.a						\
+#		libstate.a						\
+#		libmat.a						\
+#
+# This is as simple as it could be.  No special flags or per-file
+# compilation issues.  Most of your programs are likely to be this
+# simple.
+#
+# As the last thing in the Makefile, include the common things for
+# all Makefiles (which in turn includes this Makefile.rules and
+# Makefile.deps):
+#
+#	include ../Makefile.common
+#
+# Lastly, add your new subdirectory to the list of binary directories
+# and library directories since it will have both programs and a
+# library produced:
+#
+#	vi src/Makefile
+#	add 'controller' to LIBDIRS list
+#	add 'controller' to BINDIRS list
+#
+# And that is it!  Run 'make depend' to build the list of dependencies
+# and tagets, then try a 'make' from the top level.  It should recurse
+# into your new directory and build the libraries, programs, etc.
+#
+# You can keep reading if you like.  It does get a little hairy
+# in places.  
+# 
+##########################
+
+##########################
+#
+# Functions to process dep lists and reduce amount of work
+# required by users of this Makefile
+#
+##########################
+
+# Functional macro to apply a function to a list
+map		= $(foreach a,$2,$(call $1,$a))
+
+# Convert a list of source files into a list of object files
+_src2obj	= $(OBJDIR)/$(basename $(notdir $1)).o
+src2obj		= $(call map,_src2obj,$($1.srcs))
+
+# Given a list of targets, produce the list of objects
+allobj		= $(foreach a,$1,$(call src2obj,$a))
+
+# Given a list of targets, produce the list of sources
+allsrc		= $(foreach a,$1,$($a.srcs))
+
+# Convert a target to a list of either libraries in $(LIBDIR)
+src2lib		= $(foreach a,$($1.libs),$(LIBDIR)/$a)
+
+# Returns a list of all deps for the target
+deps		=							\
+	$(call src2obj,$1)						\
+	$(call src2lib,$1)						\
+
+
+##########################
+#
+# Default all target is to build all of our binaries.  The libraries
+# will be built as necessary for the binaries.
+#
+# all will build all binaries and necessary libraries
+# lib will build all libraries
+# tests will build all tests and necessary libraries
+#
+##########################
+all:	$(foreach a,$(BINS),$(BINDIR)/$a)
+bin:	$(foreach a,$(BINS),$(BINDIR)/$a)
+lib:	$(foreach a,$(LIBS),$(LIBDIR)/$a.a)
+perl5:	$(foreach a,$(SWIG),$(LIBDIR)/$a.so)
+tests:	$(foreach a,$(TESTS),$(BINDIR)/$a)
+
+
+##########################
+#
+# Rules to build our object files for C and C++ files.
+# Not all programs use the same file naming convention.
+#
+# Each object file may specifiy a .cflags target to
+# include their specific flags.
+#
+##########################
+$(OBJDIR)/%.o:	%.c
+	$(CC) $(CFLAGS) $($<.cflags) -c -o $@ $<
+
+$(OBJDIR)/%.o:	%.cpp
+	$(CXX) $(CXXFLAGS) $($<.cflags) -c -o $@ $<
+
+$(OBJDIR)/%.o:	%.C
+	$(CXX) $(CXXFLAGS) $($<.cflags) -c -o $@ $<
+
+$(OBJDIR)/%.o:	%.cc
+	$(CXX) $(CXXFLAGS) $($<.cflags) -c -o $@ $<
+
+%.cpp: %.fl
+	fluid -c $<
+
+
+##########################
+#
+# Rule to build our libraries
+#
+# We remove the archive to avoid bugs with updating old
+# entries.  Sometimes it doesn't work with gcc.
+#
+##########################
+$(foreach lib,$(LIBS:=.a),$(LIBDIR)/$(lib)):
+	$(RM) $@
+	$(AR) rv $@ $(call src2obj,$(notdir $*))
+	$(RANLIB) $@
+
+
+##########################
+#
+# Rule to build our binaries
+#
+# Each binary may specify a .ldflags variable to include
+# their own specific link flags.  This is the correct location
+# for -Lpath -llib sort of directives.
+#
+##########################
+$(foreach a,$(BINS),$(BINDIR)/$a)					\
+$(foreach a,$(TESTS),$(BINDIR)/$a)					\
+:
+	$(LD) $(LDFLAGS)						\
+		-o $@							\
+		$(call src2obj,$(notdir $@))				\
+		$(call src2lib,$(notdir $@))				\
+		$(LDLIBS)						\
+		$($(notdir $@).ldflags)					\
+
+
+
+##########################
+#
+# Rules to build our SWIG interfaces for Perl programs.
+#
+##########################
+$(LIBDIR)/%.pm %_wrap.c: %.i
+	swig -dnone -perl5 $<
+	mv $*.pm $(LIBDIR)/$*.pm
+
+$(LIBDIR)/%.so: %_wrap.c
+	$(CXX)								\
+		-fpic							\
+		-shared							\
+		-o $@							\
+		-Dsv_undef=PL_sv_undef					\
+		-Dsv_yes=PL_sv_yes					\
+		-Dna=PL_na						\
+		-Dbool=char						\
+		-I /usr/lib/perl5/5.6.1/i386-linux/CORE			\
+		-I ..							\
+		-I ../include						\
+		$<							\
+		$(call src2lib,$(notdir $@))				\
+
+
+
+##########################
+#
+# Clean out all of our known programs, libraries and tests, as well
+# as all of their object files.
+#
+##########################
+clean:
+	-$(RM) -f							\
+		*.o							\
+		*.a							\
+		core							\
+		a.out							\
+		$(foreach a,$(LIBS),$(LIBDIR)/$a.a)			\
+		$(foreach a,$(BINS),$(BINDIR)/$a)			\
+		$(foreach a,$(TESTS),$(BINDIR)/$a)			\
+		$(call allobj,$(BINS))					\
+		$(call allobj,$(LIBS))					\
+		$(call allobj,$(TESTS))					\
+
+
+##########################
+#
+# Produce all of our dependencies
+# Typically, MAKEDEPEND = $(CC) -M
+#
+##########################
+
+
+#
+# The targets are generated from the list of binaries, libraries
+# and test programs in the Makefile.  We generate the Make code to
+# call the dependencies and write the rules for building them here.
+#
+targets: 								\
+	$(foreach a,$(BINS),$a.bin-deps)				\
+	$(foreach a,$(TESTS),$a.bin-deps)				\
+	$(foreach a,$(LIBS),$a.lib-deps)				\
+
+%.bin-deps:
+	echo >> .Makefile.targets					\
+		"\$$(BINDIR)/$*: \$$(call deps,$*)"
+
+%.lib-deps:
+	echo >> .Makefile.targets					\
+		"\$$(LIBDIR)/$*.a: \$$(call src2obj,$*)"
+
+depend:
+	rm -f								\
+		.Makefile.targets					\
+		.Makefile.deps
+	$(MAKE) targets
+	$(MAKEDEPEND)							\
+		$(CXXFLAGS)						\
+		$(call allsrc,$(BINS))					\
+		$(call allsrc,$(LIBS))					\
+		$(call allsrc,$(TESTS))					\
+	| sed 's!^\(.*\):!$$(OBJDIR)/\1:!'				\
+	>> .Makefile.deps
+
+
+##########################
+#
+# Include our dependencies if they exist.  No warnings
+# if they don't.
+#
+##########################
+-include .Makefile.deps
+-include .Makefile.targets

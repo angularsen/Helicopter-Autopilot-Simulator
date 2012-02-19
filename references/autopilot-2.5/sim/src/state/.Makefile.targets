@@ -1,0 +1,2 @@
+$(BINDIR)/log2txt: $(call deps,log2txt)
+$(LIBDIR)/libstate.a: $(call src2obj,libstate)

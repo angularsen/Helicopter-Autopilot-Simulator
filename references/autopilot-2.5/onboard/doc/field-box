@@ -1,0 +1,49 @@
+# $Id: field-box,v 2.0 2002/09/22 02:10:16 tramm Exp $
+
+After lugging laptops, joysticks, helicopters, starting hardware,
+jumper cables, etc just to try flying the prototypes, we've decided
+that a field box is required.
+
+It would have the following features:
+
+- Gell-cell 12V battery
+- 12V charger
+- Power inverter
+- Weather-proof 12V outlets
+- Weather-proof 110 AC outlets
+- Posts for 12V "jumper" cables (for starter motor)
+- A tool box
+- Chargers for the Tx, Rx, glow starter,
+- Charger for the 12V battery (from 110 AC)
+- Ammeter for 12V current draw
+- Fuel tank
+- Fuel pump
+- Starter holder
+- Kill switch
+- Protected, weatherproof switches for all functions
+
+Optionally, it would also have room for the helicopter.  This would
+greatly increase the size of the case for the .60 sized airframe
+and might be too large.  I tried a 36 x 18 x 14 rolling box from
+the Container Store and found that just the "pod" of the large
+prototype would fit.  The boom was too long, even when detached.
+
+The gel cell battery is required to prevent the electrolyte from
+leaking and damaging the other hardware.  If the box were always
+oriented correctly, this would not be required.  But since it
+would be nice to have wheels on one end (like a roll behind
+cart) this is not feasible.  One of the easiest solutions is to
+purchase a "Power Pack" from WalMart/Target/etc.  These are self
+contained jumpstarting solutions for automobiles; they contain a
+sealed gel cell (AGM actually) battery, a trickle charger and
+jumper cables.  Throw away the jumper cables, remove it from the
+bogus case and it is a perfect 12V source for the field box.
+
+The inverter does not need to be large; it would really only power
+the laptop and possibly a small television.  Plus a host of wall-wart
+adapters, but not very much overall current.  I've selected a 175
+watt (360 peak) unit with no fan; the fan is nice for cooling, but
+adds quite a bit of noise.
+
+All of the controls and ports should be accesible from the front panel.
+This will involve drilling some holes in the box.

@@ -1,0 +1,44 @@
+# $Id: autopilot,v 2.0 2002/09/22 02:10:16 tramm Exp $
+
+This has all been somewhat replaced with the concept of a PID feedback
+loop.  It is still here for historical value.
+
+----------------
+
+Now that we have three gyros and working sampling code with feedback
+to the EFIS, it's time to start on the autopilot code.  I've drawn
+up some thoughts on the subject and am looking for feedback.
+
+The control loop is run on a 60 Hz cycle, which is roughly one full
+servo PWM frame.  We can't make changes any faster to the servos,
+so this seems about right.  Meanwhile, sensor sampling is happening
+in realtime and being averaged (weighted average) between control
+loop cycles.
+
+ - Maintain attitude:
+   - Level?     Do nothing
+   - Steady?    Slow, proportional response.
+   - Righting? 	Reduce the response
+   - Tipping?   Fast, proportional response.
+ - Parse serial input
+ - Do status output
+
+Interrupts:
+ - A->D (gyros, fuel, etc)
+ - Pulse counting
+ - UART I/O
+ - Servo PWM output
+
+The new features that will have to be added before tomorrow's test flight:
+
+ - Remote override from the serial port.  We will be giving the realtime
+   system control of the cyclic servos and need to make sure that there
+   is a way to recover control to the groundstation should things go off.
+
+ - Remote attitude zeroing.  Right now it is a physical button on the
+   STK200 board.  I don't want to have to get too close to hit it.
+
+ - Slow servo response.  Rather than zipping to the new position,
+   it will slowly move to there.
+
+ - Other stuff to make it work.

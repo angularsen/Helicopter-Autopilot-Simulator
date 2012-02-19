@@ -1,0 +1,1 @@
+$(LIBDIR)/libgetoptions.a: $(call src2obj,libgetoptions)

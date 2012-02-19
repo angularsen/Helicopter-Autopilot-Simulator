@@ -1,0 +1,10 @@
+﻿<Window x:Class="TestApplication.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="TestApplication"
+    xmlns:SwordfishCharts="clr-namespace:Swordfish.WPF.Charts;assembly=Swordfish.WPF.Charts"
+    >
+    <Grid>
+      <SwordfishCharts:TestPage/>
+    </Grid>
+</Window>

@@ -1,0 +1,76 @@
+# $Id: realtime-design,v 2.0 2002/09/22 02:10:16 tramm Exp $
+
+The onboard real-time system has several responsibilities:
+
+- Servo ouputs (PWM)
+- Gyro inputs (PWM)
+- Gyro inputs (analog)
+- Altimeter
+- Compass
+- Engine monitoring
+	- Fuel (analog)
+	- N1 engine rpm (pulse counting)
+	- N2 rotor rpm (pulse counting)
+	- CHT (analog)
+	- EGT (analog)
+	- Battery level (analog)
+- Relays
+- Servo control input (RS-232)
+- Status output (RS-232)
+- NMEA input from GPS (RS-232)
+
+
+The PCB should have the following ports:
+
+- System power/ground
+- Servo power/ground pins
+- 8 Servo output ports (with power and ground)
+- 4 Servo/Gyro input ports
+	- Roll?
+	- Pitch?
+	- Yaw?
+	- Unused
+- 8 analog input ports
+	- Fuel
+	- Gyro pitch
+	- Gyro roll
+	- CHT
+	- EGT
+	- Battery
+	- Sonar altimeter
+	- Flux-gate compass
+- 4 Pulse counting inputs
+	- N1
+	- N2
+	- Sonar altimeter
+	- Unused
+- 4 LED outputs
+- 4 Relay outputs
+	- All for payload
+- 1 or 2 RS-232
+- In-system programming port
+
+
+The real-time board can receive power from the same battery as the servos,
+or use its own supply.  The servo power is likely to be unclean and require
+filtering, so some caps should be onboard to do that.
+
+The gyros (of both kinds) are going to be mounted externally and connected
+via a cable, so there is no need to make space on the board for them.
+The MicroGyro 100 does have a very simple mounting system, and the final
+product should probably have
+
+Right now we're using the Mega103, which is no longer available.  The
+new chip is the Mega128.  It has an extra UART and can run at 16 MHz.
+Since availability of the 103 is nil, we need to transition to the 128
+chip design.  More details on it:
+
+	http://www.avrfreaks.net/Devices/devices.php?action=1&devid=54
+
+However, the Mega128 series are only available in SMD packaging.  The
+smaller chips are more suited for development.  The Mega16 has a few
+less ports, but appears to be fully functional:
+
+	http://www.avrfreaks.net/Devices/devices.php?action=1&devid=56
+
+

@@ -1,0 +1,396 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0102 
+header_name {.h} 
+code_name {.cpp}
+class UserInterface {open
+} {
+  Function {make_window()} {open
+  } {
+    Fl_Window {} {
+      label {Ground station} open
+      xywh {531 142 400 338} visible
+    } {
+      Fl_Tabs {} {open
+        xywh {10 10 375 290}
+      } {
+        Fl_Group {} {
+          label Attitude open selected
+          xywh {10 35 375 265}
+        } {
+          Fl_Box horizon {
+            label attitude
+            xywh {20 45 240 240} box DOWN_BOX
+            code0 {\#include "Horizon.h"}
+            class Horizon
+          }
+          Fl_Dial {} {
+            label N1
+            xywh {270 40 50 50} type Line align 8 maximum 1024
+          }
+          Fl_Dial {} {
+            label N2
+            xywh {270 90 50 50} type Line align 8 maximum 1024
+          }
+          Fl_Dial {} {
+            label CHT
+            xywh {270 140 50 50} type Line align 8 maximum 1024
+          }
+          Fl_Dial {} {
+            label EGT
+            xywh {270 190 50 50} type Line align 8 maximum 1024
+          }
+          Fl_Dial trace_dial {
+            label Trace
+            xywh {270 240 50 50} type Line align 8 maximum 2
+          }
+        }
+        Fl_Group {} {
+          label Gains
+          xywh {10 35 375 260} hide
+        } {
+          Fl_Group {} {
+            label Pitch open
+            xywh {140 60 105 70} box THIN_DOWN_FRAME align 5
+          } {
+            Fl_Value_Input gain_pitch_p {
+              label {P:}
+              xywh {160 65 80 20}
+            }
+            Fl_Value_Input gain_pitch_i {
+              label {I:}
+              xywh {160 85 80 20}
+            }
+            Fl_Value_Input gain_pitch_d {
+              label {D:}
+              xywh {160 105 80 20}
+            }
+          }
+          Fl_Group {} {
+            label Roll open
+            xywh {20 60 105 70} box THIN_DOWN_FRAME align 5
+          } {
+            Fl_Value_Input gain_roll_p {
+              label {P:}
+              xywh {40 65 80 20}
+            }
+            Fl_Value_Input gain_roll_i {
+              label {I:}
+              xywh {40 85 80 20}
+            }
+            Fl_Value_Input gain_roll_d {
+              label {D:}
+              xywh {40 105 80 20}
+            }
+          }
+          Fl_Group {} {
+            label Yaw open
+            xywh {260 60 105 70} box THIN_DOWN_FRAME align 5
+          } {
+            Fl_Value_Input gain_yaw_p {
+              label {P:}
+              xywh {280 65 80 20}
+            }
+            Fl_Value_Input gain_yaw_i {
+              label {I:}
+              xywh {280 85 80 20}
+            }
+            Fl_Value_Input gain_yaw_d {
+              label {D:}
+              xywh {280 105 80 20}
+            }
+          }
+          Fl_Button {} {
+            label Upload
+            xywh {205 265 175 25}
+          }
+          Fl_Button {} {
+            label Refresh
+            xywh {15 265 170 25}
+          }
+          Fl_Group {} {
+            label Forward open
+            xywh {20 160 105 70} box THIN_DOWN_FRAME align 5
+          } {
+            Fl_Value_Input gain_x_p {
+              label {P:}
+              xywh {40 165 80 20}
+            }
+            Fl_Value_Input gain_x_i {
+              label {I:}
+              xywh {40 185 80 20}
+            }
+            Fl_Value_Input gain_x_d {
+              label {D:}
+              xywh {40 205 80 20}
+            }
+          }
+          Fl_Group {} {
+            label Sideways open
+            xywh {140 160 105 70} box THIN_DOWN_FRAME align 5
+          } {
+            Fl_Value_Input gain_y_p {
+              label {P:}
+              xywh {160 165 80 20}
+            }
+            Fl_Value_Input gain_y_i {
+              label {I:}
+              xywh {160 185 80 20}
+            }
+            Fl_Value_Input gain_y_d {
+              label {D:}
+              xywh {160 205 80 20}
+            }
+          }
+          Fl_Group {} {
+            label Up open
+            xywh {260 160 105 70} box THIN_DOWN_FRAME align 5
+          } {
+            Fl_Value_Input gain_up_p {
+              label {P:}
+              xywh {280 165 80 20}
+            }
+            Fl_Value_Input gain_up_i {
+              label {I:}
+              xywh {280 185 80 20}
+            }
+            Fl_Value_Input gain_up_d {
+              label {D:}
+              xywh {280 205 80 20}
+            }
+          }
+        }
+        Fl_Group {} {
+          label State open
+          xywh {10 35 375 260} hide
+        } {
+          Fl_Value_Output accel_x {
+            label {Accel:}
+            xywh {90 60 75 25} step 0.001
+          }
+          Fl_Value_Output accel_y {
+            label {value:}
+            xywh {165 60 75 25} labeltype NO_LABEL step 0.001
+          }
+          Fl_Value_Output accel_z {
+            label {value:}
+            xywh {240 60 75 25} labeltype NO_LABEL step 0.001
+          }
+          Fl_Value_Output rates_p {
+            label Rates
+            xywh {90 90 75 25} step 0.001
+          }
+          Fl_Value_Output rates_q {
+            label {value:}
+            xywh {165 90 75 25} labeltype NO_LABEL step 0.001
+          }
+          Fl_Value_Output rates_r {
+            label {value:}
+            xywh {240 90 75 25} labeltype NO_LABEL step 0.001
+          }
+          Fl_Value_Output pos_x {
+            label Pos
+            xywh {90 120 75 25} step 0.001
+          }
+          Fl_Value_Output pos_y {
+            label {value:}
+            xywh {165 120 75 25} labeltype NO_LABEL step 0.001
+          }
+          Fl_Value_Output pos_z {
+            label {value:}
+            xywh {240 120 75 25} labeltype NO_LABEL step 0.001
+          }
+          Fl_Value_Output vel_x {
+            label Vel
+            xywh {90 150 75 25} step 0.001
+          }
+          Fl_Value_Output vel_y {
+            label {value:}
+            xywh {165 150 75 25} labeltype NO_LABEL step 0.001
+          }
+          Fl_Value_Output vel_z {
+            label {value:}
+            xywh {240 150 75 25} labeltype NO_LABEL step 0.001
+          }
+          Fl_Value_Output angle_phi {
+            label Angle
+            xywh {90 180 75 25} step 0.001
+          }
+          Fl_Value_Output angle_theta {
+            label {value:}
+            xywh {165 180 75 25} labeltype NO_LABEL step 0.001
+          }
+          Fl_Value_Output angle_psi {
+            label {value:}
+            xywh {240 180 75 25} labeltype NO_LABEL step 0.001
+          }
+          Fl_Value_Output trace {
+            label Trace
+            xywh {90 205 75 25}
+          }
+          Fl_Value_Output latitude {
+            label {Lat:}
+            xywh {90 230 95 25} step 1e-06
+          }
+          Fl_Value_Output longitude {
+            label {Long:}
+            xywh {240 230 90 25} step 1e-06
+          }
+          Fl_Value_Output altitude_llh {
+            label Alt
+            xywh {90 255 75 25}
+          }
+        }
+        Fl_Group {} {
+          label PPM open
+          xywh {10 35 375 265} hide
+        } {
+          Fl_Value_Slider ppm_roll {
+            label Roll
+            xywh {20 45 30 235} minimum 17000 maximum 7000 step 8 value 16000 textsize 8
+          }
+          Fl_Value_Slider ppm_pitch {
+            label Pitch
+            xywh {65 45 30 235} minimum 17000 maximum 7000 step 8 value 16000 textsize 8
+          }
+          Fl_Value_Slider ppm_yaw {
+            label Yaw
+            xywh {110 45 30 235} minimum 17000 maximum 7000 step 8 value 16000 textsize 8
+          }
+          Fl_Value_Slider ppm_throttle {
+            label Thr
+            xywh {155 45 30 235} minimum 17000 maximum 7000 step 8 value 16000 textsize 8
+          }
+          Fl_Value_Slider ppm_coll {
+            label Coll
+            xywh {200 45 30 235} minimum 17000 maximum 7000 step 8 value 16000 textsize 8
+          }
+          Fl_Value_Slider ppm_mode {
+            label Mod
+            xywh {245 45 30 235} minimum 17000 maximum 7000 step 8 value 16000 textsize 8
+          }
+          Fl_Value_Slider ppm_manual {
+            label Man
+            xywh {290 45 30 235} minimum 17000 maximum 7000 step 8 value 16000 textsize 8
+          }
+          Fl_Value_Slider ppm_extra {
+            label Ext
+            xywh {335 45 30 235} minimum 17000 maximum 7000 step 8 value 16000 textsize 8
+          }
+        }
+        Fl_Group joystickTab {
+          label Joystick open
+          xywh {10 35 375 265} hide
+          code0 {\#include "Joystick.h"}
+        } {
+          Fl_Group buttons {
+            label Buttons
+            xywh {285 65 85 95} box THIN_DOWN_BOX
+          } {
+            Fl_Check_Button {} {
+              label 1
+              xywh {295 70 25 25} down_box DOWN_BOX
+            }
+            Fl_Check_Button {} {
+              label 2
+              xywh {295 90 25 25} down_box DOWN_BOX
+            }
+            Fl_Check_Button {} {
+              label 3
+              xywh {295 110 25 25} down_box DOWN_BOX
+            }
+            Fl_Check_Button {} {
+              label 4
+              xywh {295 130 25 25} down_box DOWN_BOX
+            }
+            Fl_Check_Button {} {
+              label 5
+              xywh {330 70 25 25} down_box DOWN_BOX
+            }
+            Fl_Check_Button {} {
+              label 6
+              xywh {330 90 25 25} down_box DOWN_BOX
+            }
+            Fl_Check_Button {} {
+              label 7
+              xywh {330 110 25 25} down_box DOWN_BOX
+            }
+            Fl_Check_Button {} {
+              label 8
+              xywh {330 125 25 30} down_box DOWN_BOX
+            }
+          }
+          Fl_Group axes {
+            label Axes open
+            xywh {20 40 245 260} labeltype NO_LABEL
+          } {
+            Fl_Value_Slider rollSlider {
+              label { }
+              xywh {20 50 30 215} type {Vert Knob} minimum 32768 maximum -32768 step 1 value 32768 textsize 8
+            }
+            Fl_Value_Slider pitchSlider {
+              label { }
+              xywh {63 50 30 215} type {Vert Knob} minimum 32768 maximum -32768 step 1 value 32768 textsize 8
+            }
+            Fl_Value_Slider collSlider {
+              label { }
+              xywh {106 50 30 215} type {Vert Knob} minimum 32768 maximum -32768 step 1 value 32768 textsize 8
+            }
+            Fl_Value_Slider yawSlider {
+              label { }
+              xywh {149 50 30 215} type {Vert Knob} minimum 32768 maximum -32768 step 1 value 32768 textsize 8
+            }
+            Fl_Value_Slider {} {
+              label 4
+              xywh {192 50 30 225} type {Vert Knob} minimum 32768 maximum -32768 step 1 value 32768 textsize 8
+            }
+            Fl_Value_Slider {} {
+              label 5
+              xywh {235 50 30 225} type {Vert Knob} minimum 32768 maximum -32768 step 1 value 32768 textsize 8
+            }
+            Fl_Value_Input rollAxes {
+              label { }
+              xywh {20 265 15 25}
+            }
+            Fl_Value_Input pitchAxes {
+              label { }
+              xywh {65 265 15 25}
+            }
+            Fl_Value_Input collAxes {
+              label { }
+              xywh {105 265 15 25}
+            }
+            Fl_Value_Input yawAxes {
+              label { }
+              xywh {150 265 15 25}
+            }
+          }
+          Fl_Light_Button joy_status {
+            label {Open joystick}
+            callback {reconnect_joy();}
+            xywh {270 270 110 25}
+          }
+          Fl_Value_Input guiJoyID {
+            label {JoyID:}
+            xywh {330 185 25 25}
+          }
+        }
+      }
+      Fl_Button {} {
+        label Exit
+        callback {std::exit( 0 );}
+        xywh {265 305 120 25}
+        code0 {\#include <cstdlib>}
+      }
+      Fl_Light_Button connected {
+        label Reconnect
+        callback { reconnect_server(); }
+        xywh {155 305 100 25}
+        code0 {\#include "Ground.h"}
+      }
+      Fl_Value_Output packets {
+        label Packets
+        xywh {60 305 80 25}
+      }
+    }
+  }
+} 

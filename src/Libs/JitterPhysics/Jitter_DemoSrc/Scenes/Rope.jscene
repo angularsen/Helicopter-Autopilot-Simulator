@@ -1,0 +1,31 @@
+private const int RopeSize = 25;
+
+public void Create(World world)
+{
+    RigidBody last = null;
+
+    for (int i = 0; i < RopeSize; i++)
+    {
+        RigidBody body = new RigidBody(new BoxShape(JVector.One));
+        body.Position = new JVector(i * 1.5f, 0.5f, 0);
+
+        JVector jpos2 = body.Position;
+
+        world.AddBody(body);
+        body.Update();
+
+        if (last != null)
+        {
+            JVector jpos3 = last.Position;
+
+            JVector dif; JVector.Subtract(ref jpos2, ref jpos3, out dif);
+            JVector.Multiply(ref dif, 0.5f, out dif);
+            JVector.Subtract(ref jpos2, ref dif, out dif);
+
+            Constraint cons = new PointConstraint(last, body, dif);
+            world.AddConstraint(cons);
+        }
+
+        last = body;
+    }
+}

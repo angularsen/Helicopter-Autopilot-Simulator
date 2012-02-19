@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Sim.Settings" GeneratedClassName="Colors">
+  <Profiles />
+  <Settings>
+    <Setting Name="ButtonUp" Type="Microsoft.Xna.Framework.Graphics.Color" Scope="User">
+      <Value Profile="(Default)">255, 255, 255, 255</Value>
+    </Setting>
+    <Setting Name="ButtonDown" Type="Microsoft.Xna.Framework.Graphics.Color" Scope="User">
+      <Value Profile="(Default)">112, 128, 144, 255</Value>
+    </Setting>
+    <Setting Name="ButtonHover" Type="Microsoft.Xna.Framework.Graphics.Color" Scope="User">
+      <Value Profile="(Default)">173, 216, 230, 255</Value>
+    </Setting>
+    <Setting Name="PanelBG" Type="Microsoft.Xna.Framework.Graphics.Color" Scope="User">
+      <Value Profile="(Default)">0, 0, 0, 128</Value>
+    </Setting>
+    <Setting Name="Text" Type="Microsoft.Xna.Framework.Graphics.Color" Scope="User">
+      <Value Profile="(Default)">255, 255, 255, 255</Value>
+    </Setting>
+    <Setting Name="TextShadow" Type="Microsoft.Xna.Framework.Graphics.Color" Scope="User">
+      <Value Profile="(Default)">0, 0, 0, 128</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

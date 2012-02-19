@@ -1,0 +1,59 @@
+# $Id: README.rev2,v 2.0 2002/09/22 02:10:16 tramm Exp $
+
+NMEA Sentences output by the rev2 board:
+
+Copied directly from GPS unit:
+
+GPGGA:	GPS position
+GPVGT:	Velocity over the ground
+
+
+Generated internally:
+
+GPPPM:	PPM data stream
+GPADC:	Analog voltages
+GPRPM:	Engine RPM
+GPAGL:	Height AGL
+GPMOD:	Mode # and auto/manual
+
+
+ADC outputs:
+1: NC
+2: NC
+3: NC
+4: Roll acceleration (+ is left roll)
+5: Pitch acceleraiton (+ is forward pitch)
+6: Yaw gyro (+ is ?)
+7: Pitch gyro (+ is ?)
+8: Roll gyro (+ is ?)
+
+
+PPM outputs:
+1: Roll (+ is left roll)
+2: Pitch (+ is forward pitch)
+3: Throttle (+ is less throttle)
+4: Yaw (+ is ?)
+5: NC
+6: Collective (+ is less pitch)
+7: NC
+8: NC
+
+
+AX input: 3
+Pitch fore:		6200	25088
+Pitch level:		4700	18176
+Pitch aft:		2B00	11008
+
+AY input: 4
+Roll right:		3410	13328
+Roll level:		50B0	20656
+Roll left:		6B00	27392
+
+Yaw input: 5
+Zero:			424A	16970
+
+Pitch input: 6
+Zero:			3920	14624
+
+Roll input: 7
+Zero:			33CA	13258

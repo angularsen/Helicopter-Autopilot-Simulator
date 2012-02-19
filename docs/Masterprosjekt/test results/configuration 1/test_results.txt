@@ -1,0 +1,115 @@
+Scenario: A-B Short Flat
+Scenario ended by: ReachedDestination
+Duration: 4,7 s
+Sensors: 
+Accelerometer 0 Hz std.dev: FRU(Forward: 0,708 Right: 0,708 Up: 0,885) 
+GPS position std.dev: XYZ({X:2,824744 Y:2,824744 Z:2,824744}) 
+GPS velocity std.dev: XYZ({X:0,0882177 Y:0,0882177 Z:0,0882177}) 
+Orientation angle noise std.dev: 0 
+
+Autopilot MaxHVelocity: 36 km/h 
+Autopilot PIDSetup: Pitch(30, 0, 0) Roll(30, 0, 0) Yaw(30, 0, 0) Throttle(-0,5, -0,5, -1)
+
+MaxEstimatedPositionError: 0,09 m
+AvgEstimatedPositionError: 0,06 m
+MinEstimatedPositionError: 0 m
+MaxHeightAboveGround: 5 m
+AvgHeightAboveGround: 4,98 m
+MinHeightAboveGround: 4,93 m
+MaxVelocity: 23,2 km/h
+AvgVelocity: 13,2 km/h
+
+
+
+Scenario: Circle Large Hilly
+Scenario ended by: Crashed
+Duration: 12,7 s
+Sensors: 
+Accelerometer 0 Hz std.dev: FRU(Forward: 0,708 Right: 0,708 Up: 0,885) 
+GPS position std.dev: XYZ({X:2,824744 Y:2,824744 Z:2,824744}) 
+GPS velocity std.dev: XYZ({X:0,0882177 Y:0,0882177 Z:0,0882177}) 
+Orientation angle noise std.dev: 0 
+
+Autopilot MaxHVelocity: 36 km/h 
+Autopilot PIDSetup: Pitch(30, 0, 0) Roll(30, 0, 0) Yaw(30, 0, 0) Throttle(-0,5, -0,5, -1)
+
+MaxEstimatedPositionError: 1,23 m
+AvgEstimatedPositionError: 0,61 m
+MinEstimatedPositionError: 0 m
+MaxHeightAboveGround: 7,11 m
+AvgHeightAboveGround: 4,82 m
+MinHeightAboveGround: 0,45 m
+MaxVelocity: 43,6 km/h
+AvgVelocity: 26,6 km/h
+
+
+
+Scenario: Circle Large Hilly
+Scenario ended by: ReachedDestination
+Duration: 63,3 s
+Sensors: 
+Accelerometer 0 Hz std.dev: FRU(Forward: 0,708 Right: 0,708 Up: 0,885) 
+GPS position std.dev: XYZ({X:2,824744 Y:2,824744 Z:2,824744}) 
+GPS velocity std.dev: XYZ({X:0,0882177 Y:0,0882177 Z:0,0882177}) 
+Orientation angle noise std.dev: 0 
+
+Autopilot MaxHVelocity: 18 km/h 
+Autopilot PIDSetup: Pitch(30, 0, 0) Roll(30, 0, 0) Yaw(30, 0, 0) Throttle(-0,5, -0,5, -1)
+
+MaxEstimatedPositionError: 1,15 m
+AvgEstimatedPositionError: 0,31 m
+MinEstimatedPositionError: 0 m
+MaxHeightAboveGround: 6,17 m
+AvgHeightAboveGround: 5 m
+MinHeightAboveGround: 3,67 m
+MaxVelocity: 32,9 km/h
+AvgVelocity: 19,3 km/h
+
+
+
+Scenario: Circle Medium Sloped
+Scenario ended by: ReachedDestination
+Duration: 29,8 s
+Sensors: 
+Accelerometer 0 Hz std.dev: FRU(Forward: 0,708 Right: 0,708 Up: 0,885) 
+GPS position std.dev: XYZ({X:2,824744 Y:2,824744 Z:2,824744}) 
+GPS velocity std.dev: XYZ({X:0,0882177 Y:0,0882177 Z:0,0882177}) 
+Orientation angle noise std.dev: 0 
+
+Autopilot MaxHVelocity: 36 km/h 
+Autopilot PIDSetup: Pitch(30, 0, 0) Roll(30, 0, 0) Yaw(30, 0, 0) Throttle(-0,5, -0,5, -1)
+
+MaxEstimatedPositionError: 0,46 m
+AvgEstimatedPositionError: 0,26 m
+MinEstimatedPositionError: 0 m
+MaxHeightAboveGround: 5,27 m
+AvgHeightAboveGround: 5 m
+MinHeightAboveGround: 4,7 m
+MaxVelocity: 32,4 km/h
+AvgVelocity: 21,8 km/h
+
+
+
+Scenario: Circle Precision Short Flat
+Scenario ended by: ReachedDestination
+Duration: 7,8 s
+Sensors: 
+Accelerometer 0 Hz std.dev: FRU(Forward: 0,708 Right: 0,708 Up: 0,885) 
+GPS position std.dev: XYZ({X:2,824744 Y:2,824744 Z:2,824744}) 
+GPS velocity std.dev: XYZ({X:0,0882177 Y:0,0882177 Z:0,0882177}) 
+Orientation angle noise std.dev: 0 
+
+Autopilot MaxHVelocity: 36 km/h 
+Autopilot PIDSetup: Pitch(30, 0, 0) Roll(30, 0, 0) Yaw(30, 0, 0) Throttle(-0,5, -0,5, -1)
+
+MaxEstimatedPositionError: 0,05 m
+AvgEstimatedPositionError: 0,03 m
+MinEstimatedPositionError: 0 m
+MaxHeightAboveGround: 1,01 m
+AvgHeightAboveGround: 0,99 m
+MinHeightAboveGround: 0,93 m
+MaxVelocity: 7,1 km/h
+AvgVelocity: 5,3 km/h
+
+
+

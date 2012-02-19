@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>JoystickInterface</name>
+    </assembly>
+    <members>
+        <member name="T:JoystickInterface.Joystick">
+            <summary>
+            Class to interface with a joystick device.
+            </summary>
+        </member>
+        <member name="M:JoystickInterface.Joystick.#ctor(System.IntPtr)">
+            <summary>
+            Constructor for the class.
+            </summary>
+            <param name="window_handle">Handle of the window which the joystick will be "attached" to.</param>
+        </member>
+        <member name="M:JoystickInterface.Joystick.FindJoysticks">
+            <summary>
+            Retrieves a list of joysticks attached to the computer.
+            </summary>
+            <example>
+            [C#]
+            <code>
+            JoystickInterface.Joystick jst = new JoystickInterface.Joystick(this.Handle);
+            string[] sticks = jst.FindJoysticks();
+            </code>
+            </example>
+            <returns>A list of joysticks as an array of strings.</returns>
+        </member>
+        <member name="M:JoystickInterface.Joystick.AcquireJoystick(System.String)">
+            <summary>
+            Acquire the named joystick. You can find this joystick through the <see cref="M:JoystickInterface.Joystick.FindJoysticks"/> method.
+            </summary>
+            <param name="name">Name of the joystick.</param>
+            <returns>The success of the connection.</returns>
+        </member>
+        <member name="M:JoystickInterface.Joystick.ReleaseJoystick">
+            <summary>
+            Unaquire a joystick releasing it back to the system.
+            </summary>
+        </member>
+        <member name="M:JoystickInterface.Joystick.UpdateStatus">
+            <summary>
+            Update the properties of button and axis positions.
+            </summary>
+        </member>
+        <member name="P:JoystickInterface.Joystick.AxisCount">
+            <summary>
+            Number of axes on the joystick.
+            </summary>
+        </member>
+        <member name="P:JoystickInterface.Joystick.AxisA">
+            <summary>
+            The first axis on the joystick.
+            </summary>
+        </member>
+        <member name="P:JoystickInterface.Joystick.AxisB">
+            <summary>
+            The second axis on the joystick.
+            </summary>
+        </member>
+        <member name="P:JoystickInterface.Joystick.AxisC">
+            <summary>
+            The third axis on the joystick.
+            </summary>
+        </member>
+        <member name="P:JoystickInterface.Joystick.AxisD">
+            <summary>
+            The fourth axis on the joystick.
+            </summary>
+        </member>
+        <member name="P:JoystickInterface.Joystick.AxisE">
+            <summary>
+            The fifth axis on the joystick.
+            </summary>
+        </member>
+        <member name="P:JoystickInterface.Joystick.AxisF">
+            <summary>
+            The sixth axis on the joystick.
+            </summary>
+        </member>
+        <member name="P:JoystickInterface.Joystick.Buttons">
+            <summary>
+            Array of buttons availiable on the joystick. This also includes PoV hats.
+            </summary>
+        </member>
+    </members>
+</doc>

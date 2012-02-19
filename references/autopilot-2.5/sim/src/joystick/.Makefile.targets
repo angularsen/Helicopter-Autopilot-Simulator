@@ -1,0 +1,3 @@
+$(BINDIR)/heli-stick: $(call deps,heli-stick)
+$(BINDIR)/calibrate: $(call deps,calibrate)
+$(LIBDIR)/libjoystick.a: $(call src2obj,libjoystick)

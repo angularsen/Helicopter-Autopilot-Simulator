@@ -1,0 +1,254 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <ProjectGuid>{76E4EDE3-20C1-48D4-A832-C92130D81E89}</ProjectGuid>
+    <ProjectTypeGuids>{6D335F3A-9D43-41b4-9D22-F6F17C4BE596};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">Xbox 360</Platform>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Simulator</RootNamespace>
+    <AssemblyName>Simulator</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <XnaFrameworkVersion>v3.1</XnaFrameworkVersion>
+    <XnaPlatform>Xbox 360</XnaPlatform>
+    <XnaCrossPlatformGroupID>4b657735-816d-4534-90a5-5166a18865ea</XnaCrossPlatformGroupID>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Xbox 360' ">
+    <OutputPath>bin\Xbox 360\Debug</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE;XBOX;XBOX360</DefineConstants>
+    <XnaCompressContent>true</XnaCompressContent>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Xbox 360' ">
+    <OutputPath>bin\Xbox 360\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE;XBOX;XBOX360</DefineConstants>
+    <XnaCompressContent>true</XnaCompressContent>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Cameras\CameraBase.cs" />
+    <Compile Include="Cameras\CameraType.cs" />
+    <Compile Include="Cameras\ChaseCamera.cs" />
+    <Compile Include="Cameras\CockpitCamera.cs" />
+    <Compile Include="Cameras\FreeCamera.cs" />
+    <Compile Include="Cameras\FixedCamera.cs" />
+    <Compile Include="HelicopterBase.cs" />
+    <Compile Include="KeyboardEvents.cs" />
+    <Compile Include="Parsers\ScenarioParserXML.cs" />
+    <Compile Include="Parsers\PIDParserXML.cs" />
+    <Compile Include="Parsers\JoystickSetupParserXML.cs" />
+    <Compile Include="Parsers\TestConfigurationParserXML.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RenderModes.cs" />
+    <Compile Include="Scenarios\HelicopterScenario.cs" />
+    <Compile Include="Scenarios\Scenario.cs" />
+    <Compile Include="Resources\SimulatorResources.cs" />
+    <Compile Include="SimulatorGame.cs" />
+    <Compile Include="StaticMeshes\FlatTexturedGround.cs" />
+    <Compile Include="StaticMeshes\Trees\Forest.cs" />
+    <Compile Include="StaticMeshes\Trees\SunlitLTree.cs" />
+    <Compile Include="StaticMeshes\Trees\SunlitSimpleTree.cs" />
+    <Compile Include="StaticMeshes\SimpleModel.cs" />
+    <Compile Include="Skydome\SkydomeComponent.cs" />
+    <Compile Include="Skydome\SunlightEffect.cs" />
+    <Compile Include="Skydome\SunlightEffectModelProcessor.cs" />
+    <Compile Include="Skydome\SunlightParameters.cs" />
+    <Compile Include="StaticMeshes\Ground.cs" />
+    <Compile Include="StaticMeshes\WaypointMesh.cs" />
+    <Compile Include="Terrain\Generator\Heightmap.cs" />
+    <Compile Include="Terrain\Generator\HeightmapFaultSettings.cs" />
+    <Compile Include="Terrain\Generator\HeightmapMidPointSettings.cs" />
+    <Compile Include="Terrain\Generator\HeightmapParticleDepositionSettings.cs" />
+    <Compile Include="Terrain\Generator\HeightmapPerlinNoiseSettings.cs" />
+    <Compile Include="Terrain\Generator\Heightmask.cs" />
+    <Compile Include="Terrain\Generator\InputManager.cs" />
+    <Compile Include="Terrain\Generator\RandomHelper.cs" />
+    <Compile Include="Terrain\Generator\TerrainMesh.cs" />
+    <Compile Include="Terrain\Generator\TerrainPatch.cs" />
+    <Compile Include="Terrain\TerrainComponent.cs" />
+    <Compile Include="Testing\AutopilotConfiguration.cs" />
+    <Compile Include="Testing\ScenarioTestResult.cs" />
+    <Compile Include="Testing\TestConfiguration.cs" />
+    <Compile Include="Tracking\TrackedObject.cs" />
+    <Compile Include="Tracking\Tracker.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <NestedContentProject Include="Content\Content.contentproj">
+      <Project>b5f7cd7b-db2c-43c7-b295-1f3bf8e03dd5</Project>
+      <Visible>False</Visible>
+    </NestedContentProject>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Xna.Framework.3.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft XNA Framework Redistributable 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\JoystickSetups.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PIDSetups.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Scenarios.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\TestConfiguration.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Xna.Framework">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Game">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="mscorlib">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>False</Private>
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>False</Private>
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Anj\Helpers\Anj.Helpers.XNA\Xbox 360 Copy of Anj.Helpers.XNA.csproj">
+      <Project>{557f39a5-516d-4fdf-b0bd-5f1df3226658}</Project>
+      <Name>Xbox 360 Copy of Anj.Helpers.XNA</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Control\Control.Common\Xbox 360 Copy of Control.Common.csproj">
+      <Project>{28d4665e-b29e-4b57-9529-c92721037b6f}</Project>
+      <Name>Xbox 360 Copy of Control.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Control\Control\Xbox 360 Copy of Control.csproj">
+      <Project>{f897dc33-53b3-4502-a9da-7734c9ed5673}</Project>
+      <Name>Xbox 360 Copy of Control</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libs\LTrees-source-2.0a\LTreesLibrary\Xbox 360 Copy of LTreesLibrary.csproj">
+      <Project>{76743665-113e-493d-8815-c13c3bc627aa}</Project>
+      <Name>Xbox 360 Copy of LTreesLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Physics\Physics.Common\Xbox 360 Copy of Physics.Common.csproj">
+      <Project>{4FB88752-EEDB-476E-859E-825FDC83F567}</Project>
+      <Name>Xbox 360 Copy of Physics.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Physics\Physics\Xbox 360 Copy of Physics.csproj">
+      <Project>{dd3f2a71-f3e6-4f36-bb25-3ca3cfcdd264}</Project>
+      <Name>Xbox 360 Copy of Physics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Sensors\Sensors.Model\Xbox 360 Copy of Sensors.Model.csproj">
+      <Project>{24293460-87E2-4A5F-B3B1-FF14EE0CFD50}</Project>
+      <Name>Xbox 360 Copy of Sensors.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Sensors\Xbox 360 Copy of Sensors.csproj">
+      <Project>{3b4136de-d627-4a93-9c6c-da858bf3e370}</Project>
+      <Name>Xbox 360 Copy of Sensors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\State\State.Common\Xbox 360 Copy of State.Common.csproj">
+      <Project>{138ff542-3138-41d4-ae8a-55b89323d70f}</Project>
+      <Name>Xbox 360 Copy of State.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\State\State.Model\Xbox 360 Copy of State.Model.csproj">
+      <Project>{1876CD6F-B8A6-4E66-8A18-F04EE09E17D7}</Project>
+      <Name>Xbox 360 Copy of State.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\State\State\Xbox 360 Copy of State.csproj">
+      <Project>{ae00e5b6-86c9-4bbb-8884-6119a3909014}</Project>
+      <Name>Xbox 360 Copy of State</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Simulator.Common\Xbox 360 Copy of Simulator.Common.csproj">
+      <Project>{b74ce06f-3295-49f9-947c-9e34a1881690}</Project>
+      <Name>Xbox 360 Copy of Simulator.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Simulator.Interfaces\Xbox 360 Copy of Simulator.Interfaces.csproj">
+      <Project>{6427C3E7-250A-4F5D-88B0-F22F230E6F9D}</Project>
+      <Name>Xbox 360 Copy of Simulator.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Simulator.Utils\Xbox 360 Copy of Simulator.Utils.csproj">
+      <Project>{9c3c7a78-bd84-4cab-8bb0-e7719bb58231}</Project>
+      <Name>Xbox 360 Copy of Simulator.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

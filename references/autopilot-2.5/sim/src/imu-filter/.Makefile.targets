@@ -1,0 +1,7 @@
+$(BINDIR)/flyer: $(call deps,flyer)
+$(BINDIR)/gps-flyer: $(call deps,gps-flyer)
+$(BINDIR)/ahrs: $(call deps,ahrs)
+$(BINDIR)/gpsins: $(call deps,gpsins)
+$(BINDIR)/test-2d: $(call deps,test-2d)
+$(BINDIR)/test-gps: $(call deps,test-gps)
+$(LIBDIR)/libimu-filter.a: $(call src2obj,libimu-filter)

@@ -1,0 +1,55 @@
+#!/usr/bin/make
+
+all:	bin
+
+bin:	imuviewer
+
+CFLAGS		=							\
+	-g								\
+	-pg								\
+	-O3								\
+	-W								\
+	-Wall								\
+	-pedantic							\
+	-I.								\
+	-DWIN32					\
+	-mwindows			\
+
+CXXFLAGS	= $(CFLAGS)
+
+gl.ldflags	=							\
+	-L/usr/X11R6/lib						\
+	-lGL								\
+	-lGLU								\
+	-lglut								\
+	-lXi								\
+	-lXmu								\
+
+fltk.ldflags	=							\
+	-lfltk_gl							\
+	-lfltk								\
+
+imuviewer.srcs	=							\
+	frame.cpp							\
+	main.cpp							\
+	GlStripChart.cpp						\
+
+imuviewer.objs	= $(imuviewer.srcs:.cpp=.o)
+
+
+frame.cpp: frame.fl
+	fluid -c -o frame.cpp $<
+
+imuviewer: $(imuviewer.objs)
+	$(CXX)								\
+		-o $@							\
+		-pg								\
+		$(imuviewer.objs)						\
+		$(fltk.ldflags)						\
+		-L/usr/X11R6/lib -lX11					\
+		-L/usr/local/lib					\
+		-lglu32 -lglut32 -lopengl32 -lole32 -luuid -lcomctl32 -lsupc++ \
+		-mwindows -DWIN32
+		$(gl.ldflags)						\
+
+

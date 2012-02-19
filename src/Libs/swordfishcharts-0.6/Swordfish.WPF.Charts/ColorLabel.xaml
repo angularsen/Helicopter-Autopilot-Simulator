@@ -1,0 +1,75 @@
+<!--
+Copyright (c) 2007, John Stewien (formerly of Swordfish Computing Australia)
+
+All rights reserved. Modified BSD License (removed some restrictions):
+
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+Redistributions of source code must retain the above copyright notice, this list
+of conditions and the following disclaimer.
+
+Redistributions in binary form must retain the string:
+"Swordfish Charts, Copyright (c) 2007, John Stewien"
+in the XYLineChart.xaml.cs file.
+
+Neither the name of Swordfish Charts nor the names of its contributors may be
+used to endorse or promote products derived from this software without specific
+prior written permission. 
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+<UserControl x:Class="Swordfish.WPF.Charts.ColorLabel"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!--Set up a grid of 2 columns and one row for holding a color indicator and a text label-->
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto"/>
+      <ColumnDefinition Width="Auto"/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <!--Draw a colored ellipse-->    
+    
+    <Ellipse x:Name ="colorSize" Width ="20" Height="Auto" Grid.Column="0" Grid.Row="0" Margin="1,1,2,1">
+      <Ellipse.Fill>
+        <RadialGradientBrush GradientOrigin="0.713524269001633,0.222658979042552">
+          <RadialGradientBrush.GradientStops>
+            <GradientStopCollection>
+              <GradientStop Color="#FFFFFFFF" Offset="0"/>
+              <GradientStop Color="#FF000000" Offset="0.8051282051282046" x:Name="color"/>
+            </GradientStopCollection>
+          </RadialGradientBrush.GradientStops>
+					<RadialGradientBrush.RelativeTransform>
+						<TransformGroup>
+							<TranslateTransform X="0" Y="0"/>
+							<ScaleTransform ScaleX="1" ScaleY="1"/>
+							<SkewTransform AngleX="0" AngleY="0"/>
+							<RotateTransform Angle="0"/>
+							<TranslateTransform X="0" Y="0"/>
+							<TranslateTransform X="0.13631346658315804" Y="-0.095419426608209776"/>
+						</TransformGroup>
+					</RadialGradientBrush.RelativeTransform>
+        </RadialGradientBrush>
+        </Ellipse.Fill>
+      </Ellipse>
+
+    <!--Add a text box-->
+    
+    <TextBlock x:Name ="textBlock" Text="Legend" Grid.Column="1" Grid.Row="0"/>
+  </Grid>
+</UserControl>

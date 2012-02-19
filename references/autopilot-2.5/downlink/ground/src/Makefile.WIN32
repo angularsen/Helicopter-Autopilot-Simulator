@@ -1,0 +1,71 @@
+#!/usr/bin/make
+# $Id: Makefile.WIN32,v 1.1 2003/02/03 16:28:46 dennisda Exp $
+
+all:	bin
+
+bin:	ground
+
+sim.root	= ../../../sim
+
+CFLAGS		=							\
+	-g								\
+	-pg								\
+	-O3								\
+	-W								\
+	-Wall								\
+	-pedantic							\
+	-DWIN32								\
+	-mwindows							\
+	-I$(sim.root)/src						\
+	-I$(sim.root)/src/include					\
+	-I.								\
+
+CXXFLAGS	= $(CFLAGS)
+
+gl.ldflags	=							\
+	-L/usr/X11R6/lib						\
+	-lGL								\
+	-lGLU								\
+	-lGLw								\
+	-lglut								\
+	-lXi								\
+	-lXmu								\
+	
+fltk.ldflags	=							\
+	-L/usr/local/lib						\
+	-L/lib/w32api							\
+	-lfltk_gl							\
+	-lfltk								\
+	-lfltk_forms							\
+	-lfltk_images							\
+
+
+
+ground.srcs	=							\
+	gui.cpp								\
+	main.cpp							\
+	Horizon.cpp							\
+	Joystick.cpp							\
+
+ground.objs	= $(ground.srcs:.cpp=.o)
+
+
+gui.cpp: gui.fl
+	fluid -c $<
+
+ground: $(ground.objs)
+	$(CXX)								\
+		-o $@							\
+		$(ground.objs)						\
+		-mwindows -DWIN32 				\
+		$(fltk.ldflags)						\
+		-lglu32 -lglut32 -lopengl32 -lole32 -luuid -lcomctl32 -lsupc++ -lwinmm \
+		-L/usr/X11R6/lib -lX11					\
+		-L$(sim.root)/lib					\
+		-lstate							\
+		-pg							\
+
+#		-ljoystick						\
+
+#		$(gl.ldflags)						\
+ 

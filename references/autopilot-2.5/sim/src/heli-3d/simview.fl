@@ -1,0 +1,94 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0100 
+header_name {.h} 
+code_name {.cpp}
+class UserInterface {open
+} {
+  Function {make_window()} {open
+  } {
+    Fl_Window {} {
+      label {Ground station} open
+      xywh {64 209 400 335}
+      code0 {\#include <state/Server.h>}
+      code1 {\#include <state/commands.h>}
+      code2 {extern libstate::Server *server;} visible
+    } {
+      Fl_Tabs {} {open
+        xywh {10 10 380 290}
+      } {
+        Fl_Group {} {
+          label 3D open
+          xywh {10 35 380 265}
+        } {
+          Fl_Box simview {
+            label Simview
+            xywh {20 45 240 240} box DOWN_BOX
+            code0 {\#include "graphics.h"}
+            class Simview
+          }
+          Fl_Button {} {
+            label Reset
+            callback {server->send_command( libstate::SIM_RESET );}
+            xywh {270 260 105 25}
+          }
+          Fl_Group viewpoint_group {open
+            xywh {265 55 120 175}
+          } {
+            Fl_Light_Button {} {
+              label Fixed
+              callback {viewpoint = view_stationary;
+simview->redraw();}
+              xywh {275 55 105 25} type Radio value 1
+            }
+            Fl_Light_Button {} {
+              label Rear
+              callback {viewpoint = view_fly_behind;
+simview->redraw();}
+              xywh {275 85 105 25} type Radio
+            }
+            Fl_Light_Button {} {
+              label Follow
+              callback {viewpoint = view_walk_behind;
+simview->redraw();}
+              xywh {275 115 105 25} type Radio
+            }
+            Fl_Light_Button {} {
+              label {Top (North)}
+              callback {viewpoint = view_north_up;
+simview->redraw();}
+              xywh {275 175 105 25} type Radio
+            }
+            Fl_Light_Button {} {
+              label {Top (Head)}
+              callback {viewpoint = view_track_up;
+simview->redraw();}
+              xywh {275 205 105 25} type Radio
+            }
+            Fl_Light_Button {} {
+              label Cockpit
+              callback {viewpoint = view_cockpit;
+simview->redraw();} selected
+              xywh {275 145 105 25} type Radio
+            }
+          }
+        }
+      }
+      Fl_Button {} {
+        label Exit
+        callback {std::exit( 0 );}
+        xywh {265 305 120 25}
+        code0 {\#include <cstdlib>}
+      }
+      Fl_Light_Button connected {
+        label Reconnect
+        callback {reconnect_server();}
+        xywh {155 305 100 25}
+        code0 {/* \#include "Ground.h" */}
+      }
+      Fl_Value_Output packets {
+        label Packets
+        xywh {60 305 80 25}
+      }
+    }
+  }
+} 

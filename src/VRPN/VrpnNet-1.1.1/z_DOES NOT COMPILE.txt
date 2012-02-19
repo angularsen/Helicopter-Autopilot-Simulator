@@ -1,0 +1,2 @@
+This solution file was downloaded from the VRPN website, but I never got it to compile.
+I use their pre-compiled .DLL files instead, located in src/Libs .

@@ -1,0 +1,19 @@
+Terrain generator
+http://www.ziggyware.com/readarticle.php?article_id=132&rowstart=11
+
+Java applet generator
+http://www.asahi-net.or.jp/~FX6M-FJmY/java07e.html
+
+Fractals
+http://www.ics.uci.edu/~eppstein/junkyard/fractal.html
+
+LTrees
+http://ltrees.codeplex.com/
+
+
+Semiautonomous Avionics-and-Sensors System for a UAV
+NASA Tech Briefs, Jan 2006
+http://findarticles.com/p/articles/mi_qa3957/is_200601/ai_n17172100/
+
+Pitot-static system (airspeed, altitude, etc..)
+http://en.wikipedia.org/wiki/Pitot-static_system

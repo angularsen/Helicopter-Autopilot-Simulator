@@ -1,0 +1,329 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0102 
+header_name {.h} 
+code_name {.cxx}
+class UserInterface {open
+} {
+  Function {make_window()} {open
+  } {
+    Fl_Window {} {
+      label {Rotomotion IMU Viewer} open
+      xywh {105 121 800 630} visible
+    } {
+      Fl_Tabs {} {open
+        xywh {0 25 830 605}
+      } {
+        Fl_Group {} {
+          label ADC
+          xywh {0 50 805 580} labelfont 11 hide
+        } {
+          Fl_Progress adc_bar_0 {
+            xywh {130 90 600 25}
+          }
+          Fl_Progress adc_bar_1 {
+            xywh {130 125 600 25}
+          }
+          Fl_Progress adc_bar_2 {
+            xywh {130 160 600 25}
+          }
+          Fl_Progress adc_bar_3 {
+            xywh {130 195 600 25}
+          }
+          Fl_Progress adc_bar_4 {
+            xywh {130 230 600 25}
+          }
+          Fl_Progress adc_bar_5 {
+            xywh {130 265 600 25}
+          }
+          Fl_Value_Output adc_value_0 {
+            label Ch0
+            xywh {60 90 60 25}
+          }
+          Fl_Value_Output adc_value_1 {
+            label Ch1
+            xywh {60 125 60 25}
+          }
+          Fl_Value_Output adc_value_2 {
+            label Ch2
+            xywh {60 160 60 25}
+          }
+          Fl_Value_Output adc_value_3 {
+            label Ch3
+            xywh {60 195 60 25}
+          }
+          Fl_Value_Output adc_value_4 {
+            label Ch4
+            xywh {60 230 60 25}
+          }
+          Fl_Value_Output adc_value_5 {
+            label Ch5
+            xywh {60 265 60 25}
+          }
+          Fl_Progress adc_bar_6 {
+            xywh {130 300 600 25}
+          }
+          Fl_Progress adc_bar_7 {
+            xywh {130 335 600 30}
+          }
+          Fl_Value_Output adc_value_6 {
+            label Ch6
+            xywh {60 300 60 25}
+          }
+          Fl_Value_Output adc_value_7 {
+            label Ch7
+            xywh {60 335 60 30}
+          }
+        }
+        Fl_Group {} {
+          label PPM open
+          xywh {0 50 800 580} labelfont 11 hide
+        } {
+          Fl_Progress ppm_bar_0 {
+            xywh {125 70 645 25} selection_color 63
+          }
+          Fl_Progress ppm_bar_1 {
+            xywh {125 105 645 25} selection_color 71
+          }
+          Fl_Progress ppm_bar_2 {
+            xywh {125 140 645 25} selection_color 71
+          }
+          Fl_Progress ppm_bar_3 {
+            xywh {125 175 645 25} selection_color 71
+          }
+          Fl_Progress ppm_bar_4 {
+            xywh {125 210 645 25} selection_color 71
+          }
+          Fl_Progress ppm_bar_5 {
+            xywh {125 245 645 25} selection_color 71
+          }
+          Fl_Progress ppm_bar_6 {
+            xywh {125 280 645 25} selection_color 71
+          }
+          Fl_Progress ppm_bar_7 {
+            xywh {125 315 645 25} selection_color 71
+          }
+          Fl_Value_Output ppm_value_0 {
+            label Ch0
+            xywh {60 70 60 25}
+          }
+          Fl_Value_Output ppm_value_1 {
+            label Ch1
+            xywh {60 105 60 25}
+          }
+          Fl_Value_Output ppm_value_2 {
+            label Ch2
+            xywh {60 140 60 25}
+          }
+          Fl_Value_Output ppm_value_3 {
+            label Ch3
+            xywh {60 175 60 25}
+          }
+          Fl_Value_Output ppm_value_4 {
+            label Ch4
+            xywh {60 210 60 25}
+          }
+          Fl_Value_Output ppm_value_5 {
+            label Ch5
+            xywh {60 245 60 25}
+          }
+          Fl_Value_Output ppm_value_6 {
+            label Ch6
+            xywh {60 280 60 25}
+          }
+          Fl_Value_Output ppm_value_7 {
+            label Ch7
+            xywh {60 315 60 25}
+          }
+          Fl_Progress ppm_bar_8 {
+            xywh {125 350 645 25} selection_color 71
+          }
+          Fl_Value_Output ppm_value_8 {
+            label Ch8
+            xywh {60 350 60 25}
+          }
+        }
+        Fl_Group {} {
+          label IMU open
+          xywh {0 50 800 580} labelfont 11 hide
+        } {
+          Fl_Group {} {
+            label ZAccel open
+            xywh {5 55 790 95} box THIN_UP_BOX align 21
+          } {
+            Fl_Slider zaccel_zoom {
+              xywh {35 75 20 70}
+            }
+            Fl_Box glstripchart {
+              xywh {60 60 730 85} box BORDER_BOX color 23
+              code0 {\#include "GlStripChart.h"}
+              class GlStripChart
+            }
+            Fl_Button zaccel_zero {
+              label 0
+              callback {zero_axis(0);}
+              xywh {10 75 20 70}
+              code0 {\#include "imu_viewer.h"}
+            }
+          }
+          Fl_Group {} {
+            label XAccel open
+            xywh {5 150 790 95} box THIN_UP_BOX align 21
+          } {
+            Fl_Box glstripchart1 {
+              xywh {60 155 730 85} box BORDER_BOX color 23
+              code0 {\#include "GlStripChart.h"}
+              class GlStripChart
+            }
+            Fl_Slider xaccel_zoom {
+              xywh {35 170 20 70}
+            }
+            Fl_Button xaccel_zero {
+              label 0
+              callback {zero_axis(3);}
+              xywh {10 170 20 70}
+            }
+          }
+          Fl_Group {} {
+            label YAccel open
+            xywh {5 245 790 95} box THIN_UP_BOX align 21
+          } {
+            Fl_Box glstripchart2 {
+              xywh {60 250 730 85} box BORDER_BOX color 23
+              code0 {\#include "GlStripChart.h"}
+              class GlStripChart
+            }
+            Fl_Slider yaccel_zoom {
+              xywh {35 265 20 70}
+            }
+            Fl_Button yaccel_zero {
+              label 0
+              callback {zero_axis(4);}
+              xywh {10 265 20 70}
+            }
+          }
+          Fl_Group {} {
+            label Yaw open
+            xywh {5 340 790 95} box THIN_UP_BOX align 21
+          } {
+            Fl_Box glstripchart3 {
+              xywh {60 345 730 85} box BORDER_BOX color 23
+              code0 {\#include "GlStripChart.h"}
+              class GlStripChart
+            }
+            Fl_Slider yaw_zoom {
+              xywh {35 360 20 70}
+            }
+            Fl_Button yaw_zero {
+              label 0
+              callback {zero_axis(5);}
+              xywh {10 360 20 70}
+            }
+          }
+          Fl_Group {} {
+            label Pitch open
+            xywh {5 435 790 95} box THIN_UP_BOX align 21
+          } {
+            Fl_Slider pitch_zoom {
+              xywh {35 455 20 70}
+            }
+            Fl_Box glstripchart4 {
+              xywh {60 440 730 85} box BORDER_BOX color 23
+              code0 {\#include "GlStripChart.h"}
+              class GlStripChart
+            }
+            Fl_Button pitch_zero {
+              label 0
+              callback {zero_axis(6);}
+              xywh {10 455 20 70}
+            }
+          }
+          Fl_Group {} {
+            label Roll open
+            xywh {5 530 790 95} box THIN_UP_BOX align 21
+          } {
+            Fl_Slider roll_zoom {
+              xywh {35 550 20 70}
+            }
+            Fl_Box glstripchart5 {
+              xywh {60 535 730 85} box BORDER_BOX color 23
+              code0 {\#include "GlStripChart.h"}
+              class GlStripChart
+            }
+            Fl_Button roll_zero {
+              label 0
+              callback {zero_axis(7);}
+              xywh {10 550 20 70}
+            }
+          }
+        }
+        Fl_Group {} {
+          label Setup open
+          xywh {0 50 800 580} labelfont 11
+        } {
+          Fl_Output connection_status {
+            label {Connection Status:}
+            xywh {645 80 125 25} color 29 align 1
+          }
+          Fl_Group win32_serial {
+            label Win32 open
+            xywh {10 60 235 85} box THIN_UP_BOX align 21
+          } {
+            Fl_Round_Button select_serial_1 {
+              label Serial1
+              callback {select_serial(1);}
+              xywh {35 95 25 25} down_box ROUND_DOWN_BOX value 1
+              code0 {\#include "imu_viewer.h"}
+            }
+            Fl_Round_Button select_serial_2 {
+              label Serial2
+              callback {select_serial(2);}
+              xywh {125 95 25 25} down_box ROUND_DOWN_BOX
+              code0 {\#include "imu_viewer.h"}
+            }
+          }
+          Fl_Group unix_serial {
+            label {UN*X} open
+            xywh {375 60 235 85} box THIN_UP_BOX align 21
+          } {
+            Fl_Input serial_device_name {
+              label {Serial Device}
+              xywh {390 95 200 25} align 9
+            }
+          }
+          Fl_Text_Display raw_serial_output {
+            label {Raw Serial Output}
+            xywh {10 170 780 450} align 5
+          }
+          Fl_Light_Button pause_raw_output {
+            label {Pause Raw}
+            xywh {665 110 105 35} value 1
+          }
+          Fl_Button connect {
+            label Connect
+            callback {connect_serial();} selected
+            xywh {260 65 100 30}
+            code0 {\#include "imu_viewer.h"}
+          }
+          Fl_Button disconnect {
+            label Disconnect
+            callback {disconnect_serial();}
+            xywh {260 110 100 30}
+            code0 {\#include "imu_viewer.h"}
+          }
+        }
+      }
+      Fl_Menu_Bar {} {open
+        xywh {0 0 800 25}
+      } {
+        menuitem {} {
+          label Exit
+          xywh {0 0 100 20}
+        }
+        menuitem {} {
+          label About
+          xywh {0 0 100 20}
+        }
+      }
+    }
+  }
+} 

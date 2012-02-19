@@ -1,0 +1,95 @@
+#!/usr/bin/make
+# $Id: Makefile.common,v 2.0 2002/09/22 02:10:16 tramm Exp $
+
+
+#
+# Set this to the architecture of the embedded board.
+# Right now we support the atmega103 and atmega163.
+# The atmega16 should be supported soon.
+#
+ARCH		= atmega163
+
+#
+# What sort of ISP programmer do we have?
+#
+PROG_ARCH	= stk200
+
+
+#
+# Global defines that control the library functions,
+# features and things that get inlined
+#
+DEFINES		=					\
+
+
+#
+# Where to find the avr-gcc tool chain
+#
+AVR_PATH	= /usr/local/bin
+
+#
+# Helper to build the assembly version of a C file
+#
+.c.s:
+	$(CC) $(CFLAGS) -S -o $@ $<
+
+
+#
+# gcc produces elf files that we have to convert to srec
+# before uploading.
+#
+%.elf: %.o
+	$(LD) -o $@ $< $(LDFLAGS)
+%.srec: %.elf
+	$(OBJCOPY) -O srec $< $@
+
+INCDIR		= ../avr
+
+CFLAGS		=					\
+	-W						\
+	-Wall						\
+	-O5						\
+	$(DEFINES)					\
+	-I$(INCDIR)					\
+
+
+LDFLAGS		=					\
+	../avr/libavr.a					\
+	-lm						\
+
+
+#
+# Here's how we actually write the program into
+# the flash memory of the microcontroller
+#
+%.install: %.srec erase
+	$(PROG) --upload if=$<
+erase:
+	$(PROG) --erase
+
+#
+# Tool-chain definitions
+#
+AR		= $(AVR_PATH)/avr-ar
+AS		= $(CC) -c
+CC		= $(AVR_PATH)/avr-gcc -mmcu=$(ARCH)
+LD		= $(CC)
+OBJCOPY		= $(AVR_PATH)/avr-objcopy
+MAKE		= gmake
+PROG		= $(AVR_PATH)/uisp -dprog=$(PROG_ARCH) -v
+
+
+#
+# Get rid of everything
+#
+clean_all:
+	$(RM)						\
+		a.out					\
+		*.a					\
+		*.so					\
+		*.o					\
+		*.elf					\
+		*.srec					\
+		core					\
+
+clean: clean_all

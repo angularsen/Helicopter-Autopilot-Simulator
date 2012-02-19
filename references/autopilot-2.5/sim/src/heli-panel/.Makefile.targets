@@ -1,0 +1,1 @@
+$(BINDIR)/heli-panel: $(call deps,heli-panel)

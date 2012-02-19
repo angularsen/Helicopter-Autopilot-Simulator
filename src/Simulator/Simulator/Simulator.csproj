@@ -1,0 +1,296 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <ProjectGuid>{06EC9914-93B9-4983-A27C-4AD473D1C17D}</ProjectGuid>
+    <ProjectTypeGuids>{6D335F3A-9D43-41b4-9D22-F6F17C4BE596};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Simulator</RootNamespace>
+    <AssemblyName>Simulator</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <XnaFrameworkVersion>v3.1</XnaFrameworkVersion>
+    <XnaPlatform>Windows</XnaPlatform>
+    <XnaCrossPlatformGroupID>4b657735-816d-4534-90a5-5166a18865ea</XnaCrossPlatformGroupID>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\x86\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <PlatformTarget>x86</PlatformTarget>
+    <XnaCompressContent>false</XnaCompressContent>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\x86\Release</OutputPath>
+    <DefineConstants>TRACE;WINDOWS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoStdLib>true</NoStdLib>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <PlatformTarget>x86</PlatformTarget>
+    <XnaCompressContent>true</XnaCompressContent>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Jitter, Version=0.1.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\JitterPhysics\Jitter_Bin\Jitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.DirectX.DirectInput, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="Microsoft.Xna.Framework, Version=3.1.0.0, Culture=neutral, PublicKeyToken=6d5c3888ef60e27d, processorArchitecture=x86">
+      <Private>False</Private>
+      <SpecificVersion>True</SpecificVersion>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Game, Version=3.1.0.0, Culture=neutral, PublicKeyToken=6d5c3888ef60e27d, processorArchitecture=MSIL">
+      <Private>False</Private>
+      <SpecificVersion>True</SpecificVersion>
+    </Reference>
+    <Reference Include="mscorlib">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VrpnNet, Version=1.1.1.22906, Culture=neutral, PublicKeyToken=d88711d9dd279d9f, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\VrpnNet-1.1.1\Debug-VC9\VrpnNet.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Cameras\CameraBase.cs" />
+    <Compile Include="Cameras\CameraType.cs" />
+    <Compile Include="Cameras\ChaseCamera.cs" />
+    <Compile Include="Cameras\CockpitCamera.cs" />
+    <Compile Include="Cameras\FreeCamera.cs" />
+    <Compile Include="Cameras\FixedCamera.cs" />
+    <Compile Include="HelicopterBase.cs" />
+    <Compile Include="KeyboardEvents.cs" />
+    <Compile Include="Parsers\ScenarioParserXML.cs" />
+    <Compile Include="Parsers\PIDParserXML.cs" />
+    <Compile Include="Parsers\JoystickSetupParserXML.cs" />
+    <Compile Include="Parsers\TestConfigurationParserXML.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RenderModes.cs" />
+    <Compile Include="Scenarios\HelicopterScenario.cs" />
+    <Compile Include="Scenarios\Scenario.cs" />
+    <Compile Include="Resources\SimulatorResources.cs" />
+    <Compile Include="SimulatorGame.cs" />
+    <Compile Include="StaticMeshes\FlatTexturedGround.cs" />
+    <Compile Include="StaticMeshes\Trees\Forest.cs" />
+    <Compile Include="StaticMeshes\Trees\SunlitLTree.cs" />
+    <Compile Include="StaticMeshes\Trees\SunlitSimpleTree.cs" />
+    <Compile Include="StaticMeshes\SimpleModel.cs" />
+    <Compile Include="Skydome\SkydomeComponent.cs" />
+    <Compile Include="Skydome\SunlightEffect.cs" />
+    <Compile Include="Skydome\SunlightEffectModelProcessor.cs" />
+    <Compile Include="Skydome\SunlightParameters.cs" />
+    <Compile Include="StaticMeshes\Ground.cs" />
+    <Compile Include="StaticMeshes\WaypointMesh.cs" />
+    <Compile Include="Terrain\Generator\Heightmap.cs" />
+    <Compile Include="Terrain\Generator\HeightmapFaultSettings.cs" />
+    <Compile Include="Terrain\Generator\HeightmapMidPointSettings.cs" />
+    <Compile Include="Terrain\Generator\HeightmapParticleDepositionSettings.cs" />
+    <Compile Include="Terrain\Generator\HeightmapPerlinNoiseSettings.cs" />
+    <Compile Include="Terrain\Generator\Heightmask.cs" />
+    <Compile Include="Terrain\Generator\InputManager.cs" />
+    <Compile Include="Terrain\Generator\RandomHelper.cs" />
+    <Compile Include="Terrain\Generator\TerrainMesh.cs" />
+    <Compile Include="Terrain\Generator\TerrainPatch.cs" />
+    <Compile Include="Terrain\TerrainComponent.cs" />
+    <Compile Include="Testing\AutopilotConfiguration.cs" />
+    <Compile Include="Testing\ScenarioTestResult.cs" />
+    <Compile Include="Testing\TestConfiguration.cs" />
+    <Compile Include="Tracking\TrackedObject.cs" />
+    <Compile Include="Tracking\Tracker.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <NestedContentProject Include="Content\Content.contentproj">
+      <Project>b5f7cd7b-db2c-43c7-b295-1f3bf8e03dd5</Project>
+      <Visible>False</Visible>
+    </NestedContentProject>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Anj\Helpers\Anj.Helpers.XNA\Anj.Helpers.XNA.csproj">
+      <Project>{BEE9A6ED-DFD6-4343-989C-3C11387FB1EF}</Project>
+      <Name>Anj.Helpers.XNA</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Control\Control.Common\Control.Common.csproj">
+      <Project>{E47952F3-694A-4A06-B6F3-66EE2D6FF01F}</Project>
+      <Name>Control.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Control\Control\Control.csproj">
+      <Project>{8093CA9F-1AA7-4F15-8E07-ABEB49B4582D}</Project>
+      <Name>Control %28Control\Control%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libs\Anj.XNA.Joysticks\Anj.XNA.Joysticks.csproj">
+      <Project>{CDC059C9-7F7C-49B3-85B6-3C1056BA4495}</Project>
+      <Name>Anj.XNA.Joysticks</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libs\LTrees-source-2.0a\LTreesLibrary\LTreesLibrary.csproj">
+      <Project>{8AAAB1D0-6C1D-4F92-851B-56D4611A6D1E}</Project>
+      <Name>LTreesLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libs\LTrees-source-2.0a\LTreesPipeline\LTreesPipeline.csproj">
+      <Project>{199AA449-800E-4908-BF49-778990A2983A}</Project>
+      <Name>LTreesPipeline</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libs\swordfishcharts-0.6\Swordfish.WPF.Charts\Swordfish.WPF.Charts.2008.csproj">
+      <Project>{455B0C11-236A-4A4E-956F-1A3E41B7260B}</Project>
+      <Name>Swordfish.WPF.Charts.2008</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Physics\Physics.Common\Physics.Common.csproj">
+      <Project>{6679B885-8D10-41FC-8D54-2D6F64C3F74F}</Project>
+      <Name>Physics.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Physics\Physics\Physics.csproj">
+      <Project>{A2EC5D62-5E19-4E03-A149-DBAB64DAF877}</Project>
+      <Name>Physics %28Physics\Physics%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Sensors\Sensors.csproj">
+      <Project>{94EB75CB-2EC0-44E5-BAA5-CACD33EF4F62}</Project>
+      <Name>Sensors %28Sensors\Sensors%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Sensors\Sensors.Model\Sensors.Model.csproj">
+      <Project>{F273AD46-FE97-46D6-86F3-ECC85D771841}</Project>
+      <Name>Sensors.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\State\State.Common\State.Common.csproj">
+      <Project>{B8D71FAD-B43D-49C9-9C46-615D47EF9E83}</Project>
+      <Name>State.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\State\State.Model\State.Model.csproj">
+      <Project>{C44BE819-51AC-4B92-A39D-123C01299EF3}</Project>
+      <Name>State.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\State\State\State.csproj">
+      <Project>{273CD9D4-780E-4967-B518-4E9FCCFA7F9D}</Project>
+      <Name>State %28State\State%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tests\Tests.ControlGraphs\Tests.ControlGraphs.csproj">
+      <Project>{5CDAEA1A-A23C-4A98-B8CC-84F77B0DBC6C}</Project>
+      <Name>Tests.ControlGraphs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Simulator.Common\Simulator.Common.csproj">
+      <Project>{656921DA-A577-47A3-ABB1-AEB3EE442371}</Project>
+      <Name>Simulator.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Simulator.Interfaces\Simulator.Interfaces.csproj">
+      <Project>{0BB11D21-145F-47A4-AC89-713D43228635}</Project>
+      <Name>Simulator.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Simulator.Utils\Simulator.Utils.csproj">
+      <Project>{5E1B4EDB-EE67-48C3-9A28-45707F720945}</Project>
+      <Name>Simulator.Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="Simulator.UI\Simulator.UI.csproj">
+      <Project>{B53042AE-FBE8-4F01-B732-C25F25DBA594}</Project>
+      <Name>Simulator.UI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Xna.Framework.3.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft XNA Framework Redistributable 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\JoystickSetups.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\PIDSetups.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Scenarios.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\TestConfiguration.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

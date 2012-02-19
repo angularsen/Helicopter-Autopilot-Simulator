@@ -1,0 +1,152 @@
+# $Id: sensors,v 2.0 2002/09/22 02:10:16 tramm Exp $
+
+Some thoughts on output formats and data streams from the realtime
+system.  Comments are welcome!
+
+There are four groups of output:
+
+1. Attitude (roll, pitch, heading)
+2. Engine stats (N1, N2, CHT, EGT, Fuel, Voltage)
+3. Position (lat, long, alt)
+4. Payload stats (???)
+
+Of these, the attitude is the most important.  I would rank the
+priorities for the realtime and nav systems as:
+
+1. Keep it under control
+2. Ensure the systems are safe
+3. Go where we want
+4. Perform the mission
+
+Which, oddly enough, coincide with the output groups...
+
+So far, all of the effort has been on the attitude output.  Once we
+have that working, progressing through the other groups should be
+quite easy.
+
+Details on the sensor inputs and the output formats:
+
+Attitude
+--------
+Internally, the realtime system is reading the acceleration rates
+from the gyros (or the attitude reference) and performing rate
+integration to produce the attitude.  The three (roll, pitch and
+heading) values are output for use by the nav system or EFIS.
+With the PWM gyros we need to poll the servo input lines.
+With the Gyrations MG100 we sample the Vg1, Vg2, Vref and Temp analog
+inputs to compute the acceleration values.
+With the ADXL202 accelerometer, we can either sample voltages or
+use the PWM inputs similar to the hobby-gyros.
+
+Output every 1/8th of a second:
+R=xxxx P=xxxx H=xxxx
+
+Current wiring map:
+
+Cat5			Meaning			Connection (STK300)
+----			----			----
+Brown:			Ground			Gnd (Long cable)
+Brown + White:		Power			Vcc (Long cable)
+Green:			Black accelerometer	A0
+Green + White:		Red accelerometer	A1
+Orange:			Vg2			ADC0 (Blue shrink)
+Blue:			Vg1			ADC1 (Blue shrink)
+Orange + White:		Vref2
+Blue + White:		Vref1
+
+Engine stats
+------------
+N1 and N2 are easily sensed from magnetic set screws on the
+crankshaft and mainshaft.  The HAL effect sensor feeds into the
+realtime system's interrupt which counts the pulses and computes
+the RPM.  If these numbers are desired, interrupt 6 and 7 should
+be enabled.
+
+N1 refers to the engine RPM, while N2 is the rotor RPM.
+For a two-stroke .60 sized engine, N1 will max out at
+28,000 RPM, while for a model helicopter N2 maxes 2,000 RPM.
+
+The real-time system can adjust the throttle to maintain
+a constant N1, regardless of pitch changes due to collective
+inputs.  This makes for smooth controls, even though the 2-stroke
+engine has "instant" power available, unlike a turbine.  This
+software governor should update once per second.
+
+The accuracy requirements are fairly limited.  At high N1 RPM
+we can miss 5 pulses a second and still be within 1%.  N2 is
+more important since it is so much slower (1:12), but we can
+still miss a few and be within 5%.  At low RPM we're probably
+on the ground anyway.  Additionally, by maintaining a weighted
+average we can filter out a few pulses misses.
+
+
+It would also be good to have a "low rotor RPM"
+alarm if the rotor drops below 1,000 RPM.  If the engine
+is turning at less than 8,000 RPM we want to indicate an
+alternator failure.  At less than 1,000 RPM we should
+indicate engine failure.
+
+CHT (Cylinder head temp) and EGT (exhaust gas temp) thermocouples
+are read with the onboard A->D.  These are not necessary for flight,
+but can help with tuning the mixture adjustments.  Expected values
+are unknown at this time, but below 150 C we do not care.
+
+We will need a fuel tank sender to read the fuel level; this will have
+to wait.  The need is obvious...
+
+Output every 1/2 second:
+N=xxxx T=xxxx C=xxxx E=xxxx V=xxxx F=xxxx
+
+Position
+--------
+Lattitude and Longitude are read from the NMEA data stream from the
+GPS chipset.  We can also get altitude and heading, but both of
+these are fairly useless for hovering.  At low altitude AGL hovers,
+we use a sonar altimeter (such as the Polaroid range finder) to
+maintain a stable altitude.  This unit feeds pulses into the realtime
+system in a manner similar to the engine tachs.  For high altitude
+hovers we can use the GPS altitude since a few meter error won't be
+as obvious.
+
+Should we output the velocity or allow the nav system to compute
+it from the values?  I'm not sure who should do this.
+
+Output every 1 second:
+X=xxxx Y=xxxx Z=xxxx
+
+Payload
+-------
+This will vary with the payload, obviously.  Cameras might report
+the number of frames remaining, the focal depth, etc.  Crop seeding
+operations would report the remining quantity in the hoppers, etc.
+
+Output every 1 second:
+???
+
+
+
+---------------------------------
+
+Output summary:
+
+C=xxxx		CHT
+E=xxxx		EGT
+F=xxxx		Fuel level
+H=xxxx		Heading
+P=xxxx		Pitch
+N=xxxx		Engine RPM (N1)
+R=xxxx		Roll
+T=xxxx		Rotor RPM (N2)
+V=xxxx		Voltage
+X=xxxx		Longitude
+Y=xxxx		Lattitude
+Z=xxxx		Altitude
+
+Other possibilities:
+x=xxxx		Longitude velocity
+y=xxxx		Lattitude velocity
+z=xxxx		Rate-of-climb
+
+x,y,z acceleration?
+r,p,h velocity?
+r,p,h acceleration?

@@ -1,0 +1,94 @@
+/**
+ *  $Id: xcell-60,v 2.0 2002/09/22 02:07:28 tramm Exp $
+ *
+ * XCell-60 aircraft description
+ */
+
+
+/*
+ *  Setup the rotor
+ */
+rotor["main"]		= new rotor(
+	// diameter
+	// stuff
+);
+
+rotor["tail"]		= new rotor(
+	// diamter
+	// stuff
+);
+
+rotor["flybar"]		= new flybar(
+	rotor["main"],	// Needs to be attached to another rotor
+	// stuff
+);
+
+
+// Make sure the rotor mass doesn't go through the ground
+rotor2contact( rotor["main"] );
+
+
+/*
+ *  Servos
+ */
+servos["yaw"]		= new futaba_9253;
+servos["roll"]		= new futaba_9202;
+servos["pitch"]		= new futaba_9202;
+servos["coll"]		= new futaba_5101;
+
+
+/*
+ *  Aerodynamic elements
+ */
+fins["fuse"]		= new fin(
+	 3.0000,               // fs
+       	12.0000,               // waterline
+       	-0.4240,               // xuu
+       	-1.2518,               // yvv
+       	-0.8861                // zww
+);
+
+fins["horizontal"]	= new fin(
+	 0.0000,               // fs
+	 0.0000,               // waterline
+	-1.0000,               // xuu
+	 0.0000,               // yvv
+	 0.0000                // zww
+);
+
+fins["vertical"]	= new fin(
+	-41.5000,               // fs
+	  7.2500,               // wl
+	  0.0000,               // xuu
+	 -1.4339,               // yvv
+	  0.0000                // zww
+);
+
+
+/*
+ *  Contact points
+ */
+if( training_gear )
+{
+	skid2contact(
+		 32.0000,		// length
+		 32.0000,		// width
+		-24.0000,		// height from CG to skid
+		  2.0000		// offset to the front
+	);
+} else
+{
+	skid2contact(
+		 16.0000,		// length
+		 15.8000,		// width
+		-20.0000,		// height from CG to skid
+		  2.0000		// offset to the front
+	);
+}
+
+contact["tail"]		= new contact(
+	-41.0000,		// way back in the back
+	  0.0000,		// on the center line
+	-19.0000,		// almost as tall as the skids
+	140.0000		// coefficient of friction
+);
